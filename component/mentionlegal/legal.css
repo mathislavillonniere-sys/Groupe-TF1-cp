@@ -1,0 +1,121 @@
+/* css/legal.css - Version Institutionnelle */
+
+/* On définit des variables spécifiques pour le confort de lecture */
+:root {
+  --bg-legal: #f8fafc;
+  --text-main: #1e293b;
+  --text-muted: #475569;
+  --border-soft: #e2e8f0;
+  --accent-legal: #003366; /* Bleu très profond pour le côté officiel */
+}
+
+body {
+  background-color: var(--bg-legal);
+  color: var(--text-main);
+}
+
+/* Bannière simplifiée et élégante */
+.hero-legal {
+  background-color: var(--accent-legal);
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("../img/bg-texture.png"); /* Texture légère si dispo */
+}
+
+.hero-legal h1 {
+  margin: 0;
+  font-size: 2.5em;
+  font-weight: 300; /* Plus fin pour plus d'élégance */
+  letter-spacing: 2px;
+}
+
+/* Conteneur de lecture optimal */
+.legal-container {
+  max-width: 900px;
+  margin: -40px auto 80px; /* Chevauche légèrement la bannière */
+  padding: 60px 80px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-soft);
+}
+
+/* Informations de mise à jour */
+.last-updated {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 40px;
+  display: block;
+  border-bottom: 1px solid var(--border-soft);
+  padding-bottom: 10px;
+}
+
+/* Titres de sections */
+.legal-container h2 {
+  color: var(--bleu-corporate);
+  font-size: 1.6em;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* Petit liseré rouge institutionnel devant le titre */
+.legal-container h2::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 24px;
+  background-color: var(--rouge-tf1);
+  margin-right: 15px;
+}
+
+.legal-container h3 {
+  color: var(--accent-legal);
+  font-size: 1.2em;
+  margin-top: 30px;
+}
+
+/* Paragraphes et listes */
+.legal-container p {
+  line-height: 1.8;
+  margin-bottom: 20px;
+  text-align: justify; /* Pour l'aspect "document officiel" */
+  color: var(--text-muted);
+}
+
+.legal-container ul {
+  padding-left: 20px;
+  margin-bottom: 25px;
+}
+
+.legal-container li {
+  margin-bottom: 10px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Bloc d'alerte ou note importante */
+.legal-note {
+  background-color: #f1f5f9;
+  border-left: 4px solid var(--bleu-corporate);
+  padding: 20px;
+  margin: 30px 0;
+  font-size: 0.9em;
+  color: var(--text-main);
+}
+
+/* Adaptabilité mobile */
+@media (max-width: 768px) {
+  .legal-container {
+    margin: 20px;
+    padding: 40px 25px;
+  }
+  .hero-legal {
+    padding: 60px 20px;
+  }
+}

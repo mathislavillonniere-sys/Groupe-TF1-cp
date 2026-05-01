@@ -1,0 +1,135 @@
+/* css/chaines.css - Design de la page Chaînes & Streaming */
+
+.hero-banner {
+  background-color: var(--bleu-corporate);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  border-bottom: 4px solid var(--rouge-tf1);
+}
+
+.hero-banner h1 {
+  margin: 0 0 15px 0;
+  font-size: 2.5em;
+  text-transform: uppercase;
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+/* Grille Responsive (s'adapte au mobile) */
+.chaines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+/* Design des Cartes Chaînes */
+.channel-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--bordure);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* L'espace pour le Logo */
+.channel-logo-container {
+  background: #f8f9fa;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 3px solid var(--rouge-tf1);
+}
+
+.channel-logo-container h2 {
+  color: var(--bleu-corporate);
+  font-size: 2em;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+/* Le contenu de la carte */
+.channel-body {
+  padding: 25px;
+  flex-grow: 1;
+}
+
+.channel-desc {
+  color: var(--texte-gris);
+  font-size: 0.95em;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Les petites infos (Date, Audience, Dir) */
+.channel-meta {
+  background: var(--gris-fond);
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 0.85em;
+}
+
+.channel-meta p {
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--bordure);
+  padding-bottom: 4px;
+}
+
+.channel-meta p:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.meta-label {
+  color: var(--texte-gris);
+  font-weight: bold;
+}
+.meta-value {
+  color: var(--bleu-corporate);
+  font-weight: bold;
+}
+
+/* Liste des programmes phares */
+.channel-programs h4 {
+  color: var(--bleu-corporate);
+  margin: 0 0 10px 0;
+  font-size: 0.95em;
+  text-transform: uppercase;
+}
+
+.channel-programs ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.channel-programs li {
+  font-size: 0.9em;
+  padding: 4px 0;
+  color: var(--texte-noir);
+}
+
+.channel-programs li::before {
+  content: "▶";
+  color: var(--rouge-tf1);
+  font-size: 0.8em;
+  margin-right: 8px;
+}

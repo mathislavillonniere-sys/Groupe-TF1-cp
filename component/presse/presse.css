@@ -1,0 +1,34 @@
+.presse-list {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--bordure);
+  margin-top: 20px;
+}
+.presse-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--bordure);
+}
+.presse-item:last-child {
+  border-bottom: none;
+}
+.presse-item strong {
+  color: var(--bleu-corporate);
+  display: block;
+  margin-bottom: 5px;
+}
+.presse-item a {
+  color: var(--rouge-tf1);
+  font-weight: bold;
+  text-decoration: none;
+  border: 1px solid var(--rouge-tf1);
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+.presse-item a:hover {
+  background-color: var(--rouge-tf1);
+  color: white;
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mises à jour des Séries - TF1 CP</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../navbar/menu.css" />
+    <link rel="stylesheet" href="renouvellement.css" />
+    <link rel="stylesheet" href="../footer/footer.css" />
+  </head>
+
+  <body>
+    <script src="../navbar/navbar.js"></script>
+
+    <header class="hero-banner">
+      <h1>Mises à jour des Programmes</h1>
+      <p>Statut des séries et nouveautés pour la saison 2026 - 2027.</p>
+    </header>
+
+    <main class="section-container">
+      <section class="program-section">
+        <h2>
+          <i class="fa-solid fa-circle-check" style="color: #10b981"></i> Séries
+          Renouvelées
+        </h2>
+        <div id="grid-renouveles" class="program-grid"></div>
+      </section>
+
+      <section class="program-section">
+        <h2>
+          <i
+            class="fa-solid fa-circle-xmark"
+            style="color: var(--rouge-tf1)"
+          ></i>
+          Séries Annulées / Terminées
+        </h2>
+        <div id="grid-annules" class="program-grid"></div>
+      </section>
+
+      <section class="program-section">
+        <h2>
+          <i class="fa-solid fa-star" style="color: #3b82f6"></i> Nouvelles
+          Séries Commandées
+        </h2>
+        <div id="grid-nouveaux" class="program-grid"></div>
+      </section>
+    </main>
+
+    <script src="renouvellement.js"></script>
+    <script src="../footer/footer.js"></script>
+  </body>
+</html>

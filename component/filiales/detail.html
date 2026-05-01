@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fiche Secteur - TF1 CP</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../navbar/menu.css" />
+    <link rel="stylesheet" href="filiales.css" />
+    <link rel="stylesheet" href="../footer/footer.css" />
+
+    <style>
+      /* --- Le conteneur principal --- */
+      .fiche-detail {
+        max-width: 900px;
+        margin: 60px auto;
+        background: white;
+        padding: 50px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border-top: 5px solid var(--rouge-tf1);
+      }
+
+      .header-fiche {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+
+      .header-fiche i {
+        font-size: 3.5em;
+        color: var(--bleu-corporate);
+      }
+
+      .btn-retour {
+        margin-bottom: 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--texte-gris);
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.2s;
+      }
+
+      .btn-retour:hover {
+        color: var(--rouge-tf1);
+      }
+
+      /* --- Le nouveau design des sous-cartes (Filiales) --- */
+      .filiales-list {
+        display: grid;
+        /* S'adapte automatiquement à la taille de l'écran */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .filiale-item {
+        padding: 25px;
+        background: #ffffff;
+        border-radius: 12px;
+        border-left: 5px solid var(--bleu-corporate); /* Liseré bleu de base */
+        border-top: 1px solid #f1f5f9;
+        border-right: 1px solid #f1f5f9;
+        border-bottom: 1px solid #f1f5f9;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); /* Ombre très légère */
+        transition: all 0.3s ease; /* Animation fluide */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      /* L'effet magique au survol de la carte ! */
+      .filiale-item:hover {
+        transform: translateY(-5px); /* Se soulève légèrement */
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08); /* Ombre plus marquée */
+        border-left-color: var(--rouge-tf1); /* Le liseré devient rouge TF1 */
+      }
+
+      .filiale-item h4 {
+        margin: 0 0 8px 0;
+        color: var(--bleu-corporate);
+        font-size: 1.15em;
+        transition: color 0.3s ease;
+      }
+
+      .filiale-item p {
+        font-size: 0.95em;
+        margin: 0;
+        color: #64748b; /* Gris pro */
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="../navbar/navbar.js"></script>
+
+    <main class="section-container">
+      <a href="filiales.html" class="btn-retour">
+        <i class="fa-solid fa-arrow-left"></i> Retour aux pôles</a
+      >
+
+      <div id="contenu-fiche" class="fiche-detail">
+        <p>Chargement des informations...</p>
+      </div>
+    </main>
+
+    <script src="../footer/footer.js"></script>
+
+    <script>
+      const polesDetails = {
+        medias: {
+          titre: "Télévision & Médias",
+          icone: "fa-solid fa-tv",
+          directeur: "Mathis Lavillonnière",
+          mission:
+            "Leader de l'audiovisuel, notre pôle média façonne le divertissement de demain à travers une offre multi-canal unique.",
+          filiales: [
+            {
+              nom: "TF1 Camping Paradis",
+              role: "Chaîne généraliste leader (22.5% pda).",
+            },
+            { nom: "CP Info", role: "Chaîne d'information en continu 24/7." },
+            {
+              nom: "Studios Paradis",
+              role: "Production de fictions et formats originaux.",
+            },
+            {
+              nom: "TF1 CP +",
+              role: "Plateforme de streaming et SVOD premium.",
+            },
+          ],
+        },
+        telecom: {
+          titre: "Pôle Télécom",
+          icone: "fa-solid fa-tower-broadcast",
+          directeur: "Damien Menard",
+          mission:
+            "Connecter les territoires en développant des réseaux très haut débit et des services numériques innovants.",
+          filiales: [
+            {
+              nom: "CP Télécom",
+              role: "Opérateur réseau et déploiement fibre.",
+            },
+            {
+              nom: "Société & Moi",
+              role: "Services interactifs (Météo, Nature & Moi).",
+            },
+          ],
+        },
+        commerce: {
+          titre: "Commerce & Licences",
+          icone: "fa-solid fa-store",
+          directeur: "Aline Girard",
+          mission:
+            "Valoriser nos marques et accompagner le développement économique de nos partenaires.",
+          filiales: [
+            {
+              nom: "Color School",
+              role: "Centre de formation aux métiers du groupe.",
+            },
+            {
+              nom: "Union des Commerçants",
+              role: "Réseau de boutiques officielles.",
+            },
+            {
+              nom: "CP Licensing",
+              role: "Gestion des droits dérivés et produits.",
+            },
+          ],
+        },
+        france: {
+          titre: "France CP",
+          icone: "fa-solid fa-flag",
+          directeur: "Patrice Lamart",
+          mission:
+            "Assurer la mission de service public de l'État (actionnaire à 80%) et produire des contenus fédérateurs.",
+          filiales: [
+            {
+              nom: "France CP Production",
+              role: "Production de documentaires et fictions publiques.",
+            },
+            {
+              nom: "Camping Paradis TV",
+              role: "Chaîne institutionnelle de l'État.",
+            },
+          ],
+        },
+        infra: {
+          titre: "Immobilier & Resorts",
+          icone: "fa-solid fa-building",
+          directeur: "Justine Segrestan",
+          mission:
+            "Bâtir et gérer les infrastructures hôtelières et le parc immobilier de l'écosystème Camping Paradis.",
+          filiales: [
+            {
+              nom: "Resorts Camping Paradis",
+              role: "Gestion des complexes hôteliers internationaux.",
+            },
+            {
+              nom: "CP Immobilier",
+              role: "Aménagement foncier et gestion du patrimoine (75%).",
+            },
+            {
+              nom: "CP Infrastructure",
+              role: "Gros œuvre et chantiers (50%).",
+            },
+          ],
+        },
+        finance: {
+          titre: "Pôle Finance",
+          icone: "fa-solid fa-chart-line",
+          directeur: "Hervé Bourges",
+          mission:
+            "Garant de la stabilité du groupe, le pôle finance propose des services bancaires et de protection innovants.",
+          filiales: [
+            {
+              nom: "Crédit Camping Paradis",
+              role: "Établissement bancaire et solutions de financement.",
+            },
+            {
+              nom: "CP Assurances",
+              role: "Protection globale des biens et des personnes du réseau.",
+            },
+          ],
+        },
+        inter: {
+          titre: "Pôle International",
+          icone: "fa-solid fa-globe",
+          directeur: "Sophie Lachaud",
+          mission:
+            "Faire rayonner l'expertise et la marque TF1 Camping Paradis à travers le monde.",
+          filiales: [
+            {
+              nom: "TF1 CP International",
+              role: "Gestion des filiales étrangères.",
+            },
+            {
+              nom: "Distribution",
+              role: "Ventes de formats et droits à l'international.",
+            },
+          ],
+        },
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const data = polesDetails[id];
+
+      if (data) {
+        document.getElementById("contenu-fiche").innerHTML = `
+                <div class="header-fiche">
+                    <i class="${data.icone}"></i>
+                    <div>
+                        <h2 style="margin:0; color:var(--bleu-corporate)">${data.titre}</h2>
+                        <p style="color:var(--rouge-tf1); font-weight:bold; margin:0">FICHE SECTEUR OFFICIELLE</p>
+                    </div>
+                </div>
+                <p><strong>Directeur(s) :</strong> ${data.directeur}</p>
+                <p><strong>Mission :</strong> ${data.mission}</p>
+                <h3 style="margin-top:40px; border-bottom:2px solid #eee; padding-bottom:10px; color:var(--bleu-corporate);">Filiales et Activités</h3>
+                <div class="filiales-list">
+                    ${data.filiales
+                      .map(
+                        (f) => `
+                        <div class="filiale-item">
+                            <h4>${f.nom}</h4>
+                            <p style="font-size:0.9em; margin:0; color:var(--texte-gris);">${f.role}</p>
+                        </div>
+                    `,
+                      )
+                      .join("")}
+                </div>
+            `;
+      } else {
+        document.getElementById("contenu-fiche").innerHTML =
+          "<p>Pôle introuvable. Veuillez retourner à la page précédente.</p>";
+      }
+    </script>
+  </body>
+</html>

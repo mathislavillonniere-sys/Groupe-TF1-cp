@@ -1,0 +1,96 @@
+/* component/histoire/histoire.css */
+
+.histoire-section {
+  padding: 80px 20px;
+  background-color: #f8fafc;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  color: var(--bleu-corporate, #00152b);
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.section-intro {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 60px;
+  font-style: italic;
+}
+
+/* La ligne de la Timeline */
+.timeline {
+  position: relative;
+  padding: 20px 0;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: #cbd5e1;
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  margin-bottom: 40px;
+  position: relative;
+  width: 50%;
+}
+
+/* Alternance Gauche / Droite */
+.timeline-item:nth-child(odd) {
+  left: 0;
+  padding-right: 40px;
+  text-align: right;
+}
+.timeline-item:nth-child(even) {
+  left: 50%;
+  padding-left: 40px;
+}
+
+.timeline-date {
+  font-weight: 800;
+  color: var(--rouge-tf1, #cc0000);
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.timeline-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-top: 3px solid var(--bleu-corporate, #00152b);
+}
+
+.timeline-content h3 {
+  margin-top: 0;
+  color: var(--bleu-corporate, #00152b);
+}
+
+.timeline-content p {
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+  }
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    padding-left: 50px !important;
+    text-align: left !important;
+  }
+}

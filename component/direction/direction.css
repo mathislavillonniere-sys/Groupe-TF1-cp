@@ -1,0 +1,120 @@
+/* css/direction.css */
+.hero-banner {
+  background-color: var(--bleu-corporate);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  border-bottom: 4px solid var(--rouge-tf1);
+}
+
+.governance-section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  color: var(--bleu-corporate);
+  border-left: 5px solid var(--rouge-tf1);
+  padding-left: 15px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+/* Grille de dirigeants */
+.leaders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* Carte PDG (Plus large) */
+.ceo-card {
+  display: flex;
+  background: white;
+  border: 1px solid var(--bordure);
+  margin-bottom: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.leader-card {
+  background: white;
+  border: 1px solid var(--bordure);
+  border-radius: 8px;
+  padding: 30px;
+  transition: 0.3s;
+}
+
+.leader-card:hover {
+  border-color: var(--rouge-tf1);
+  transform: translateY(-5px);
+}
+
+.leader-name {
+  font-size: 1.4em;
+  color: var(--bleu-corporate);
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.leader-role {
+  color: var(--rouge-tf1);
+  font-weight: 600;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+.leader-desc {
+  font-size: 0.9em;
+  color: var(--texte-gris);
+  line-height: 1.6;
+}
+/* Le bloc qui contient la photo */
+.ceo-image-container {
+  background: #f0f2f5;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Empêche l'image de s'écraser si le texte est long */
+}
+
+/* La photo en elle-même */
+.ceo-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Recadre l'image proprement pour remplir l'espace */
+}
+
+/* La zone de texte */
+.ceo-content {
+  padding: 40px;
+  flex-grow: 1;
+}
+
+/* --- Design du Mot du PDG --- */
+.ceo-quote {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--bordure); /* Petite ligne de séparation */
+}
+
+.ceo-quote strong {
+  color: var(--bleu-corporate);
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ceo-quote blockquote {
+  margin: 15px 0 0 0;
+  font-style: italic;
+  color: var(--texte-noir);
+  border-left: 4px solid var(--rouge-tf1); /* Belle barre rouge sur le côté */
+  padding: 15px 20px;
+  font-size: 1.05em;
+  line-height: 1.6;
+  background: #f9fbfd; /* Fond très légèrement bleuté pour faire ressortir la citation */
+  border-radius: 0 8px 8px 0;
+}

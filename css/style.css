@@ -1,0 +1,221 @@
+/* =======================================
+   1. LES COULEURS DE BASE
+   ======================================= */
+:root {
+  --bleu-corporate: #001f3f;
+  --rouge-tf1: #e60000;
+  --gris-fond: #f4f7f6;
+  --bordure: #e1e5ea;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--gris-fond);
+  margin: 0;
+  color: #333;
+}
+
+/* =======================================
+   2. LE MENU DE NAVIGATION EN HAUT
+   ======================================= */
+.navbar {
+  background-color: var(--bleu-corporate);
+  border-bottom: 3px solid var(--rouge-tf1);
+  padding: 0 20px;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.nav-logo {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+.nav-logo span {
+  color: var(--rouge-tf1);
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+}
+
+.dropdown {
+  position: relative;
+}
+.dropdown > a {
+  color: white;
+  text-decoration: none;
+  padding: 20px 10px;
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-top: 3px solid var(--rouge-tf1);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.dropdown-content li a {
+  color: var(--bleu-corporate);
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content li a:hover {
+  background-color: #f0f0f0;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* =======================================
+   3. LES GRANDES BANNIÈRES & BOUTONS
+   ======================================= */
+.hero-banner {
+  background-color: var(--bleu-corporate);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  border-bottom: 4px solid var(--rouge-tf1);
+}
+
+.btn-principal {
+  background-color: var(--rouge-tf1);
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* =======================================
+   4. LES GRILLES POUR LES CARTES
+   ======================================= */
+.section-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.card-chiffre,
+.card-news {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--bordure);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+.card-news {
+  text-align: left;
+  border-top: 4px solid var(--rouge-tf1);
+}
+.valeur {
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--rouge-tf1);
+}
+
+/* --- Animations au Scroll --- */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(40px); /* Décalé de 40px vers le bas */
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+}
+
+/* La classe qui sera ajoutée par le JavaScript */
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0); /* Remonte à sa position d'origine */
+}
+.channels-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px; /* Espace entre chaque chaîne */
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Petite ombre légère comme sur la photo */
+  max-width: 1000px;
+  margin: 0 auto;
+}
+/* Le style général de chaque lien */
+.channel-item {
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: 800;
+  color: #9ca3af;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+
+  /* MODIFICATIONS ICI : */
+  min-height: 40px; /* min-height au lieu de height */
+  display: flex;
+  align-items: center;
+}
+
+/* --- ÉTAT NORMAL --- */
+.channel-item .state-default {
+  display: inline-block;
+}
+
+/* --- ÉTAT SURVOL (Caché par défaut) --- */
+.channel-item .state-hover {
+  display: none; /* Invisible tant qu'on ne survole pas */
+  align-items: center;
+  gap: 8px; /* Espace entre le logo et le texte */
+  color: #cc0000; /* Le texte "CAMPING PARADIS" passe en rouge, ou mettez #000 si vous le voulez noir */
+}
+
+/* Le style du petit logo qui apparaît */
+.hover-logo {
+  height: 30px; /* Vous pouvez augmenter un peu si c'est trop petit, ex: 35px */
+  width: auto;
+  flex-shrink: 0; /* LE SECRET 1 : Empêche l'image d'être écrasée par le texte */
+  object-fit: contain; /* LE SECRET 2 : Force l'image à s'afficher en entier */
+  display: block; /* Supprime les petits décalages invisibles sous l'image */
+  margin: 0; /* Supprime les marges par défaut qui pourraient rogner l'image */
+}
+
+/* --- L'ANIMATION AU SURVOL (:hover) --- */
+
+/* 1. On cache le texte gris par défaut */
+.channel-item:hover .state-default {
+  display: none;
+}
+
+/* 2. On affiche le bloc contenant le logo et le nouveau texte */
+.channel-item:hover .state-hover {
+  display: inline-flex; /* Flex permet de bien aligner l'image et le texte verticalement */
+}

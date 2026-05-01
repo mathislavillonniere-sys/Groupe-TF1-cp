@@ -1,0 +1,347 @@
+/* css/pro.css - Design spécifique pour les tableaux de la grille TV */
+
+.hero-banner {
+  background-color: var(--bleu-corporate);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  border-bottom: 4px solid var(--rouge-tf1);
+}
+
+.hero-banner h1 {
+  margin: 0 0 15px 0;
+  font-size: 2.5em;
+  text-transform: uppercase;
+}
+.page-title {
+  color: var(--bleu-corporate);
+  text-align: center;
+  font-size: 1.8em;
+}
+
+.section-container {
+  max-width: 1600px; /* Plus large pour accueillir les 7 jours de la semaine */
+  margin: 40px auto;
+  padding: 0 20px;
+}
+/* --- LE PANNEAU DE CONTRÔLE (Sélecteur de Semaine) --- */
+
+/* On centre le titre de la page pour équilibrer le design */
+.main-pro h2 {
+  text-align: center;
+  color: var(--bleu-corporate);
+  font-size: 1.8em;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+/* Le grand conteneur en forme de pilule */
+.semaine-selector-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Espace entre les boutons et le texte */
+  background-color: #ffffff;
+  padding: 10px 20px;
+  margin: 0 auto 50px auto; /* Centre la pilule et laisse de l'espace en bas */
+  max-width: 600px; /* Empêche la barre de s'étirer sur tout l'écran */
+  border-radius: 50px; /* L'effet "Pilule" très moderne */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); /* Ombre douce et élégante */
+  border: 1px solid #e2e8f0;
+}
+
+/* Le bloc central qui contient "SÉLECTIONNER..." et la date */
+.semaine-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 280px; /* Largeur fixe pour éviter que les boutons ne bougent quand la date change */
+}
+
+/* Le petit texte gris au-dessus */
+.semaine-info .label {
+  font-size: 0.75em;
+  font-weight: 700;
+  color: #64748b; /* Gris pro */
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 5px;
+}
+
+/* La date principale en bleu */
+.semaine-info .dates {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--bleu-corporate);
+}
+
+/* Les boutons Précédent / Suivant (❮ et ❯) */
+.nav-btn {
+  background-color: #f8fafc; /* Fond très légèrement grisé par défaut */
+  color: var(--bleu-corporate);
+  border: none;
+  width: 45px; /* Boutons parfaitement carrés... */
+  height: 45px;
+  border-radius: 50%; /* ...qui deviennent des cercles parfaits ! */
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center; /* CENTRE VERTICALEMENT le contenu dans les 120px */
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Animation fluide */
+}
+
+/* L'effet Premium quand on passe la souris sur les boutons */
+.nav-btn:hover {
+  background-color: var(--rouge-tf1); /* Le fond devient rouge */
+  color: #ffffff; /* La flèche devient blanche */
+  transform: scale(1.05); /* Le bouton grossit très légèrement */
+  box-shadow: 0 4px 12px rgba(204, 0, 0, 0.25); /* Petite ombre rouge */
+}
+
+/* Adaptabilité pour les téléphones */
+@media (max-width: 768px) {
+  .semaine-selector-container {
+    border-radius: 12px; /* On enlève la pilule sur mobile pour un rectangle arrondi */
+    padding: 15px;
+    gap: 10px;
+  }
+  .semaine-info {
+    min-width: auto;
+  }
+  .semaine-info .dates {
+    font-size: 0.95em;
+  }
+}
+.categorie-section {
+  margin-bottom: 50px;
+}
+
+/* Le design de la Grille */
+.titre-categorie {
+  background: var(--bleu-corporate);
+  color: white;
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 6px 6px 0 0;
+  margin-bottom: 0;
+}
+
+.grille-container {
+  display: flex; /* C'est cette ligne qui aligne les jours côte à côte ! */
+  overflow-x: auto;
+  background: white;
+  border: 1px solid var(--bordure);
+  border-top: 4px solid var(--rouge-tf1);
+  border-radius: 0 6px 6px 6px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.colonne-jour {
+  flex: 1;
+  min-width: 180px;
+  border-right: 1px solid var(--bordure);
+  display: flex;
+  flex-direction: column;
+}
+
+.colonne-jour:last-child {
+  border-right: none;
+}
+
+.titre-jour {
+  background: #f7f8f9;
+  padding: 15px;
+  text-align: center;
+  font-weight: 800;
+  border-bottom: 1px solid var(--bordure);
+  color: var(--bleu-corporate);
+  text-transform: uppercase;
+}
+
+/* --- L'ALIGNEMENT VERTICAL DES CASES --- */
+.programme-item {
+  padding: 15px;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.2s ease;
+
+  height: 120px; /* On garde la hauteur fixe pour l'alignement des lignes */
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* CENTRE HORIZONTALEMENT le texte pour un look plus institutionnel */
+
+  /* MODIFICATIONS ICI : */
+  justify-content: center; /* CENTRE VERTICALEMENT le contenu dans les 120px */
+  text-align: center; /* CENTRE HORIZONTALEMENT le texte pour un look plus institutionnel */
+}
+
+/* On ajuste un peu les marges internes pour que ce soit parfait */
+.heure-prog {
+  font-weight: 700;
+  color: var(--bleu-corporate);
+  font-size: 1.1em;
+  margin-bottom: 4px; /* Un peu moins d'espace sous l'heure */
+  text-align: left;
+}
+
+.titre-prog {
+  font-size: 0.9em;
+  text-transform: uppercase;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0; /* Supprime les marges par défaut */
+  text-align: left;
+}
+
+/* On s'assure que l'effet de survol ressort bien sur les colonnes grises ET blanches */
+.programme-item:hover {
+  background-color: #c2c5c9;
+  cursor: pointer;
+}
+
+/* --- LE SÉLECTEUR DE CHAÎNE --- */
+.channel-selector {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  /* LE SECRET DU CENTRAGE ICI */
+  width: fit-content; /* La boîte s'adapte exactement à la taille du texte */
+  margin: 0 auto 30px auto; /* Le "auto" à gauche et à droite centre la boîte ! */
+
+  /* Le Design "Premium" */
+  background-color: #ffffff;
+  padding: 10px 25px;
+  border-radius: 50px; /* Bords totalement arrondis */
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Effet d'illumination au survol de la boîte */
+.channel-selector:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  border-color: var(--bleu-corporate);
+}
+
+.channel-selector label {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.channel-selector select {
+  background-color: transparent;
+  border: none;
+  color: var(--bleu-corporate);
+  font-size: 1.1em;
+  font-weight: 800;
+  cursor: pointer;
+  outline: none;
+  appearance: none; /* Enlève le style système parfois très laid */
+  padding-right: 25px;
+
+  /* Une flèche plus épaisse et plus moderne */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300152b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 0.8em;
+  transition: color 0.2s;
+}
+
+.channel-selector select:hover,
+.channel-selector select:focus {
+  color: var(--rouge-tf1);
+}
+/* --- LE MENU DÉROULANT SUR-MESURE --- */
+
+.custom-select {
+  position: relative;
+  min-width: 220px;
+  user-select: none; /* Empêche de surligner le texte par erreur */
+}
+
+/* Le bouton principal sur lequel on clique */
+.select-selected {
+  color: var(--bleu-corporate);
+  font-size: 1.1em;
+  font-weight: 800;
+  cursor: pointer;
+  padding-right: 25px;
+
+  /* La petite flèche */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300152b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 0.8em;
+  transition: color 0.2s ease;
+}
+
+.select-selected:hover {
+  color: var(--rouge-tf1);
+}
+
+/* La boîte flottante qui contient les options */
+.select-items {
+  position: absolute;
+  background-color: #ffffff;
+  top: 180%; /* Place la boîte juste en dessous de la pilule */
+  left: -20px; /* Aligne la boîte pour qu'elle soit bien centrée */
+  right: -20px;
+  z-index: 999;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Belle ombre pro */
+  border: 1px solid #e2e8f0;
+  border-top: 3px solid var(--rouge-tf1); /* Liseré rouge TF1 */
+  overflow: hidden;
+}
+
+/* Classe pour cacher le menu */
+.select-hide {
+  display: none;
+}
+
+/* Le design de chaque option dans la liste */
+.select-items div {
+  color: var(--bleu-corporate);
+  padding: 12px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95em;
+  border-bottom: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.select-items div:last-child {
+  border-bottom: none;
+}
+
+/* L'effet Magique au survol d'une option */
+.select-items div:hover {
+  background-color: #f8fafc;
+  color: var(--rouge-tf1);
+  padding-left: 28px; /* Le texte glisse légèrement vers la droite, très classe ! */
+}
+/* --- L'ALTERNANCE DE COULEURS (1 jour sur 2) --- */
+.colonne-jour:nth-child(odd) {
+  background-color: #ffffff; /* Lundi, Mercredi, Vendredi, Dimanche en Blanc */
+}
+
+.colonne-jour:nth-child(even) {
+  background-color: #f4f7fc; /* Mardi, Jeudi, Samedi en Gris très clair bleuté */
+}
+
+/* Le titre des jours (doit correspondre à son fond) */
+.colonne-jour:nth-child(odd) .titre-jour {
+  background-color: #ffffff;
+}
+.colonne-jour:nth-child(even) .titre-jour {
+  background-color: #f4f7fc;
+}

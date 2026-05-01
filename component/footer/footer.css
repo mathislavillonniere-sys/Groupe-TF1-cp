@@ -1,0 +1,231 @@
+/* css/footer.css */
+
+.corporate-footer {
+  background-color: var(--bleu-corporate);
+  color: #e1e5ea;
+  font-family: "Inter", "Segoe UI", sans-serif;
+
+  /* 1. On équilibre l'espace en haut (40px) pour qu'il soit identique à l'espace en bas */
+  padding-top: 40px;
+
+  margin-top: 80px;
+  border-top: 5px solid var(--rouge-tf1);
+}
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+
+  /* 1. LA CORRECTION : On aligne tout par le haut. 
+        Les titres seront rigoureusement sur la même ligne ! */
+  align-items: flex-start;
+}
+
+/* 2. LE CENTRAGE : On cible uniquement les 3 colonnes de droite, 
+      et on les pousse ensemble vers le bas pour les centrer par rapport au logo */
+.footer-col:not(.brand-col) {
+  margin-top: 45px;
+}
+/* --- Typographie et Titres --- */
+.footer-col h3 {
+  color: var(--blanc);
+  font-size: 1.1em;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* --- Colonne Identité --- */
+
+.footer-col.brand-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 100%; /* Empêche la colonne de s'étirer à l'infini */
+}
+.footer-logo-container {
+  margin-bottom: 20px;
+  display: block;
+  max-width: 220px; /* LE SECRET EST ICI : on bloque la largeur de la boîte ! */
+  width: 100%;
+}
+.footer-logo {
+  color: white;
+  font-size: 1.5em;
+  font-weight: 900;
+  margin-bottom: 15px;
+}
+
+.footer-logo-img {
+  width: 100%; /* L'image s'adapte parfaitement aux 220px de sa boîte */
+  height: auto; /* Conserve les proportions sans déformer le logo */
+  display: block;
+  /* filter: brightness(0) invert(1); */
+  transition: transform 0.3s ease;
+}
+.footer-logo span {
+  color: var(--rouge-tf1);
+}
+
+.footer-desc {
+  font-size: 0.9em;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: #a0aec0;
+}
+
+.footer-address {
+  display: flex;
+  gap: 15px;
+  font-size: 0.85em;
+  line-height: 1.6;
+  color: #a0aec0;
+}
+
+.footer-address i {
+  color: var(--rouge-tf1);
+  font-size: 1.2em;
+  margin-top: 4px;
+}
+
+.footer-address strong {
+  color: var(--blanc);
+}
+
+/* --- Listes de Liens --- */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+  color: #a0aec0;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition:
+    color 0.3s ease,
+    padding-left 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color: var(--rouge-tf1);
+  padding-left: 5px; /* Petit effet de glissement au survol */
+}
+
+/* --- Réseaux Sociaux --- */
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--blanc);
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background-color: var(--rouge-tf1);
+  transform: translateY(-3px);
+}
+
+/* --- Barre inférieure (Copyright & Mentions légales) --- */
+.footer-bottom {
+  background-color: #00152b;
+  padding: 25px 0; /* Un peu plus d'espace en haut et en bas */
+}
+
+.footer-bottom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column; /* Empile le texte et les liens */
+  justify-content: center;
+  align-items: center; /* Centre parfaitement au milieu */
+  gap: 12px; /* Espace entre le copyright et les liens */
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 1em; /* Texte plus gros (au lieu de 0.8em) */
+  color: #718096;
+  text-align: center;
+}
+
+.legal-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centre les liens sur leur ligne */
+  gap: 25px;
+}
+
+.legal-links li a {
+  color: #718096;
+  text-decoration: none;
+  font-size: 1em; /* Texte plus gros (au lieu de 0.8em) */
+  transition: color 0.2s;
+}
+
+.legal-links li a:hover {
+  color: var(--blanc);
+}
+
+/* Responsivité pour mobile */
+@media (max-width: 768px) {
+  .footer-bottom-container {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .legal-links {
+    justify-content: center;
+  }
+}
+/* Bouton Retour en haut */
+.back-to-top {
+  display: none; /* Caché par défaut */
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: var(--rouge-tf1);
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
+}
+
+.back-to-top:hover {
+  background-color: var(--bleu-corporate);
+  transform: scale(1.1);
+}

@@ -1,0 +1,130 @@
+/* css/filiales.css */
+
+.hero-banner {
+  background-color: var(--bleu-corporate);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  border-bottom: 4px solid var(--rouge-tf1);
+}
+
+.hero-banner h1 {
+  margin: 0 0 15px 0;
+  font-size: 2.5em;
+  text-transform: uppercase;
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.poles-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  ); /* Cartes plus fines */
+  gap: 30px; /* Espace légèrement réduit entre les cartes */
+  padding-bottom: 40px;
+}
+
+/* --- NOUVEAU DESIGN DES CARTES (Avec Image) --- */
+.pole-card {
+  background: white;
+  border-radius: 16px; /* Bords bien arrondis */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); /* Ombre très douce */
+  border: 1px solid #e2e8f0; /* Bordure grise très discrète */
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden; /* Indispensable : coupe les coins de l'image pour épouser la carte */
+}
+
+/* L'effet au survol de la carte */
+.pole-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  border-color: var(
+    --rouge-tf1
+  ); /* La bordure devient rouge très subtilement */
+}
+
+/* --- L'image d'en-tête --- */
+/* --- L'image d'en-tête --- */
+.pole-image {
+  width: 100%;
+  height: 160px;
+  padding: 20px;
+  box-sizing: border-box; /* LA CORRECTION : Empêche le padding de décaler le centre à droite */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.pole-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  margin: 0 auto; /* Force le centrage parfait des marges */
+  display: block;
+  transition: transform 0.6s ease;
+}
+/* Petit effet de zoom sur la photo quand on survole la carte */
+.pole-card:hover .pole-image img {
+  transform: scale(1.08);
+}
+
+/* --- Le contenu textuel --- */
+.pole-content {
+  padding: 10px 25px 75px 25px; /* J'ai réduit le padding haut à 10px pour rapprocher le texte de l'image */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: center; /* CENTRE le titre et le paragraphe */
+  align-items: center; /* Aligne tout au milieu de la carte */
+}
+
+.pole-title {
+  font-size: 1.4em;
+  color: var(--bleu-corporate);
+  margin: 0 0 15px 0;
+  font-weight: 800;
+}
+
+.pole-desc {
+  color: var(--texte-gris);
+  font-size: 0.95em;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- Le nouveau bouton (intégré dans la carte) --- */
+.btn-voir-plus {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+  background: #f8fafc; /* Fond gris très clair par défaut */
+  color: var(--bleu-corporate);
+  padding: 12px 20px;
+  border-radius: 8px; /* Carré arrondi, plus moderne que la pilule rouge */
+  font-weight: bold;
+  font-size: 0.95em;
+  transition: all 0.3s;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid #e2e8f0;
+}
+
+.btn-voir-plus:hover {
+  background: var(--rouge-tf1);
+  color: white;
+  border-color: var(--rouge-tf1);
+}
