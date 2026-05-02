@@ -37,7 +37,7 @@ function startAutoPlay() {
     if (isPlaying) {
       showSlides(slideIndex + 1);
     }
-  }, 6000);
+  }, 5000);
 }
 
 // Fonction pour RELANCER le défilement après un clic manuel

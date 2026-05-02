@@ -32,3 +32,21 @@
   background-color: var(--rouge-tf1);
   color: white;
 }
+/* ==========================================
+   VERSION MOBILE (< 768px)
+   ========================================== */
+@media (max-width: 768px) {
+  .presse-item {
+    flex-direction: column; /* On empile les éléments au lieu de les mettre côte à côte */
+    align-items: flex-start; /* On aligne tout proprement à gauche */
+    gap: 15px; /* On crée un petit espace entre le texte et le bouton */
+    padding: 15px;
+  }
+
+  .presse-item a {
+    display: block; /* Nécessaire pour prendre toute la largeur */
+    width: 100%; /* Le bouton prend 100% de la largeur du téléphone */
+    text-align: center; /* On centre le texte "Télécharger le PDF" dans le bouton */
+    box-sizing: border-box; /* Empêche le bouton de déborder de la boîte */
+  }
+}

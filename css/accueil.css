@@ -320,6 +320,32 @@
       transparent 100%
     );
   }
+  /* ==========================================
+   BADGE INÉDIT
+   ========================================== */
+  .badge-inedit {
+    display: inline-block;
+    background-color: transparent; /* <-- Le fond devient invisible */
+    border: 2px solid white; /* <-- La nouvelle bordure blanche */
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 900;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    /* --- L'alignement corrigé --- */
+    vertical-align: middle;
+    transform: translateY(
+      25px
+    ); /* <-- LA MODIFICATION : un chiffre positif pour le faire descendre */
+    margin-left: 15px;
+
+    /* Toujours non-cliquable */
+    pointer-events: none;
+    user-select: none;
+  }
 } /* <-- CETTE ACCOLADE EST CRUCIALE, ELLE FERME LE MEDIA QUERY */
 
 /* ==========================================
