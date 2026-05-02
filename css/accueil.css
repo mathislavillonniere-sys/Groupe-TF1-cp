@@ -95,6 +95,10 @@
 
 .text-box p {
   color: #cbd5e1;
+  max-width: 400px;
+  text-transform: uppercase;
+  text-align: right;
+  margin-left: auto;
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 25px;
