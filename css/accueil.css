@@ -213,6 +213,62 @@
   color: var(--rouge-tf1);
   display: block;
 }
+/* ==========================================
+   DESIGN DES CHIFFRES CLÉS (CARTES)
+   ========================================== */
+
+/* 1. On réduit l'espace blanc au-dessus de la section */
+.section-container {
+  padding-top: 20px;
+  margin-top: -30px; /* Remonte légèrement la section vers le haut */
+}
+
+/* 2. Le nouveau design premium des cartes */
+.card-chiffre {
+  background: #ffffff;
+  border-radius: 12px; /* Coins plus arrondis et modernes */
+  padding: 35px 20px;
+  text-align: center;
+  border: none; /* On enlève la bordure grise basique */
+
+  /* Une belle ombre douce façon Apple/Netflix */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+
+  /* La touche TF1 : une ligne rouge en bas de la carte */
+  border-bottom: 4px solid var(--rouge-tf1);
+
+  /* Animation fluide au survol */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  margin-bottom: 20px; /* Espace entre les cartes sur mobile */
+}
+
+/* Petit effet quand on passe la souris (ou le doigt) dessus */
+.card-chiffre:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* 3. Le style des gros chiffres rouges */
+.card-chiffre .valeur {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--rouge-tf1);
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+/* 4. Le petit texte descriptif en dessous */
+.card-chiffre .label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(
+    --bleu-corporate
+  ); /* On utilise ton bleu TF1 pour faire plus pro */
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Ecarte légèrement les lettres pour l'élégance */
+}
 
 /* --- Grilles de Cartes (Pôles & News) --- */
 .grid-cards {
@@ -469,6 +525,10 @@
   /* Cache les boutons "Voir le dossier" / "En savoir plus" sur téléphone */
   .btn-carousel,
   .btn-line {
+    display: none !important;
+  }
+  /* On cache le badge INÉDIT sur téléphone pour épurer le design */
+  .badge-inedit {
     display: none !important;
   }
 }

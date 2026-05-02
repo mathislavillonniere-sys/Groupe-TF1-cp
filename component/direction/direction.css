@@ -135,3 +135,49 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+/* ==========================================
+   VERSION MOBILE (< 768px)
+   ========================================== */
+@media (max-width: 768px) {
+  /* 1. On empile la carte du PDG (Image en haut, texte en bas) */
+  .ceo-card {
+    flex-direction: column;
+  }
+
+  /* 2. L'image prend toute la largeur de l'écran */
+  .ceo-image-container {
+    width: 100%;
+    height: 350px; /* On fixe une belle hauteur pour la photo sur mobile */
+  }
+
+  /* 3. On réduit un peu les marges internes pour laisser de la place au texte */
+  .ceo-content {
+    padding: 20px;
+  }
+
+  /* 4. On ajuste le bloc de citation du PDG */
+  .ceo-quote {
+    margin-top: 20px;
+  }
+  .ceo-quote blockquote {
+    font-size: 0.95em; /* Un peu plus petit pour la lecture sur mobile */
+    padding: 15px;
+  }
+
+  /* 5. On force les grilles de dirigeants sur 1 seule colonne pour éviter les débordements */
+  .leaders-grid {
+    grid-template-columns: 1fr;
+    gap: 20px; /* Un peu moins d'espace entre les cartes */
+  }
+
+  /* 6. On réduit les marges globales de la page */
+  .governance-section {
+    margin: 40px auto;
+  }
+  .ceo-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top; /* <-- LA MAGIE EST ICI : On force le cadrage vers le haut ! */
+  }
+}
