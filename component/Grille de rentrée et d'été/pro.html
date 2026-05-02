@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TF1 CP Pro - Grille TV</title>
+
+    <link rel="stylesheet" href="../navbar/menu.css" />
+
+    <link rel="stylesheet" href="pro.css" />
+
+    <link rel="stylesheet" href="../footer/footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <script src="../navbar/navbar.js"></script>
+
+    <header class="hero-banner">
+      <h1>Grille des programmes</h1>
+      <p>
+        Accédez aux grilles de programmes de soirée, annuelles et saisonnières
+        de nos chaines
+      </p>
+    </header>
+
+    <main>
+      <div class="controls-container">
+        <h2 class="page-title">Grilles TV - TF1 Camping Paradis</h2>
+
+        <div class="channel-selector">
+          <label>CHAÎNE :</label>
+
+          <div class="custom-select" id="custom-chaine-select">
+            <div class="select-selected">TF1 Camping Paradis</div>
+            <div class="select-items select-hide">
+              <div data-value="tf1">TF1 Camping Paradis</div>
+              <!-- <div data-value="m6">M6 Camping Paradis</div>
+              <div data-value="tfx">TFX Camping Paradis</div>
+              <div data-value="lci">LCI Camping Paradis</div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="week-selector"></div>
+      </div>
+
+      <div class="semaine-selector-container">
+        <button class="nav-btn" onclick="changerSemaine(-1)">❮</button>
+        <div class="semaine-info">
+          <span class="label">SÉLECTIONNER UNE SEMAINE</span>
+          <span id="affichage-semaine" class="dates"
+            >Semaine du ... au ...</span
+          >
+        </div>
+        <button class="nav-btn" onclick="changerSemaine(1)">❯</button>
+      </div>
+
+      <div class="categorie-section">
+        <h3 class="titre-categorie">Le Prime Time (21h10 - 23h25)</h3>
+        <div id="grille-soir" class="grille-container"></div>
+      </div>
+
+      <div class="categorie-section">
+        <h3 class="titre-categorie">La Nuit</h3>
+        <div id="grille-nuit" class="grille-container"></div>
+      </div>
+
+      <div class="categorie-section">
+        <h3 class="titre-categorie">La Matinée</h3>
+        <div id="grille-matin" class="grille-container"></div>
+      </div>
+
+      <div class="categorie-section">
+        <h3 class="titre-categorie">L'Après-midi</h3>
+        <div id="grille-apres-midi" class="grille-container"></div>
+      </div>
+    </main>
+
+    <script src="pro.js"></script>
+
+    <script src="../footer/footer.js"></script>
+  </body>
+</html>
