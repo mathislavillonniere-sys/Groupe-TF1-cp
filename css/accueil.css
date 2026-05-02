@@ -382,7 +382,7 @@
 
 @media (max-width: 768px) {
   .main-carousel {
-    height: 350px; /* Au lieu de 480px, on écrase un peu le carrousel */
+    height: 300px; /* Au lieu de 480px, on écrase un peu le carrousel */
   }
 
   /* On réduit un peu le texte pour qu'il rentre bien dans cette nouvelle taille */
@@ -392,6 +392,7 @@
   .text-box p {
     font-size: 0.85rem;
     margin-bottom: 10px;
+    color: #dfe6f0;
   }
 
   .carousel-content-wrapper {
