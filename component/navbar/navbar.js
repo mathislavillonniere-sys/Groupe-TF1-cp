@@ -14,7 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
           <img src="${prefixe}photo/logo_sombre-removebg-preview.png" alt="Logo TF1 CP Groupe" />
         </a>
 
-        <ul class="nav-menu">
+        <div class="menu-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+
+        <ul class="nav-menu" id="nav-menu">
           <li class="dropdown">
             <a href="#">Notre Groupe ▾</a>
             <ul class="dropdown-content">
@@ -51,4 +57,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // On injecte le menu tout en haut de la page
   document.body.insertAdjacentHTML("afterbegin", navbarHTML);
+
+  // ==========================================
+  // NOUVEAU : LOGIQUE DU MENU MOBILE
+  // ==========================================
+  const menuToggle = document.getElementById("mobile-menu");
+  const navMenu = document.getElementById("nav-menu");
+
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", function () {
+      menuToggle.classList.toggle("is-active"); // Transforme le hamburger en croix
+      navMenu.classList.toggle("active"); // Fait glisser le menu
+    });
+  }
 });

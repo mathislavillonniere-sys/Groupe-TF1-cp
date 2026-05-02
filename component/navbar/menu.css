@@ -19,7 +19,7 @@ body {
    ======================================= */
 .navbar {
   background-color: var(--bleu-corporate);
-  border-bottom: 3px solid var(--rouge-tf1);
+  border-bottom: none;
   height: 85px;
   display: flex; /* On force la barre elle-même à utiliser Flexbox */
   align-items: center; /* Centre le conteneur à l'intérieur */
@@ -134,4 +134,109 @@ body {
   background-color: #f8fafc; /* Fond très légèrement grisé */
   color: var(--rouge-tf1); /* Le texte passe en rouge */
   padding-left: 32px; /* L'astuce magique : le texte glisse vers la droite ! */
+}
+/* =======================================
+   BOUTON HAMBURGER (Base)
+   ======================================= */
+.menu-toggle {
+  display: none; /* Caché par défaut sur grand écran */
+  cursor: pointer;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  display: block;
+}
+
+/* =======================================
+   VERSION MOBILE & TABLETTE (< 992px)
+   ======================================= */
+@media (max-width: 992px) {
+  .menu-toggle {
+    display: block; /* On affiche le hamburger */
+    z-index: 1001; /* Doit être au-dessus du menu ouvert */
+  }
+
+  /* On transforme la barre horizontale en panneau latéral caché */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Le menu est caché à l'extérieur de l'écran à droite */
+    width: 75%; /* Largeur du panneau ouvert */
+    height: 100vh; /* Prend 100% de la hauteur de l'écran */
+    background-color: var(--bleu-corporate);
+    flex-direction: column; /* Les liens s'empilent verticalement */
+    align-items: flex-start;
+    padding-top: 100px; /* On laisse de la place pour la croix en haut */
+    transition: 0.4s ease-in-out; /* Animation fluide */
+    z-index: 1000;
+    overflow-y: auto; /* Permet de scroller si l'écran est petit */
+  }
+
+  /* La classe ajoutée par le JavaScript quand on clique */
+  .nav-menu.active {
+    right: 0; /* Le menu glisse vers la gauche pour s'afficher */
+    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.5); /* Ombre sur le côté */
+  }
+
+  /* Animation du Hamburger en Croix (X) */
+  .menu-toggle.is-active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.is-active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .menu-toggle.is-active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* --- Adaptation des liens sur Mobile --- */
+  .dropdown {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dropdown > a {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Ligne de séparation subtile */
+  }
+
+  /* Sur mobile, on remet les sous-menus dans le flux normal */
+  .dropdown-content {
+    position: static !important; /* <-- LA SOLUTION : annule l'effet flottant */
+    display: block;
+    opacity: 1;
+    transform: none;
+    box-shadow: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 0 10px 15px; /* Un peu d'espace en bas et à gauche */
+    width: 100%;
+  }
+
+  .dropdown-content li {
+    width: 100%;
+  }
+
+  .dropdown-content li a {
+    color: #cbd5e1;
+    padding: 10px 20px;
+    border-bottom: none;
+    display: block; /* Force le lien à prendre toute la largeur */
+    width: 100%;
+  }
+
+  .dropdown-content li a:hover {
+    background-color: transparent;
+    color: white;
+    padding-left: 25px;
+  }
 }
