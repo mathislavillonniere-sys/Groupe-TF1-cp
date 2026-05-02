@@ -7,6 +7,19 @@
   --bordure: #e1e5ea;
 }
 
+/* Règle d'or pour éviter que les éléments débordent de l'écran */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Empêche tout le site de bouger de gauche à droite */
+body,
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: var(--gris-fond);
@@ -175,6 +188,7 @@ body {
     transition: 0.4s ease-in-out; /* Animation fluide */
     z-index: 1000;
     overflow-y: auto; /* Permet de scroller si l'écran est petit */
+    overflow-x: hidden !important;
   }
 
   /* La classe ajoutée par le JavaScript quand on clique */
@@ -209,16 +223,17 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Ligne de séparation subtile */
   }
 
-  /* Sur mobile, on remet les sous-menus dans le flux normal */
+  /* 2. On corrige le sous-menu qui dépassait de l'écran */
   .dropdown-content {
-    position: static !important; /* <-- LA SOLUTION : annule l'effet flottant */
+    position: static !important;
     display: block;
     opacity: 1;
     transform: none;
     box-shadow: none;
     background-color: transparent;
     border: none;
-    padding: 0 0 10px 15px; /* Un peu d'espace en bas et à gauche */
+    padding: 0; /* <-- On enlève le padding ici */
+    margin-left: 0; /* <-- On enlève le décalage qui faisait déborder le menu */
     width: 100%;
   }
 
@@ -226,11 +241,12 @@ body {
     width: 100%;
   }
 
+  /* 3. On applique le décalage directement sur les liens pour que ça reste propre */
   .dropdown-content li a {
     color: #cbd5e1;
-    padding: 10px 20px;
+    padding: 10px 20px 10px 40px; /* <-- 40px à gauche pour créer l'effet "sous-menu" */
     border-bottom: none;
-    display: block; /* Force le lien à prendre toute la largeur */
+    display: block;
     width: 100%;
   }
 
