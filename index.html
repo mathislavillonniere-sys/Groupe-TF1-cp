@@ -21,14 +21,53 @@
   </head>
   <body>
     <main>
-      <header class="hero-home">
-        <h1>TF1 Camping Paradis</h1>
-        <p>
-          Un groupe audiovisuel mondial engagé dans l'innovation et le
-          divertissement pour tous.
-        </p>
-      </header>
+      <header class="main-carousel">
+        <div class="carousel-container">
+          <div class="carousel-slide active">
+            <img src="photo/imagesstarac.jfif" alt="Star Academy" />
+            <div class="carousel-overlay">
+              <div class="carousel-content-wrapper">
+                <div class="text-box">
+                  <h2>STAR ACADEMY</h2>
+                  <p>
+                    Découvrez la nouvelle saison dès le lundi 1er juin à 18h00
+                    sur TF1 Camping Paradis.
+                  </p>
+                  <a href="#" class="btn-carousel">En savoir plus</a>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <div class="carousel-slide">
+            <img src="photo/NCIS" alt="NCIS" />
+            <div class="carousel-overlay">
+              <div class="carousel-content-wrapper">
+                <div class="text-box">
+                  <h2>NCIS</h2>
+                  <p>
+                    Retrouvez tous nos dossiers de presse et les dernières
+                    actualités de nos programmes phares.
+                  </p>
+                  <a href="#" class="btn-carousel">Voir le dossier</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="currentSlide(0)"></span>
+          <span class="dot" onclick="currentSlide(1)"></span>
+        </div>
+
+        <button class="nav-btn prev" onclick="changeSlide(-1)">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="nav-btn next" onclick="changeSlide(1)">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </header>
       <section class="section-home">
         <h2 class="section-title">Présentation du Groupe</h2>
         <p style="text-align: center; font-size: 1.1rem; line-height: 1.8">
@@ -148,5 +187,6 @@
     <script src="./js/animation.js"></script>
     <script src="./component/navbar/navbar.js"></script>
     <script src="./component/footer/footer.js"></script>
+    <script src="./js/header.js"></script>
   </body>
 </html>

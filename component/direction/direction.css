@@ -118,3 +118,20 @@
   background: #f9fbfd; /* Fond très légèrement bleuté pour faire ressortir la citation */
   border-radius: 0 8px 8px 0;
 }
+/* Style spécifique pour le Conseil d'Administration */
+.board-card {
+  background-color: #fcfdfe; /* Un fond très légèrement bleuté */
+  border-left: 4px solid var(--bleu-corporate); /* Une barre bleue au lieu de l'effet rouge au hover */
+}
+
+.board-card:hover {
+  border-color: var(--rouge-tf1);
+  background-color: white;
+}
+
+/* On ajuste l'espacement pour que les 6 cartes des pôles soient bien rangées */
+@media (min-width: 900px) {
+  .leaders-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

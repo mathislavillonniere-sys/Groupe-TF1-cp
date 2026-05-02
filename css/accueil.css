@@ -1,25 +1,169 @@
 /* css/accueil.css */
 
 /* --- Hero Header --- */
-.hero-home {
-  background: linear-gradient(135deg, var(--bleu-corporate) 0%, #003366 100%);
+.main-carousel {
+  position: relative;
+  width: 100%;
+  /* Au lieu de height: 550px; on utilise aspect-ratio */
+  aspect-ratio: 16 / 6; /* Cela crée un rectangle parfait qui s'adapte à la largeur */
+  overflow: hidden;
+  background-color: #000;
+  position: relative;
+  height: 600px;
+}
+.carousel-container {
+  position: relative;
+  height: 100%;
+}
+
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.8s ease-in-out,
+    visibility 0.8s;
+  z-index: 1;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+/* IMAGE : Pour qu'elle soit bien centrée et couvre tout */
+/* ANTI-PIXELLISATION : On aide le navigateur à lisser l'image */
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Force un rendu plus net sur certains navigateurs */
+  image-rendering: -webkit-optimize-contrast;
+  /* Empêche l'image d'être trop "étirée" si elle est trop petite */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* OVERLAY : Pour assombrir un peu le fond et placer le texte */
+.carousel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7));
+  display: flex;
+  align-items: center;
+}
+
+.carousel-content-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Texte à droite */
+  padding-right: 10%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
+}
+/* LA BOITE DE TEXTE */
+.text-box {
+  max-width: 500px;
   color: white;
-  padding: 100px 20px;
-  text-align: center;
-  border-bottom: 5px solid var(--rouge-tf1);
+  text-align: right;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* Ombre pour la lisibilité */
 }
 
-.hero-home h1 {
-  font-size: 3.5rem;
-  margin: 0;
-  letter-spacing: -1px;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.hero-home p {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  max-width: 700px;
-  margin: 20px auto;
+.text-box h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.text-box p {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.btn-carousel {
+  display: inline-block;
+  padding: 12px 30px;
+  border: 2px solid #e2001a; /* Ta couleur rouge */
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-carousel:hover {
+  background: #e2001a;
+}
+
+/* BOUTONS NAVIGATION */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.nav-btn:hover {
+  background: #e2001a;
+  border-color: #e2001a;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev {
+  left: 30px;
+}
+.next {
+  right: 30px;
+}
+/* LES POINTS (DOTS) */
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dot.active {
+  background: #e2001a;
+  transform: scale(1.3);
 }
 
 /* --- Sections Générales --- */

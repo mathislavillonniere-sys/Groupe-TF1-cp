@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <p>
                         <strong>Siège Social</strong><br>
                         Tour TF1 Camping Paradis<br>
-                        358 avenue Notre dame de Paris<br>
+                        358 avenue Notre Dame de Paris<br>
                         79230 La Garette <br>
                         France
                     </p>
