@@ -441,4 +441,9 @@
   .carousel-dots {
     bottom: 20px;
   }
+  /* Cache les boutons "Voir le dossier" / "En savoir plus" sur téléphone */
+  .btn-carousel,
+  .btn-line {
+    display: none !important;
+  }
 }
