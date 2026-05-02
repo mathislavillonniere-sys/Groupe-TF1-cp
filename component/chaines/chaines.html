@@ -23,31 +23,48 @@
     </header>
 
     <main class="section-container">
-      <div class="chaines-grid">
-        <article class="channel-card">
-          <div class="channel-logo-container">
-            <h2>TF1 CP</h2>
-          </div>
-          <div class="channel-body">
+      <div class="chaines-tabs">
+        <button class="tab-btn active" onclick="openChannel(event, 'tf1')">
+          TF1 CP
+        </button>
+        <button class="tab-btn" onclick="openChannel(event, 'm6')">
+          M6 CP
+        </button>
+        <button class="tab-btn" onclick="openChannel(event, 'tfx')">
+          TFX CP
+        </button>
+        <button class="tab-btn" onclick="openChannel(event, 'tmc')">
+          TMC CP
+        </button>
+        <button class="tab-btn" onclick="openChannel(event, 'lci')">
+          LCI CP
+        </button>
+      </div>
+
+      <div class="channel-details-container">
+        <div id="tf1" class="channel-detail active">
+          <div
+            class="detail-header"
+            style="border-bottom-color: var(--rouge-tf1)"
+          >
+            <img
+              src="../../photo/logo-TF1.jpg"
+              alt="Logo TF1"
+              class="channel-logo-img"
+            />
+            <h3 class="channel-subtitle">Camping Paradis</h3>
             <p class="channel-desc">
               La chaîne historique, leader du divertissement, de la fiction et
               des grands événements en direct.
             </p>
-            <div class="channel-meta">
-              <p>
-                <span class="meta-label">📅 Lancement</span
-                ><span class="meta-value">1987</span>
-              </p>
-              <p>
-                <span class="meta-label">👔 Direction</span
-                ><span class="meta-value">Mathis Lavillonnière</span>
-              </p>
-              <p>
-                <span class="meta-label">📊 Audience Moy.</span
-                ><span class="meta-value">22,5 %</span>
-              </p>
+          </div>
+          <div class="detail-body">
+            <div class="detail-info">
+              <p><strong>📅 Lancement :</strong> 1987</p>
+              <p><strong>👔 Direction :</strong> Mathis Lavillonnière</p>
+              <p><strong>📊 Audience Moy. :</strong> 22,5 %</p>
             </div>
-            <div class="channel-programs">
+            <div class="detail-programs">
               <h4>Programmes Phares</h4>
               <ul>
                 <li>Camping Paradis</li>
@@ -56,35 +73,121 @@
               </ul>
             </div>
           </div>
-        </article>
+        </div>
 
-        <article class="channel-card">
-          <div
-            class="channel-logo-container"
-            style="border-bottom-color: #0088cc"
-          >
-            <h2>CP INFO</h2>
+        <div id="m6" class="channel-detail">
+          <div class="detail-header" style="border-bottom-color: #e70d0d">
+            <img
+              src="../../photo/logo-M6.png"
+              alt="Logo M6"
+              class="channel-logo-img"
+            />
+            <h3 class="channel-subtitle">Camping Paradis</h3>
+            <p class="channel-desc">
+              La chaîne de la famille, de l'art de vivre et des émissions
+              culinaires emblématiques.
+            </p>
           </div>
-          <div class="channel-body">
+          <div class="detail-body">
+            <div class="detail-info">
+              <p><strong>📅 Lancement :</strong> 2025</p>
+              <p><strong>👔 Direction :</strong> Direction des Programmes</p>
+              <p><strong>📊 Audience Moy. :</strong> 9,5 %</p>
+            </div>
+            <div class="detail-programs">
+              <h4>Programmes Phares</h4>
+              <ul>
+                <li>Top Chef Paradis</li>
+                <li>L'Amour est dans le pré</li>
+                <li>Zone Interdite</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="tfx" class="channel-detail">
+          <div class="detail-header" style="border-bottom-color: #fd3e07">
+            <img
+              src="../../photo/logo-TFX.jpg"
+              alt="Logo TFX"
+              class="channel-logo-img"
+            />
+            <h3 class="channel-subtitle">Camping Paradis</h3>
+            <p class="channel-desc">
+              La chaîne des jeunes adultes, tournée vers l'humour, le
+              divertissement et la télé-réalité.
+            </p>
+          </div>
+          <div class="detail-body">
+            <div class="detail-info">
+              <p><strong>📅 Lancement :</strong> 2025</p>
+              <p><strong>👔 Direction :</strong> Direction TFX</p>
+              <p><strong>📊 Audience Moy. :</strong> 3,1 %</p>
+            </div>
+            <div class="detail-programs">
+              <h4>Programmes Phares</h4>
+              <ul>
+                <li>La Villa des Cœurs Brisés</li>
+                <li>Tattoo Cover</li>
+                <li>Super Nanny</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="tmc" class="channel-detail">
+          <div class="detail-header" style="border-bottom-color: #000000">
+            <img
+              src="../../photo/logo-TMC.jpg"
+              alt="Logo TMC"
+              class="channel-logo-img"
+            />
+            <h3 class="channel-subtitle">Camping Paradis</h3>
+            <p class="channel-desc">
+              La chaîne premium offrant un regard décalé sur l'actualité, du
+              cinéma et des talk-shows.
+            </p>
+          </div>
+          <div class="detail-body">
+            <div class="detail-info">
+              <p><strong>📅 Lancement :</strong> 2025</p>
+              <p><strong>👔 Direction :</strong> Direction TMC</p>
+              <p><strong>📊 Audience Moy. :</strong> 4,5 %</p>
+            </div>
+            <div class="detail-programs">
+              <h4>Programmes Phares</h4>
+              <ul>
+                <li>Quotidien Paradis</li>
+                <li>Burger Quiz</li>
+                <li>Grands Reportages</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="lci" class="channel-detail">
+          <div
+            class="detail-header"
+            style="border-bottom-color: var(--rouge-tf1)"
+          >
+            <img
+              src="../../photo/logo-LCI.jpg"
+              alt="Logo LCI"
+              class="channel-logo-img"
+            />
+            <h3 class="channel-subtitle">Camping Paradis</h3>
             <p class="channel-desc">
               La chaîne d'information en continu de référence. Décryptage,
               débats et reportages 24h/24.
             </p>
-            <div class="channel-meta">
-              <p>
-                <span class="meta-label">📅 Lancement</span
-                ><span class="meta-value">2005</span>
-              </p>
-              <p>
-                <span class="meta-label">👔 Direction</span
-                ><span class="meta-value">Pôle News Paradis</span>
-              </p>
-              <p>
-                <span class="meta-label">📊 Audience Moy.</span
-                ><span class="meta-value">3,2 %</span>
-              </p>
+          </div>
+          <div class="detail-body">
+            <div class="detail-info">
+              <p><strong>📅 Lancement :</strong> 2005</p>
+              <p><strong>👔 Direction :</strong> Pôle News Paradis</p>
+              <p><strong>📊 Audience Moy. :</strong> 2,8 %</p>
             </div>
-            <div class="channel-programs">
+            <div class="detail-programs">
               <h4>Programmes Phares</h4>
               <ul>
                 <li>La Matinale Info</li>
@@ -93,48 +196,11 @@
               </ul>
             </div>
           </div>
-        </article>
-
-        <article class="channel-card">
-          <div
-            class="channel-logo-container"
-            style="background: #111; border-bottom-color: #e60000"
-          >
-            <h2 style="color: white">
-              TF1 CP <span style="color: #e60000">+</span>
-            </h2>
-          </div>
-          <div class="channel-body">
-            <p class="channel-desc">
-              Notre plateforme de streaming premium (SVOD) réunissant tout
-              l'univers du groupe et des créations originales exclusives.
-            </p>
-            <div class="channel-meta">
-              <p>
-                <span class="meta-label">📅 Lancement</span
-                ><span class="meta-value">2026</span>
-              </p>
-              <p>
-                <span class="meta-label">👔 Direction</span
-                ><span class="meta-value">Damien Menard</span>
-              </p>
-              <p>
-                <span class="meta-label">📊 Audience Moy.</span
-                ><span class="meta-value">5 Millions d'abonnés</span>
-              </p>
-            </div>
-            <div class="channel-programs">
-              <h4>Programmes Phares</h4>
-              <ul>
-                <li>Séries Originales VOD</li>
-                <li>Cinéma & Blockbusters</li>
-                <li>Avant-premières</li>
-              </ul>
-            </div>
-          </div>
-        </article>
+        </div>
       </div>
     </main>
+
+    <script src="chaine.js"></script>
 
     <script src="../footer/footer.js"></script>
   </body>

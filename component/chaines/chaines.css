@@ -1,4 +1,6 @@
-/* css/chaines.css - Design de la page Chaînes & Streaming */
+/* ==========================================
+   DESIGN DE LA PAGE CHAÎNES (SYSTÈME D'ONGLETS)
+   ========================================== */
 
 .hero-banner {
   background-color: var(--bleu-corporate);
@@ -8,128 +10,204 @@
   border-bottom: 4px solid var(--rouge-tf1);
 }
 
-.hero-banner h1 {
-  margin: 0 0 15px 0;
-  font-size: 2.5em;
-  text-transform: uppercase;
-}
-
 .section-container {
-  max-width: 1200px;
-  margin: 50px auto;
+  max-width: 1100px;
+  margin: 60px auto;
   padding: 0 20px;
 }
 
-/* Grille Responsive (s'adapte au mobile) */
-.chaines-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
-}
-
-/* Design des Cartes Chaînes */
-.channel-card {
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--bordure);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+/* 1. LES BOUTONS (ONGLETS) */
+.chaines-tabs {
   display: flex;
-  flex-direction: column;
-}
-
-.channel-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
-}
-
-/* L'espace pour le Logo */
-.channel-logo-container {
-  background: #f8f9fa;
-  height: 120px;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  border-bottom: 3px solid var(--rouge-tf1);
+  gap: 15px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
 }
 
-.channel-logo-container h2 {
+.tab-btn {
+  background: white;
+  border: 1px solid var(--bordure);
   color: var(--bleu-corporate);
-  font-size: 2em;
-  font-weight: 900;
-  margin: 0;
-  letter-spacing: -1px;
-}
-
-/* Le contenu de la carte */
-.channel-body {
-  padding: 25px;
-  flex-grow: 1;
-}
-
-.channel-desc {
-  color: var(--texte-gris);
-  font-size: 0.95em;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
-/* Les petites infos (Date, Audience, Dir) */
-.channel-meta {
-  background: var(--gris-fond);
-  padding: 15px;
-  border-radius: 6px;
-  margin-bottom: 20px;
-  font-size: 0.85em;
-}
-
-.channel-meta p {
-  margin: 5px 0;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px dashed var(--bordure);
-  padding-bottom: 4px;
-}
-
-.channel-meta p:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-.meta-label {
-  color: var(--texte-gris);
-  font-weight: bold;
-}
-.meta-value {
-  color: var(--bleu-corporate);
-  font-weight: bold;
-}
-
-/* Liste des programmes phares */
-.channel-programs h4 {
-  color: var(--bleu-corporate);
-  margin: 0 0 10px 0;
-  font-size: 0.95em;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: 800;
+  border-radius: 50px; /* Style "pilule" très moderne */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
   text-transform: uppercase;
 }
 
-.channel-programs ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+.tab-btn:hover {
+  border-color: var(--rouge-tf1);
+  transform: translateY(-2px);
 }
 
-.channel-programs li {
-  font-size: 0.9em;
-  padding: 4px 0;
+/* État actif : le bouton devient plein */
+.tab-btn.active {
+  background: var(--bleu-corporate);
+  color: white;
+  border-color: var(--bleu-corporate);
+  box-shadow: 0 10px 20px rgba(0, 21, 43, 0.15);
+}
+
+/* 2. LA GRANDE BOÎTE (POP-UP) */
+.channel-details-container {
+  background: white;
+  border-radius: 20px;
+  border: 1px solid var(--bordure);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  min-height: 450px;
+  position: relative;
+}
+
+/* Contenu de chaque chaîne (caché par défaut) */
+.channel-detail {
+  display: none;
+  padding: 60px;
+  animation: slideFade 0.5s ease forwards;
+}
+
+.channel-detail.active {
+  display: block;
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3. ENTÊTE DE LA BOÎTE */
+.detail-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 3px solid #f1f5f9;
+}
+/* --- LE FAMEUX DÉGRADÉ TF1 POUR LA LIGNE --- */
+#tf1 .detail-header {
+  border-image: linear-gradient(
+      to right,
+      var(--bleu-corporate),
+      var(--rouge-tf1)
+    )
+    1 !important;
+}
+#lci .detail-header {
+  border-image: linear-gradient(
+      to right,
+      var(--bleu-corporate),
+      var(--rouge-tf1)
+    )
+    1 !important;
+}
+/* --- NOUVEAU DESIGN LOGO + SOUS-TITRE --- */
+.channel-logo-img {
+  height: 70px; /* Ajuste cette valeur si tes logos sont trop gros ou trop petits */
+  width: auto; /* Garde les bonnes proportions du logo */
+  max-width: 250px;
+  display: block;
+  margin: 0 auto 10px auto; /* Centre le logo et met un petit espace en dessous */
+}
+
+.channel-subtitle {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--bleu-corporate);
+  text-transform: uppercase;
+  letter-spacing: 3px; /* Écarte les lettres pour un effet premium */
+  margin: 0 0 20px 0;
+}
+
+.channel-desc {
+  font-size: 1.2rem;
+  color: #64748b;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* 4. CORPS DE LA BOÎTE (INFOS & PROGS) */
+.detail-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.detail-info p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 10px;
   color: var(--texte-noir);
 }
 
-.channel-programs li::before {
-  content: "▶";
+.detail-info strong {
+  color: var(--bleu-corporate);
+  display: inline-block;
+  width: 140px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.detail-programs h4 {
+  font-size: 1.3rem;
+  text-transform: uppercase;
   color: var(--rouge-tf1);
-  font-size: 0.8em;
-  margin-right: 8px;
+  margin-bottom: 25px;
+  border-bottom: 2px solid var(--rouge-tf1);
+  display: inline-block;
+}
+
+.detail-programs ul {
+  list-style: none;
+  padding: 0;
+}
+
+.detail-programs li {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  padding-left: 30px;
+  position: relative;
+  font-weight: 600;
+}
+
+.detail-programs li::before {
+  content: "●";
+  position: absolute;
+  left: 0;
+  color: var(--rouge-tf1);
+}
+
+/* ==========================================
+   ADAPTATION MOBILE
+   ========================================== */
+@media (max-width: 768px) {
+  .channel-detail {
+    padding: 30px 20px;
+  }
+  .detail-body {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .detail-header h2 {
+    font-size: 2.2rem;
+  }
+  .detail-header .channel-desc {
+    font-size: 1rem;
+  }
+  .tab-btn {
+    padding: 10px 15px;
+    font-size: 0.8rem;
+  }
 }

@@ -204,6 +204,7 @@
   /* Le système des 3 lignes maximum avec "..." */
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3; /* <-- LA LIGNE AJOUTÉE POUR EFFACER L'AVERTISSEMENT */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
