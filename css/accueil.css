@@ -398,12 +398,7 @@
   .carousel-content-wrapper {
     justify-content: center; /* Centre horizontalement */
     padding: 0;
-    background: rgba(
-      0,
-      0,
-      0,
-      0.35
-    ); /* Un fond sombre uniforme pour bien lire */
+    background: rgba(0, 0, 0, 0.3); /* Un fond sombre uniforme pour bien lire */
   }
 
   /* 2. Le texte : centré et protégé des flèches */
