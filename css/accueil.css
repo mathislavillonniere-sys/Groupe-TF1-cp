@@ -407,7 +407,7 @@
 
   /* 2. Le texte : centré et protégé des flèches */
   .text-box {
-    text-align: center;
+    text-align: right;
     padding: 0 45px; /* Marge interne pour que le texte ne touche pas les flèches ! */
   }
 
