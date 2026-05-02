@@ -396,12 +396,14 @@
   }
 
   .carousel-content-wrapper {
-    justify-content: center;
-    align-items: flex-start; /* LA MAGIE EST ICI : On aligne le texte vers le haut au lieu du centre */
-    padding-top: 20px; /* On laisse de l'espace sous la barre de menu pour que le texte respire */
-    padding-left: 0;
-    padding-right: 0;
-    background: rgba(0, 0, 0, 0.5); /* Un fond sombre uniforme pour bien lire */
+    justify-content: center; /* Centre horizontalement */
+    padding: 0;
+    background: rgba(
+      0,
+      0,
+      0,
+      0.35
+    ); /* Un fond sombre uniforme pour bien lire */
   }
 
   /* 2. Le texte : centré et protégé des flèches */

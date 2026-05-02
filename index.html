@@ -25,7 +25,13 @@
       <header class="main-carousel">
         <div class="carousel-container">
           <div class="carousel-slide active">
-            <img src="photo/imagesstarac.jfif" alt="Star Academy" />
+            <picture>
+              <source
+                media="(max-width: 768px)"
+                srcset="photo/affiche-star-academy.jpg"
+              />
+              <img src="photo/imagesstarac.jfif" alt="Star Academy" />
+            </picture>
             <div class="carousel-overlay">
               <div class="carousel-content-wrapper">
                 <div class="text-box">
@@ -41,7 +47,16 @@
           </div>
 
           <div class="carousel-slide">
-            <img src="photo/ncis-new-york-770x433.jpg" alt="NCIS : NEW YORK" />
+            <picture>
+              <source
+                media="(max-width: 768px)"
+                srcset="photo/NCIS-newyork.jpg"
+              />
+              <img
+                src="photo/ncis-new-york-770x433.jpg"
+                alt="NCIS : NEW YORK"
+              />
+            </picture>
             <div class="carousel-overlay">
               <div class="carousel-content-wrapper">
                 <div class="text-box">
@@ -55,8 +70,15 @@
               </div>
             </div>
           </div>
+
           <div class="carousel-slide">
-            <img src="photo/secret-story.jfif" alt="Secret Story" />
+            <picture>
+              <source
+                media="(max-width: 768px)"
+                srcset="photo/Secret-Story-mobile.jpg"
+              />
+              <img src="photo/secret-story.jfif" alt="Secret Story" />
+            </picture>
             <div class="carousel-overlay">
               <div class="carousel-content-wrapper">
                 <div class="text-box">
@@ -75,11 +97,15 @@
               </div>
             </div>
           </div>
+
           <div class="carousel-slide">
-            <img
-              src="photo/Critique_The-Night_Agent_2023_ScreenTune.png"
-              alt="TNA"
-            />
+            <picture>
+              <source media="(max-width: 768px)" srcset="photo/TNA.webp" />
+              <img
+                src="photo/Critique_The-Night_Agent_2023_ScreenTune.png"
+                alt="TNA"
+              />
+            </picture>
             <div class="carousel-overlay">
               <div class="carousel-content-wrapper">
                 <div class="text-box">
@@ -93,8 +119,15 @@
               </div>
             </div>
           </div>
+
           <div class="carousel-slide">
-            <img src="photo/manifest.jpg" alt="Manifest" />
+            <picture>
+              <source
+                media="(max-width: 768px)"
+                srcset="photo/manifest-mobile.jpg"
+              />
+              <img src="photo/manifest.jpg" alt="Manifest" />
+            </picture>
             <div class="carousel-overlay">
               <div class="carousel-content-wrapper">
                 <div class="text-box">
@@ -108,8 +141,15 @@
               </div>
             </div>
           </div>
+
           <div class="carousel-slide">
-            <img src="photo/dna.jpg" alt="DNA" />
+            <picture>
+              <source
+                media="(max-width: 768px)"
+                srcset="photo/dna-mobile.jpg"
+              />
+              <img src="photo/dna.jpg" alt="DNA" />
+            </picture>
             <div class="carousel-overlay">
               <div class="carousel-content-wrapper">
                 <div class="text-box">
@@ -130,7 +170,6 @@
           <span class="dot" onclick="currentSlide(4)"></span>
           <span class="dot" onclick="currentSlide(5)"></span>
         </div>
-
         <button class="nav-arrow prev" onclick="changeSlide(-1)">
           &#10094;
         </button>
