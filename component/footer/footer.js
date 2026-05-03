@@ -1,4 +1,4 @@
-// js/footer.js (ou component/footer/footer.js selon où vous l'avez rangé)
+// js/footer.js
 
 document.addEventListener("DOMContentLoaded", function () {
   // 1. On vérifie si on est dans un sous-dossier "component"
@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const prefixe = estDansSousDossier ? "../../" : "./";
   const currentYear = new Date().getFullYear();
 
+  // 3. Le HTML du footer (stocké dans le Javascript)
   const footerHTML = `
     <footer class="corporate-footer">
         <div class="footer-container">
@@ -70,22 +71,24 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
     </footer>
 
-    <button id="backToTop" class="back-to-top" title="Retour en haut">
-        <i class="fa-solid fa-arrow-up"></i>
+    <button id="back-to-top" class="back-to-top" title="Retour en haut">
+      <i class="fas fa-arrow-up"></i>
     </button>
-    `;
+  `;
 
+  // 4. INJECTION MAGIQUE : C'est cette ligne qui dessine le footer sur la page !
   document.body.insertAdjacentHTML("beforeend", footerHTML);
 
-  // --- Logique du bouton Retour en haut ---
-  const backToTopBtn = document.getElementById("backToTop");
+  // 5. --- Logique du bouton Retour en haut ---
+  const backToTopBtn = document.getElementById("back-to-top");
+
   if (backToTopBtn) {
     window.onscroll = function () {
       if (
         document.body.scrollTop > 300 ||
         document.documentElement.scrollTop > 300
       ) {
-        backToTopBtn.style.display = "block";
+        backToTopBtn.style.display = "flex"; // Affiche et centre la flèche
       } else {
         backToTopBtn.style.display = "none";
       }

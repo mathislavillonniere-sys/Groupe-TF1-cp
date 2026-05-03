@@ -195,6 +195,43 @@
 .legal-links li a:hover {
   color: var(--blanc);
 }
+/* =======================================
+   Bouton Retour en haut
+   ======================================= */
+/* =======================================
+   Bouton Retour en haut
+   ======================================= */
+#back-to-top,
+.back-to-top {
+  display: none; /* Caché par défaut de manière stricte ! */
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  border: none;
+  outline: none;
+  background-color: var(--rouge-tf1);
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+
+  /* L'astuce pour centrer sans casser le "display: none" */
+  align-items: center;
+  justify-content: center;
+}
+
+#back-to-top:hover,
+.back-to-top:hover {
+  background-color: var(--bleu-corporate);
+  transform: scale(1.1);
+}
 /* ==========================================
    VERSION MOBILE (< 768px) - LE FOOTER
    ========================================== */

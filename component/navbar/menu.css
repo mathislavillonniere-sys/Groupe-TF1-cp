@@ -7,10 +7,7 @@
   --bordure: #e1e5ea;
 }
 /* Ajoute juste ces lignes dans la classe de ton menu du haut */
-header {
-  /* ou .navbar, selon comment tu l'as appelée */
-  padding-top: env(safe-area-inset-top);
-}
+
 /* Règle d'or pour éviter que les éléments débordent de l'écran */
 *,
 *::before,
@@ -37,9 +34,16 @@ body {
 .navbar {
   background-color: var(--bleu-corporate);
   border-bottom: none;
-  height: 85px;
-  display: flex; /* On force la barre elle-même à utiliser Flexbox */
-  align-items: center; /* Centre le conteneur à l'intérieur */
+
+  /* 1. On remplace "height" par "min-height" pour laisser la barre s'agrandir */
+  min-height: 85px;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+
+  /* 2. LA MAGIE APPLE : On ajoute l'espace de l'encoche/Dynamic Island en haut */
+  padding-top: env(safe-area-inset-top);
 }
 
 /* 1. Assurez-vous que le conteneur a bien ces propriétés : */
