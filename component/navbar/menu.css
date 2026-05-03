@@ -6,7 +6,11 @@
   --gris-fond: #f4f7f6;
   --bordure: #e1e5ea;
 }
-
+/* Ajoute juste ces lignes dans la classe de ton menu du haut */
+header {
+  /* ou .navbar, selon comment tu l'as appelée */
+  padding-top: env(safe-area-inset-top);
+}
 /* Règle d'or pour éviter que les éléments débordent de l'écran */
 *,
 *::before,

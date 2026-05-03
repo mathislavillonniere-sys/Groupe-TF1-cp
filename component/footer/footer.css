@@ -148,7 +148,13 @@
 /* --- Barre inférieure (Copyright & Mentions légales) --- */
 .footer-bottom {
   background-color: #00152b;
-  padding: 25px 0; /* Un peu plus d'espace en haut et en bas */
+
+  /* L'astuce est ici : on garde les 25px d'origine en haut, 
+     mais en bas on ajoute dynamiquement la taille de la "Safe Area" d'Apple */
+  padding-top: 25px;
+  padding-bottom: calc(25px + env(safe-area-inset-bottom));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 .footer-bottom-container {
