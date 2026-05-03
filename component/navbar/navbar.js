@@ -72,16 +72,29 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 // ========================================================
-// FIX POUR MAINTENIR L'APPLICATION PLEIN ÉCRAN SUR IPHONE
+// FIX ULTRA-AGRESSIF POUR IPHONE (STANDALONE)
 // ========================================================
-if (window.navigator.standalone) {
-  document.addEventListener("click", function (event) {
-    const a = event.target.closest("a");
+if ("standalone" in window.navigator && window.navigator.standalone) {
+  document.addEventListener(
+    "click",
+    function (event) {
+      // Cherche si on a cliqué sur un lien ou à l'intérieur d'un lien
+      let target = event.target;
+      while (target && target.tagName !== "A") {
+        target = target.parentNode;
+      }
 
-    // Si on clique sur un lien interne au site (qui ne s'ouvre pas dans un nouvel onglet)
-    if (a && a.href && a.host === location.host && a.target !== "_blank") {
-      event.preventDefault(); // Empêche l'iPhone d'ouvrir Safari
-      window.location.href = a.href; // Charge la page dans l'application
-    }
-  });
+      // Si c'est un lien interne, on bloque Safari et on force le chargement interne
+      if (
+        target &&
+        target.href &&
+        target.host === location.host &&
+        target.target !== "_blank"
+      ) {
+        event.preventDefault();
+        window.location.href = target.href;
+      }
+    },
+    false,
+  );
 }
