@@ -71,3 +71,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+// ========================================================
+// FIX POUR MAINTENIR L'APPLICATION PLEIN ÉCRAN SUR IPHONE
+// ========================================================
+if (window.navigator.standalone) {
+  document.addEventListener("click", function (event) {
+    const a = event.target.closest("a");
+
+    // Si on clique sur un lien interne au site (qui ne s'ouvre pas dans un nouvel onglet)
+    if (a && a.href && a.host === location.host && a.target !== "_blank") {
+      event.preventDefault(); // Empêche l'iPhone d'ouvrir Safari
+      window.location.href = a.href; // Charge la page dans l'application
+    }
+  });
+}
