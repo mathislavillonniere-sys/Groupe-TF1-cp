@@ -1,5 +1,19 @@
 /* component/histoire/histoire.css */
 
+.hero-banner {
+  background-color: var(--bleu-corporate);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  border-bottom: 4px solid var(--rouge-tf1);
+}
+
+.hero-banner h1 {
+  margin: 0 0 15px 0;
+  font-size: 2.5em;
+  text-transform: uppercase;
+}
+
 .histoire-section {
   padding: 80px 20px;
   background-color: #f8fafc;
