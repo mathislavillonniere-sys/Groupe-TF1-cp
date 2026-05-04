@@ -1,6 +1,13 @@
 /* ==========================================
-   DESIGN DE LA PAGE CHAÎNES (SYSTÈME D'ONGLETS)
+   DESIGN DE LA PAGE CHAÎNES (ONGLETS + PREMIUM)
    ========================================== */
+
+:root {
+  --bleu-corporate: #00152b;
+  --rouge-tf1: #e60000;
+  --bordure: #e1e5ea;
+  --texte-noir: #333333;
+}
 
 .hero-banner {
   background-color: var(--bleu-corporate);
@@ -16,7 +23,7 @@
   padding: 0 20px;
 }
 
-/* 1. LES BOUTONS (ONGLETS) */
+/* --- 1. LES BOUTONS (ONGLETS) --- */
 .chaines-tabs {
   display: flex;
   justify-content: center;
@@ -32,7 +39,7 @@
   padding: 12px 25px;
   font-size: 1rem;
   font-weight: 800;
-  border-radius: 50px; /* Style "pilule" très moderne */
+  border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
@@ -44,7 +51,6 @@
   transform: translateY(-2px);
 }
 
-/* État actif : le bouton devient plein */
 .tab-btn.active {
   background: var(--bleu-corporate);
   color: white;
@@ -52,7 +58,7 @@
   box-shadow: 0 10px 20px rgba(0, 21, 43, 0.15);
 }
 
-/* 2. LA GRANDE BOÎTE (POP-UP) */
+/* --- 2. LES CONTENEURS DE CHAÎNES --- */
 .channel-details-container {
   background: white;
   border-radius: 20px;
@@ -63,13 +69,15 @@
   position: relative;
 }
 
-/* Contenu de chaque chaîne (caché par défaut) */
+/* On cache toutes les cartes par défaut (anciennes et nouvelles) */
+.channel-card,
 .channel-detail {
   display: none;
-  padding: 60px;
   animation: slideFade 0.5s ease forwards;
 }
 
+/* On n'affiche que celle qui a la classe "active" */
+.channel-card.active,
 .channel-detail.active {
   display: block;
 }
@@ -85,48 +93,312 @@
   }
 }
 
-/* 3. ENTÊTE DE LA BOÎTE */
+/* --- 3. LE DESIGN PREMIUM (NOUVELLES CARTES) --- */
+
+/* Thèmes dynamiques */
+.theme-tf1 {
+  --theme-color: #004b9b;
+  --theme-gradient: linear-gradient(to right, #004b9b, #e60000);
+}
+.theme-m6 {
+  --theme-color: #8b0000;
+  --theme-gradient: linear-gradient(to right, #8b0000, #4a4a4a);
+}
+.theme-tfx {
+  --theme-color: #0284c7;
+  --theme-gradient: linear-gradient(to right, #0284c7, #22d3ee);
+}
+.theme-tmc {
+  --theme-color: #ea580c;
+  --theme-gradient: linear-gradient(to right, #ea580c, #facc15);
+}
+.theme-lci {
+  --theme-color: #0f172a;
+  --theme-gradient: linear-gradient(to right, #0f172a, #38bdf8);
+}
+
+/* --- LE CONTENEUR DE LA BANNIÈRE --- */
+.channel-banner {
+  height: 400px; /* On l'agrandit un peu pour que l'image respire */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center; /* Centre la boîte verticalement */
+  justify-content: center; /* Centre la boîte horizontalement */
+  position: relative;
+}
+
+.banner-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.banner-content-box {
+  /* Fond gris très foncé translucide */
+  background: rgba(15, 23, 42, 0.7);
+
+  /* L'effet de flou sur l'image derrière la boîte */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  padding: 40px 60px;
+  border-radius: 24px;
+  text-align: center;
+
+  /* Une petite bordure fine pour accentuer l'effet relief */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* Ombre portée pour décoller la boîte de l'image */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+  max-width: 85%;
+}
+
+/* --- STYLES DES ÉLÉMENTS À L'INTÉRIEUR --- */
+.banner-logo {
+  height: 80px;
+  margin-bottom: 0px; /* On enlève complètement la marge sous l'image */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.banner-subtitle {
+  color: white;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 6px;
+  margin-top: 5px; /* On contrôle l'espace pile poil ici (au lieu du grand espace par défaut) */
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.channel-slogan {
+  color: #cbd5e1; /* Un gris clair pour le slogan */
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 25px;
+}
+
+.badge-leader {
+  display: inline-block;
+  background: var(--theme-gradient); /* Ton dégradé bleu/rouge */
+  color: white;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(230, 0, 0, 0.3);
+}
+
+/* Barre EN DIRECT */
+.live-bar {
+  background: #111827;
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.live-dot {
+  color: #ef4444;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+  margin-right: 10px;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.live-progress {
+  flex-grow: 1;
+  height: 6px;
+  background: #374151;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #f52c2c; /* Le rouge "Live" */
+  width: 0%; /* Mis à jour par le JS */
+  transition: width 1s linear;
+}
+
+.btn-watch {
+  background: white;
+  color: #111827;
+  text-decoration: none;
+  padding: 6px 15px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-weight: bold;
+  transition: transform 0.2s;
+  white-space: nowrap;
+}
+
+.btn-watch:hover {
+  transform: scale(1.05);
+}
+
+/* Contenu & Grille */
+.channel-content {
+  padding: 30px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.info-box {
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 3px solid var(--theme-color);
+}
+
+.info-box i {
+  color: var(--theme-color);
+  font-size: 1.5em;
+  margin-bottom: 8px;
+}
+.trend-up {
+  color: #16a34a;
+}
+
+.channel-description {
+  text-align: center;
+  font-size: 1.1em;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+/* --- SECTION PROGRAMMES ÉTIRÉE --- */
+.media-section {
+  display: block; /* On enlève le flex pour que ça prenne toute la largeur */
+  width: 100%;
+  margin-top: 20px;
+}
+
+.programs-block {
+  width: 100%;
+}
+
+.media-section h3 {
+  color: #1e293b;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--theme-color);
+  padding-left: 15px;
+  font-size: 1.4em;
+}
+
+/* La grille s'adapte pour étirer les 3 affiches proprement */
+.posters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales et larges */
+  gap: 25px; /* Plus d'espace entre les affiches */
+}
+
+.poster-card {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.poster-card:hover {
+  transform: scale(1.03); /* Petit effet de zoom au survol */
+}
+
+.poster-card img {
+  width: 100%;
+  border-radius: 12px; /* Bordures plus arrondies pour le côté moderne */
+  aspect-ratio: 16/9; /* Format plus "cinéma/TV" ou garde 2/3 si tu préfères les affiches hautes */
+  object-fit: cover;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.poster-card span {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: var(--bleu-corporate);
+}
+
+/* La zone de description prend aussi toute la largeur */
+.description-viewer {
+  margin-top: 30px;
+  padding: 25px;
+  background: #f8fafc;
+  border-left: 6px solid #ef4444;
+  border-radius: 10px;
+  display: none;
+  width: 100%;
+}
+.hosts-grid {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.host-bubble {
+  text-align: center;
+  width: 70px;
+}
+.host-bubble img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--theme-color);
+  margin-bottom: 5px;
+}
+.host-bubble span {
+  font-size: 0.8em;
+  color: #475569;
+  font-weight: bold;
+}
+
+/* --- 4. ANCIEN DESIGN (POUR M6, TFX, TMC, LCI EN ATTENDANT LA REFONTE) --- */
+.channel-detail {
+  padding: 60px;
+}
 .detail-header {
   text-align: center;
   margin-bottom: 40px;
   padding-bottom: 30px;
   border-bottom: 3px solid #f1f5f9;
 }
-/* --- LE FAMEUX DÉGRADÉ TF1 POUR LA LIGNE --- */
-#tf1 .detail-header {
-  border-image: linear-gradient(
-      to right,
-      var(--bleu-corporate),
-      var(--rouge-tf1)
-    )
-    1 !important;
-}
-#lci .detail-header {
-  border-image: linear-gradient(
-      to right,
-      var(--bleu-corporate),
-      var(--rouge-tf1)
-    )
-    1 !important;
-}
-/* --- NOUVEAU DESIGN LOGO + SOUS-TITRE --- */
 .channel-logo-img {
-  height: 70px; /* Ajuste cette valeur si tes logos sont trop gros ou trop petits */
-  width: auto; /* Garde les bonnes proportions du logo */
+  height: 70px;
+  width: auto;
   max-width: 250px;
   display: block;
-  margin: 0 auto 10px auto; /* Centre le logo et met un petit espace en dessous */
+  margin: 0 auto 10px auto;
 }
-
 .channel-subtitle {
   font-size: 1.6rem;
   font-weight: 900;
   color: var(--bleu-corporate);
   text-transform: uppercase;
-  letter-spacing: 3px; /* Écarte les lettres pour un effet premium */
+  letter-spacing: 3px;
   margin: 0 0 20px 0;
 }
-
 .channel-desc {
   font-size: 1.2rem;
   color: #64748b;
@@ -134,32 +406,25 @@
   margin: 0 auto;
   line-height: 1.6;
 }
-
-/* 4. CORPS DE LA BOÎTE (INFOS & PROGS) */
 .detail-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
 }
-
 .detail-info p {
   font-size: 1.1rem;
   margin-bottom: 20px;
   padding: 15px;
   background: #f8fafc;
   border-radius: 10px;
-  color: var(--texte-noir);
 }
-
 .detail-info strong {
   color: var(--bleu-corporate);
   display: inline-block;
   width: 140px;
   text-transform: uppercase;
   font-size: 0.85rem;
-  letter-spacing: 1px;
 }
-
 .detail-programs h4 {
   font-size: 1.3rem;
   text-transform: uppercase;
@@ -168,12 +433,10 @@
   border-bottom: 2px solid var(--rouge-tf1);
   display: inline-block;
 }
-
 .detail-programs ul {
   list-style: none;
   padding: 0;
 }
-
 .detail-programs li {
   font-size: 1.1rem;
   margin-bottom: 15px;
@@ -181,7 +444,6 @@
   position: relative;
   font-weight: 600;
 }
-
 .detail-programs li::before {
   content: "●";
   position: absolute;
@@ -189,25 +451,127 @@
   color: var(--rouge-tf1);
 }
 
+/* Style pour la zone de description qui va apparaître */
+.description-viewer {
+  margin-top: 25px;
+  padding: 20px;
+  background: #f8fafc;
+  border-left: 5px solid #ef4444;
+  border-radius: 8px;
+  display: none; /* Caché au début */
+  animation: fadeIn 0.4s ease;
+}
+
+.description-viewer h4 {
+  margin: 0 0 10px 0;
+  color: var(--bleu-corporate);
+}
+
+.description-viewer p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /* ==========================================
-   ADAPTATION MOBILE
+   ADAPTATION MOBILE (TÉLÉPHONES ET PETITES TABLETTES)
    ========================================== */
 @media (max-width: 768px) {
-  .channel-detail {
-    padding: 30px 20px;
+  /* 1. L'entête et les boutons d'onglets */
+  .hero-banner {
+    padding: 60px 15px;
   }
-  .detail-body {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  .detail-header h2 {
-    font-size: 2.2rem;
-  }
-  .detail-header .channel-desc {
-    font-size: 1rem;
+  .chaines-tabs {
+    gap: 8px; /* On rapproche les boutons */
   }
   .tab-btn {
-    padding: 10px 15px;
-    font-size: 0.8rem;
+    padding: 8px 16px;
+    font-size: 0.85rem; /* Boutons légèrement plus petits */
+  }
+
+  /* 2. La bannière "Verre Dépoli" (Glassmorphism) */
+  .channel-banner {
+    height: auto; /* Laisse la hauteur s'adapter au contenu */
+    padding: 40px 15px; /* Marge pour voir l'image de fond en haut et en bas */
+  }
+  .banner-content-box {
+    padding: 25px 15px; /* Moins de marge à l'intérieur */
+    max-width: 95%; /* Prend presque toute la largeur de l'écran */
+    border-radius: 16px;
+  }
+  .banner-logo {
+    height: 50px; /* Logo plus petit */
+  }
+  .banner-subtitle {
+    font-size: 1.3rem; /* Titre plus petit */
+    letter-spacing: 3px;
+  }
+  .channel-slogan {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  /* 3. La barre EN DIRECT (TF1 CP) */
+  .live-bar {
+    flex-direction: column; /* On empile les éléments */
+    text-align: center;
+    gap: 15px;
+    padding: 15px;
+  }
+  .live-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .live-progress {
+    width: 100%; /* La barre de progression prend toute la largeur */
+  }
+  .btn-watch {
+    width: 100%; /* Un gros bouton bien cliquable avec le pouce */
+    box-sizing: border-box;
+  }
+
+  /* 4. Le contenu (Infos et Programmes) */
+  .channel-content {
+    padding: 20px 15px;
+  }
+  .info-grid {
+    grid-template-columns: 1fr; /* 1 seule colonne : les infos s'empilent */
+    gap: 10px;
+  }
+
+  /* 5. Les Affiches de Programmes */
+  .posters-grid {
+    grid-template-columns: 1fr; /* 1 affiche par ligne, en plein format ! */
+    gap: 20px;
+  }
+  .poster-card img {
+    border-radius: 10px;
+  }
+  .media-section h3 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+
+  /* 6. La zone de description (Texte en dessous) */
+  .description-viewer {
+    padding: 15px;
+    margin-top: 15px;
+  }
+  .description-viewer h4 {
+    font-size: 1.1rem;
+  }
+  .description-viewer p {
+    font-size: 0.95rem;
   }
 }

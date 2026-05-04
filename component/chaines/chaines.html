@@ -52,158 +52,451 @@
       </div>
 
       <div class="channel-details-container">
-        <div id="tf1" class="channel-detail active">
+        <div id="tf1" class="channel-card theme-tf1 active">
           <div
-            class="detail-header"
-            style="border-bottom-color: var(--rouge-tf1)"
+            class="channel-banner"
+            style="background-image: url(&quot;../../photo/1cccc.webp&quot;)"
           >
-            <img
-              src="../../photo/logo-TF1.jpg"
-              alt="Logo TF1"
-              class="channel-logo-img"
-            />
-            <h3 class="channel-subtitle">Camping Paradis</h3>
-            <p class="channel-desc">
-              La chaîne historique, leader du divertissement, de la fiction et
-              des grands événements en direct.
-            </p>
-          </div>
-          <div class="detail-body">
-            <div class="detail-info">
-              <p><strong>📅 Lancement :</strong> 1987</p>
-              <p><strong>👔 Direction :</strong> Mathis Lavillonnière</p>
-              <p><strong>📊 Audience Moy. :</strong> 22,5 %</p>
+            <div class="banner-content-box">
+              <img
+                src="../../photo/logo-TF1.jpg"
+                alt="Logo TF1"
+                class="banner-logo"
+              />
+
+              <h2 class="banner-subtitle">CAMPING PARADIS</h2>
+
+              <p class="channel-slogan">"Les Français, Ensembles"</p>
+
+              <span class="badge-leader"
+                >1ère chaîne de France et d'Europe</span
+              >
             </div>
-            <div class="detail-programs">
-              <h4>Programmes Phares</h4>
-              <ul>
-                <li>Camping Paradis</li>
-                <li>Le Journal de 20H</li>
-                <li>Koh-Lanta Paradis</li>
-              </ul>
+          </div>
+
+          <div class="live-bar">
+            <div class="live-info">
+              <span class="live-dot">🔴 EN DIRECT</span>
+              <span class="live-program">Chargement du programme...</span>
+            </div>
+            <div class="live-progress">
+              <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <a href="../pro/pro.html" class="btn-watch"
+              >Voir la grille <i class="fas fa-chevron-right"></i
+            ></a>
+          </div>
+
+          <div class="channel-content">
+            <div class="info-grid">
+              <div class="info-box">
+                <i class="fas fa-tv"></i><span>Canal</span><strong>1</strong>
+              </div>
+              <div class="info-box">
+                <i class="fas fa-users"></i><span>Cible</span
+                ><strong>Familles et Jeune</strong>
+              </div>
+              <div class="info-box">
+                <i class="fas fa-chart-line"></i><span>Audience</span
+                ><strong class="trend-up">64,5%</strong>
+              </div>
+            </div>
+
+            <div class="media-section">
+              <div class="programs-block">
+                <h3>Programmes Phares</h3>
+                <div class="posters-grid">
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'Demain nous appartient',
+                        'Est une série quotidienne francaise, L\'histoire tourne autour des habitants de la ville de Sète, au bord de la mer Méditerranée et de l\'étang de Thau. Leur vie est rythmée par les rivalités familiales, romances et scènes de la vie quotidienne, mais aussi par des intrigues mêlant enquêtes policières, secrets et trahisons.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/dna-affiche-chaine.jpg" alt="DNA" />
+                    <span>Demain nous appartient</span>
+                  </div>
+
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'Le Journal de 20H',
+                        'L\'actualité nationale et internationale décryptée par la rédaction de TF1 Camping Paradis.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/20h-programmetv.jpg" alt="Le 20H" />
+                    <span>Le Journal de 20H</span>
+                  </div>
+
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'Koh-Lanta Paradis',
+                        'Des naufragés doivent survivre sur une île déserte. À la fin, il n\'en restera qu\'un !',
+                      )
+                    "
+                  >
+                    <img
+                      src="../../photo/poster-kohlanta.jpg"
+                      alt="Koh-Lanta"
+                    />
+                    <span>Koh-Lanta Paradis</span>
+                  </div>
+                </div>
+
+                <div id="desc-viewer" class="description-viewer">
+                  <h4 id="desc-title">Titre du programme</h4>
+                  <p id="desc-text">Description...</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div id="m6" class="channel-detail">
-          <div class="detail-header" style="border-bottom-color: #e70d0d">
-            <img
-              src="../../photo/logo-M6.png"
-              alt="Logo M6"
-              class="channel-logo-img"
-            />
-            <h3 class="channel-subtitle">Camping Paradis</h3>
-            <p class="channel-desc">
-              La chaîne de la famille, de l'art de vivre et des émissions
-              culinaires emblématiques.
-            </p>
-          </div>
-          <div class="detail-body">
-            <div class="detail-info">
-              <p><strong>📅 Lancement :</strong> 2025</p>
-              <p><strong>👔 Direction :</strong> Direction des Programmes</p>
-              <p><strong>📊 Audience Moy. :</strong> 9,5 %</p>
-            </div>
-            <div class="detail-programs">
-              <h4>Programmes Phares</h4>
-              <ul>
-                <li>Top Chef Paradis</li>
-                <li>L'Amour est dans le pré</li>
-                <li>Zone Interdite</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div id="tfx" class="channel-detail">
-          <div class="detail-header" style="border-bottom-color: #fd3e07">
-            <img
-              src="../../photo/logo-TFX.jpg"
-              alt="Logo TFX"
-              class="channel-logo-img"
-            />
-            <h3 class="channel-subtitle">Camping Paradis</h3>
-            <p class="channel-desc">
-              La chaîne des jeunes adultes, tournée vers l'humour, le
-              divertissement et la télé-réalité.
-            </p>
-          </div>
-          <div class="detail-body">
-            <div class="detail-info">
-              <p><strong>📅 Lancement :</strong> 2025</p>
-              <p><strong>👔 Direction :</strong> Direction TFX</p>
-              <p><strong>📊 Audience Moy. :</strong> 3,1 %</p>
-            </div>
-            <div class="detail-programs">
-              <h4>Programmes Phares</h4>
-              <ul>
-                <li>La Villa des Cœurs Brisés</li>
-                <li>Tattoo Cover</li>
-                <li>Super Nanny</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div id="tmc" class="channel-detail">
-          <div class="detail-header" style="border-bottom-color: #000000">
-            <img
-              src="../../photo/logo-TMC.jpg"
-              alt="Logo TMC"
-              class="channel-logo-img"
-            />
-            <h3 class="channel-subtitle">Camping Paradis</h3>
-            <p class="channel-desc">
-              La chaîne premium offrant un regard décalé sur l'actualité, du
-              cinéma et des talk-shows.
-            </p>
-          </div>
-          <div class="detail-body">
-            <div class="detail-info">
-              <p><strong>📅 Lancement :</strong> 2025</p>
-              <p><strong>👔 Direction :</strong> Direction TMC</p>
-              <p><strong>📊 Audience Moy. :</strong> 4,5 %</p>
-            </div>
-            <div class="detail-programs">
-              <h4>Programmes Phares</h4>
-              <ul>
-                <li>Quotidien Paradis</li>
-                <li>Burger Quiz</li>
-                <li>Grands Reportages</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div id="lci" class="channel-detail">
+        <div id="m6" class="channel-card theme-m6">
           <div
-            class="detail-header"
-            style="border-bottom-color: var(--rouge-tf1)"
+            class="channel-banner"
+            style="
+              background-image: url(&quot;../../photo/ob_c6b621_visite-m6-jep-10.jpg&quot;);
+            "
           >
-            <img
-              src="../../photo/logo-LCI.jpg"
-              alt="Logo LCI"
-              class="channel-logo-img"
-            />
-            <h3 class="channel-subtitle">Camping Paradis</h3>
-            <p class="channel-desc">
-              La chaîne d'information en continu de référence. Décryptage,
-              débats et reportages 24h/24.
-            </p>
-          </div>
-          <div class="detail-body">
-            <div class="detail-info">
-              <p><strong>📅 Lancement :</strong> 2005</p>
-              <p><strong>👔 Direction :</strong> Pôle News Paradis</p>
-              <p><strong>📊 Audience Moy. :</strong> 2,8 %</p>
+            <div class="banner-content-box">
+              <img
+                src="../../photo/logo-M6-removebg-preview.png"
+                alt="Logo M6"
+                class="banner-logo"
+              />
+              <h2 class="banner-subtitle">CAMPING PARADIS</h2>
+              <p class="channel-slogan">
+                "La chaîne de la famille et de l'art de vivre."
+              </p>
             </div>
-            <div class="detail-programs">
-              <h4>Programmes Phares</h4>
-              <ul>
-                <li>La Matinale Info</li>
-                <li>L'Édition Spéciale</li>
-                <li>Un œil sur le monde</li>
-              </ul>
+          </div>
+
+          <div class="channel-content">
+            <div class="info-grid">
+              <div class="info-box">
+                <i class="fas fa-tv"></i><span>Canal</span><strong>6</strong>
+              </div>
+              <div class="info-box">
+                <i class="fas fa-users"></i><span>Cible</span
+                ><strong>Familles / CSP+</strong>
+              </div>
+              <div class="info-box">
+                <i class="fas fa-chart-line"></i><span>Audience</span
+                ><strong>9,5%</strong>
+              </div>
+            </div>
+
+            <div class="media-section">
+              <div class="programs-block">
+                <h3>Programmes Phares</h3>
+                <div class="posters-grid">
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'Top Chef Paradis',
+                        'Le plus grand concours de cuisine réservé aux professionnels.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/poster-topchef.jpg" alt="Top Chef" />
+                    <span>Top Chef Paradis</span>
+                  </div>
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'L\'Amour est dans le pré',
+                        'Des agriculteurs cherchent l\'âme sœur dans nos campagnes.',
+                      )
+                    "
+                  >
+                    <img
+                      src="../../photo/poster-amourpre.jpg"
+                      alt="Amour pré"
+                    />
+                    <span>L'Amour est dans le pré</span>
+                  </div>
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'Zone Interdite',
+                        'Le grand magazine d\'information et de société.',
+                      )
+                    "
+                  >
+                    <img
+                      src="../../photo/poster-zone.jpg"
+                      alt="Zone Interdite"
+                    />
+                    <span>Zone Interdite</span>
+                  </div>
+                </div>
+                <div id="desc-viewer-m6" class="description-viewer">
+                  <h4 id="desc-title-m6"></h4>
+                  <p id="desc-text-m6"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tfx" class="channel-card theme-tfx">
+          <div
+            class="channel-banner"
+            style="
+              background-image: url(&quot;../../photo/imagesccccccscscscs.jpg&quot;);
+            "
+          >
+            <div class="banner-content-box">
+              <img
+                src="../../photo/logo-TFX.jpg"
+                alt="Logo TFX"
+                class="banner-logo"
+              />
+              <h2 class="banner-subtitle">CAMPING PARADIS</h2>
+              <p class="channel-slogan">
+                "La chaîne des jeunes adultes et du divertissement."
+              </p>
+            </div>
+          </div>
+
+          <div class="channel-content">
+            <div class="info-grid">
+              <div class="info-box">
+                <i class="fas fa-tv"></i><span>Canal</span><strong>11</strong>
+              </div>
+              <div class="info-box">
+                <i class="fas fa-users"></i><span>Cible</span
+                ><strong>15-34 ans</strong>
+              </div>
+              <div class="info-box">
+                <i class="fas fa-chart-line"></i><span>Audience</span
+                ><strong>3,1%</strong>
+              </div>
+            </div>
+
+            <div class="media-section">
+              <div class="programs-block">
+                <h3>Programmes Phares</h3>
+                <div class="posters-grid">
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'La Villa',
+                        'Des cœurs brisés tentent de régler leurs problématiques amoureuses.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/poster-villa.jpg" />
+                    <span>La Villa</span>
+                  </div>
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'Tattoo Cover',
+                        'Des magiciens du tatouage recouvrent des dessins ratés.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/poster-tattoo.jpg" />
+                    <span>Tattoo Cover</span>
+                  </div>
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'Super Nanny',
+                        'Une aide précieuse pour les parents en difficulté.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/poster-nanny.jpg" />
+                    <span>Super Nanny</span>
+                  </div>
+                  <div class="description-viewer" style="display: none">
+                    <h4></h4>
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tmc" class="channel-card theme-tmc">
+          <div
+            class="channel-banner"
+            style="
+              background-image: url(&quot;../../photo/banniere-tmc.jpg&quot;);
+            "
+          >
+            <div class="banner-content-box">
+              <img
+                src="../../photo/logo-TMC.jpg"
+                alt="Logo TMC"
+                class="banner-logo"
+              />
+              <h2 class="banner-subtitle">CAMPING PARADIS</h2>
+              <p class="channel-slogan">"L'actualité décryptée avec humour."</p>
+            </div>
+          </div>
+
+          <div class="channel-content">
+            <div class="info-grid">
+              <div class="info-box">
+                <i class="fas fa-tv"></i><span>Canal</span><strong>10</strong>
+              </div>
+              <div class="info-box">
+                <i class="fas fa-users"></i><span>Cible</span
+                ><strong>Urbains / Premium</strong>
+              </div>
+              <div class="info-box">
+                <i class="fas fa-chart-line"></i><span>Audience</span
+                ><strong>4,5%</strong>
+              </div>
+            </div>
+
+            <div class="media-section">
+              <div class="programs-block">
+                <h3>Programmes Phares</h3>
+                <div class="posters-grid">
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'Quotidien',
+                        'Yann Barthès et son équipe décryptent l\'actu.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/poster-quotidien.jpg" />
+                    <span>Quotidien Paradis</span>
+                  </div>
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'Burger Quiz',
+                        'Le jeu le plus déjanté de la télévision française.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/poster-burger.jpg" />
+                    <span>Burger Quiz</span>
+                  </div>
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'Cinéma',
+                        'Les plus grands blockbusters mondiaux chaque soir.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/poster-film.jpg" />
+                    <span>Grands Reportages</span>
+                  </div>
+                  <div class="description-viewer" style="display: none">
+                    <h4></h4>
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="lci" class="channel-card theme-lci">
+          <div
+            class="channel-banner"
+            style="
+              background-image: url(&quot;../../photo/banniere-lci.jpg&quot;);
+            "
+          >
+            <div class="banner-content-box">
+              <img
+                src="../../photo/logo-LCI.jpg"
+                alt="Logo LCI"
+                class="banner-logo"
+              />
+              <h2 class="banner-subtitle">CAMPING PARADIS</h2>
+              <p class="channel-slogan">
+                "L'information en continu de référence."
+              </p>
+            </div>
+          </div>
+
+          <div class="channel-content">
+            <div class="info-grid">
+              <div class="info-box">
+                <i class="fas fa-tv"></i><span>Canal</span><strong>26</strong>
+              </div>
+              <div class="info-box">
+                <i class="fas fa-users"></i><span>Cible</span
+                ><strong>Décideurs / Curieux</strong>
+              </div>
+              <div class="info-box">
+                <i class="fas fa-chart-line"></i><span>Audience</span
+                ><strong>2,8%</strong>
+              </div>
+            </div>
+
+            <div class="media-section">
+              <div class="programs-block">
+                <h3>Programmes Phares</h3>
+                <div class="posters-grid">
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'La Matinale',
+                        'Toute l\'actu pour bien commencer la journée.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/poster-matinale.jpg" />
+                    <span>La Matinale Info</span>
+                  </div>
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'L\'Édition Spéciale',
+                        'Les experts débattent des sujets de société.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/poster-special.jpg" />
+                    <span>L'Édition Spéciale</span>
+                  </div>
+                  <div
+                    class="poster-card"
+                    onclick="
+                      showDescription(
+                        'Un œil sur le monde',
+                        'Reportages exclusifs aux quatre coins du globe.',
+                      )
+                    "
+                  >
+                    <img src="../../photo/poster-monde.jpg" />
+                    <span>Un œil sur le monde</span>
+                  </div>
+                </div>
+                <div class="description-viewer" style="display: none">
+                  <h4></h4>
+                  <p></p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
