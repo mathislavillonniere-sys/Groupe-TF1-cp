@@ -7,9 +7,13 @@ const baseDeDonnees = {
         label: "Semaine du 04 Mai au 10 Mai 2026",
         fichier: "../../csv/tf1_semaine_2mai.csv",
       },
-      "2026-05-10": {
+      "2026-05-11": {
         label: "Semaine du 11 Mai au 17 Mai 2026",
         fichier: "../../csv/tf1_semaine_10mai.csv",
+      },
+      "2026-05-18": {
+        label: "Semaine du 18 Mai au 24 Mai 2026",
+        fichier: "../../csv/tf1_semaine_18mai.csv",
       },
     },
   },

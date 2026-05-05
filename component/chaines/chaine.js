@@ -33,9 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // 2. BASE DE DONNÉES DES GRILLES
 // ========================================================
 const baseDeDonneesDirect = {
-  "2026-04-25": "../../csv/tf1_semaine_25avril.csv",
   "2026-05-02": "../../csv/tf1_semaine_2mai.csv",
   "2026-05-10": "../../csv/tf1_semaine_10mai.csv",
+  "2026-05-18": "../../csv/tf1_semaine_18mai.csv",
 };
 
 function obtenirFichierCsvActuel() {
