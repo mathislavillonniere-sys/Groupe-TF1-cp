@@ -73,4 +73,44 @@ document.addEventListener("DOMContentLoaded", () => {
   elementsToAnimate.forEach((el) => {
     observer.observe(el);
   });
+  /* =========================================================
+     3. CARROUSEL ACTUALITÉS (NEWSROOM)
+     ========================================================= */
+  const newsTrack = document.getElementById("news-track");
+  const btnPrevNews = document.querySelector(".prev-btn-news");
+  const btnNextNews = document.querySelector(".next-btn-news");
+
+  if (newsTrack && btnPrevNews && btnNextNews) {
+    const scrollAmount = 350;
+
+    btnNextNews.addEventListener("click", () => {
+      newsTrack.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+
+    btnPrevNews.addEventListener("click", () => {
+      newsTrack.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+  }
+
+  /* =========================================================
+     4. BOUTON REMONTER EN HAUT
+     ========================================================= */
+  const btnTop = document.getElementById("btn-back-to-top");
+
+  if (btnTop) {
+    window.addEventListener("scroll", () => {
+      if (
+        document.body.scrollTop > 500 ||
+        document.documentElement.scrollTop > 500
+      ) {
+        btnTop.style.display = "block";
+      } else {
+        btnTop.style.display = "none";
+      }
+    });
+
+    btnTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 });

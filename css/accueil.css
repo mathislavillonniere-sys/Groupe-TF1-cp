@@ -214,94 +214,361 @@
   color: var(--rouge-tf1);
   display: block;
 }
-/* ==========================================
-   DESIGN DES CHIFFRES CLÉS (CARTES)
-   ========================================== */
+/* =========================================
+   NOUVEAU DESIGN PREMIUM (CHIFFRES / PARALLAXE / NEWS)
+   ========================================= */
 
-/* 1. On réduit l'espace blanc au-dessus de la section */
-.section-container {
-  padding-top: 20px;
-  margin-top: -30px; /* Remonte légèrement la section vers le haut */
+/* 1. CHIFFRES CLÉS (GLASSMORPHISM) */
+.premium-stats-section {
+  padding: 100px 20px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+.premium-stats-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 21, 43, 0.85); /* Voile sombre */
+}
+.premium-stats-section .section-title {
+  position: relative;
+  z-index: 2;
+}
+.stats-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 30px;
+  position: relative;
+  z-index: 2;
+}
+.stat-glass-card {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 40px 20px;
+  text-align: center;
+  color: white;
+  transition:
+    transform 0.4s ease,
+    background 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.stat-glass-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  background: rgba(255, 255, 255, 0.12);
+}
+.stat-icon {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: #f8fafc;
+}
+.stat-number {
+  font-size: 3.2em;
+  font-weight: 900;
+  margin-bottom: 5px;
+  color: white !important;
+}
+.stat-label {
+  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #cbd5e1;
+  margin-bottom: 20px;
+}
+.stat-trend {
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 6px 16px;
+  border-radius: 50px;
+  display: inline-block;
+}
+.trend-up {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+.trend-stable {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
 }
 
-/* 2. Le nouveau design premium des cartes */
-.card-chiffre {
-  background: #ffffff;
-  border-radius: 12px; /* Coins plus arrondis et modernes */
-  padding: 35px 20px;
+/* 2. PARALLAXE (CITATION PDG) */
+.parallax-quote {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   text-align: center;
-  border: none; /* On enlève la bordure grise basique */
+  position: relative;
+  padding: 120px 20px;
+  margin: 50px 0;
+}
+.parallax-quote::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 21, 43, 0.5), rgba(0, 21, 43, 0.9));
+}
+.quote-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.quote-content blockquote {
+  font-size: 2.2em;
+  font-weight: 300;
+  font-style: italic;
+  color: white;
+  line-height: 1.4;
+  margin-bottom: 25px;
+}
+.quote-content cite {
+  font-size: 1.1em;
+  color: var(--rouge-tf1);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
 
-  /* Une belle ombre douce façon Apple/Netflix */
+/* 3. NEWSROOM (CARROUSEL ACTUALITÉS) */
+.newsroom-section {
+  padding: 80px 20px;
+  background: #f8fafc;
+}
+.carousel-container-news {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.carousel-track-news {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 20px 5px;
+}
+.carousel-track-news::-webkit-scrollbar {
+  display: none;
+}
+.news-card {
+  min-width: calc(33.333% - 20px);
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-
-  /* La touche TF1 : une ligne rouge en bas de la carte */
-  border-bottom: 4px solid var(--rouge-tf1);
-
-  /* Animation fluide au survol */
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-  margin-bottom: 20px; /* Espace entre les cartes sur mobile */
 }
-
-/* Petit effet quand on passe la souris (ou le doigt) dessus */
-.card-chiffre:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+.news-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
-
-/* 3. Le style des gros chiffres rouges */
-.card-chiffre .valeur {
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: var(--rouge-tf1);
-  margin-bottom: 12px;
-  line-height: 1;
+.news-img-box {
+  position: relative;
+  height: 200px;
 }
-
-/* 4. Le petit texte descriptif en dessous */
-.card-chiffre .label {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(
-    --bleu-corporate
-  ); /* On utilise ton bleu TF1 pour faire plus pro */
+.news-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.news-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: white;
+  padding: 6px 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+  border-radius: 6px;
   text-transform: uppercase;
-  letter-spacing: 1px; /* Ecarte légèrement les lettres pour l'élégance */
+}
+.badge-strategie {
+  background: var(--bleu-corporate);
+}
+.badge-programmes {
+  background: var(--rouge-tf1);
+}
+.badge-rse {
+  background: #16a34a;
+}
+.news-content {
+  padding: 25px;
+}
+.news-content h3 {
+  font-size: 1.3em;
+  color: #0f172a;
+  margin: 0 0 15px 0;
+  line-height: 1.3;
+}
+.news-content p {
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 0.95em;
+}
+.read-more {
+  color: var(--rouge-tf1);
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9em;
 }
 
-/* --- Grilles de Cartes (Pôles & News) --- */
-.grid-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-.card {
+/* FLÈCHES NEWSROOM */
+.carousel-btn {
   background: white;
-  padding: 30px;
-  border-radius: 8px;
   border: 1px solid var(--bordure);
-  transition: 0.3s;
+  color: var(--bleu-corporate);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 1.2em;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
+  position: absolute;
+  z-index: 10;
+}
+.carousel-btn:hover {
+  background: var(--rouge-tf1);
+  color: white;
+  border-color: var(--rouge-tf1);
+}
+.prev-btn-news {
+  left: -20px;
+}
+.next-btn-news {
+  right: -20px;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+/* 4. BOUTON REMONTER */
+#btn-back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: var(--rouge-tf1);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5em;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(230, 0, 0, 0.3);
+  display: none;
+  z-index: 1000;
+  transition: transform 0.3s;
+}
+#btn-back-to-top:hover {
+  transform: scale(1.1);
+  background-color: #cc0000;
 }
 
-/* --- Chaînes --- */
+/* 5. ADAPTATION MOBILE POUR CES NOUVELLES SECTIONS */
+@media (max-width: 768px) {
+  .stats-container {
+    flex-direction: column;
+  }
+  .news-card {
+    min-width: 85%;
+  }
+  .prev-btn-news,
+  .next-btn-news {
+    display: none;
+  }
+  .quote-content blockquote {
+    font-size: 1.6em;
+  }
+}
+/* =========================================
+   5. NOS CHAÎNES PRINCIPALES (SANS SAUT DE LOGO)
+   ========================================= */
+.section-full-grey {
+  width: 100%;
+  background-color: #f1f5f9;
+  padding: 80px 20px;
+}
+.section-content-centered {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 .chaines-flex {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 20px;
   padding: 40px;
   background: white;
   border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
 }
 
+.channel-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 60px;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.state-default,
+.state-hover {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* J'ai enlevé le transform, on garde juste un beau fondu ! */
+  transition: opacity 0.3s ease;
+}
+
+.state-default {
+  color: #94a3b8;
+  opacity: 1;
+}
+.state-hover {
+  color: var(--rouge-tf1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 👉 C'EST ICI QU'ON RÈGLE L'ESPACE : margin-right à 4px au lieu de 12 ! */
+.hover-logo {
+  height: 28px;
+  width: auto;
+  margin-right: 4px;
+}
+
+.channel-item:hover .state-default {
+  opacity: 0;
+}
+.channel-item:hover .state-hover {
+  opacity: 1;
+}
 .channel-logo {
   font-weight: 900;
   font-size: 1.5rem;
