@@ -157,9 +157,22 @@ async function checkLiveProgram() {
         const tempsPasse = maintenant - debut;
         const pourcentage = Math.min((tempsPasse / dureeTotale) * 100, 100);
 
+        // NOUVEAU : On formate l'heure (ex: rajoute un 0 devant 9h -> 09:00)
+        const formatHeure = (d) =>
+          String(d.getHours()).padStart(2, "0") +
+          ":" +
+          String(d.getMinutes()).padStart(2, "0");
+
         document.querySelector(".live-program").textContent = progActuel.titre;
         document.querySelector(".progress-fill").style.width =
           pourcentage + "%";
+
+        // On affiche les heures de début et fin !
+        const startElem = document.querySelector(".live-time-start");
+        const endElem = document.querySelector(".live-time-end");
+        if (startElem) startElem.textContent = formatHeure(debut);
+        if (endElem) endElem.textContent = formatHeure(fin);
+
         programmeTrouve = true;
         break;
       }

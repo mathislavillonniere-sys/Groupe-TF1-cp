@@ -222,6 +222,7 @@
   }
 }
 
+/* On s'assure que la barre prend toute la place restante */
 .live-progress {
   flex-grow: 1;
   height: 6px;
@@ -229,7 +230,20 @@
   border-radius: 3px;
   overflow: hidden;
 }
-
+/* --- LE NOUVEAU CONTENEUR POUR LA BARRE ET LES HEURES --- */
+.live-progress-wrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Espace entre l'heure et la barre */
+}
+/* Le style des petites heures */
+.live-time-start,
+.live-time-end {
+  font-size: 0.85em;
+  color: #9ca3af; /* Gris clair */
+  font-weight: bold;
+}
 .progress-fill {
   height: 100%;
   background: #f52c2c; /* Le rouge "Live" */
@@ -535,6 +549,9 @@
   }
   .live-progress {
     width: 100%; /* La barre de progression prend toute la largeur */
+  }
+  .live-progress-wrapper {
+    width: 100%;
   }
   .btn-watch {
     width: 100%; /* Un gros bouton bien cliquable avec le pouce */
