@@ -21,15 +21,18 @@ const baseDeDonnees = {
     nom: "M6 Camping Paradis",
     type: "annuel", // Mode par année
     data: {
-      2024: {
-        label: "Grille Annuelle 2024-2025",
-        fichier: "../../csv/m6_annuel2024-2025.csv",
-      },
       2025: {
         label: "Grille Annuelle 2025 - 2026",
         fichier: "../../csv/m6_annuel2025-2026.csv",
       },
-      2026: { label: "Grille Annuelle 2026", fichier: "../csv/m6_2026.csv" },
+      2026: {
+        label: "Grille Annuelle 2024 - 2025",
+        fichier: "../../csv/m6_annuel2024-2025.csv",
+      },
+      2027: {
+        label: "Grille Annuelle 2026 - 2027",
+        fichier: "../csv/m6_annuel2026-2027.csv",
+      },
     },
   },
   tfx: {
