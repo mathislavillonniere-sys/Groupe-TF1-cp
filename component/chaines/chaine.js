@@ -67,66 +67,71 @@ async function checkLiveProgram() {
 
     const response = await fetch(cheminCSV);
     if (!response.ok) throw new Error("CSV introuvable");
-    const textCSV = await response.text();
+
+    // --- LE DÉCODEUR MAGIQUE (Anti-Losanges) ---
+    const buffer = await response.arrayBuffer();
+    const decoder = new TextDecoder("iso-8859-1");
+    const textCSV = decoder.decode(buffer);
     const lignes = textCSV.split("\n");
 
     const maintenant = new Date();
 
-    // --- L'ASTUCE DE LA "JOURNÉE TV" ---
-    // En télé, la journée commence à 6h. Si on regarde à 2h du matin le Mardi,
-    // on doit lire les programmes à la fin de la colonne du Lundi !
-    let jourSemaineReel = maintenant.getDay(); // 0=Dimanche, 1=Lundi...
+    // --- LOGIQUE DU JOUR TÉLÉ (Démarre à 6h du matin) ---
+    let jourSemaineReel = maintenant.getDay();
     let dateColonne = new Date(maintenant.getTime());
 
     if (maintenant.getHours() < 6) {
       jourSemaineReel = jourSemaineReel === 0 ? 6 : jourSemaineReel - 1;
-      dateColonne.setDate(dateColonne.getDate() - 1); // La base c'est hier
+      dateColonne.setDate(dateColonne.getDate() - 1);
     }
 
-    // --- TROUVER LES BONNES COLONNES DANS TON TABLEAU ---
-    // Ton fichier : Lundi = col 0 & 1, Mardi = col 2 & 3, ... Dimanche = 12 & 13
     let colHeure, colProg;
     if (jourSemaineReel === 0) {
       colHeure = 12;
-      colProg = 13; // Dimanche
+      colProg = 13;
     } else {
       colHeure = (jourSemaineReel - 1) * 2;
       colProg = colHeure + 1;
     }
 
     const programmesDeLaJournee = [];
-    let dayOffset = 0;
-    let previousHours = -1;
 
-    // --- LECTURE LIGNE PAR LIGNE (On commence à la ligne 3 pour sauter l'en-tête) ---
+    // --- LECTURE LIGNE PAR LIGNE ---
     for (let i = 2; i < lignes.length; i++) {
       if (!lignes[i].trim()) continue;
 
-      // Ton fichier utilise des VIRGULES pour séparer les colonnes
-      const colonnes = lignes[i].split(",");
+      // Lecteur de CSV intelligent (évite les bugs si un titre contient une virgule)
+      let inQuotes = false;
+      let cur = "";
+      let colonnes = [];
+      for (let c of lignes[i]) {
+        if (c === '"') inQuotes = !inQuotes;
+        else if (c === "," && !inQuotes) {
+          colonnes.push(cur);
+          cur = "";
+        } else cur += c;
+      }
+      colonnes.push(cur);
 
-      // Si la colonne de notre jour existe sur cette ligne
       if (colonnes.length > colProg) {
         let heureBrute = colonnes[colHeure] ? colonnes[colHeure].trim() : "";
-        let titre = colonnes[colProg] ? colonnes[colProg].trim() : "";
+        let titre = colonnes[colProg]
+          ? colonnes[colProg].trim().replace(/^"|"$/g, "")
+          : "";
 
         if (heureBrute && titre) {
-          // 1. On nettoie "20 H 35" pour le transformer en "20:35"
           let heurePropre = heureBrute.replace(/h/i, ":").replace(/\s/g, "");
           const parts = heurePropre.split(":");
           const heures = parseInt(parts[0], 10) || 0;
           const minutes = parseInt(parts[1], 10) || 0;
 
-          // 2. Gestion du passage après minuit (ex: on passe de 23h à 00h)
-          if (previousHours !== -1 && heures < previousHours) {
-            dayOffset = 1; // On rajoute un jour au compteur
-          }
-          previousHours = heures;
-
-          // 3. On crée la date précise du programme
           const dateDuProgramme = new Date(dateColonne.getTime());
           dateDuProgramme.setHours(heures, minutes, 0, 0);
-          dateDuProgramme.setDate(dateDuProgramme.getDate() + dayOffset);
+
+          // CORRECTION 1 : De minuit à 5h59, c'est techniquement le lendemain !
+          if (heures < 6) {
+            dateDuProgramme.setDate(dateDuProgramme.getDate() + 1);
+          }
 
           programmesDeLaJournee.push({
             titre: titre,
@@ -136,6 +141,9 @@ async function checkLiveProgram() {
       }
     }
 
+    // CORRECTION 2 : On trie chronologiquement (car le CSV est en vrac !)
+    programmesDeLaJournee.sort((a, b) => a.dateDebut - b.dateDebut);
+
     // --- RECHERCHE DU PROGRAMME ACTUEL ---
     let programmeTrouve = false;
 
@@ -143,12 +151,11 @@ async function checkLiveProgram() {
       const progActuel = programmesDeLaJournee[j];
       const debut = progActuel.dateDebut;
 
-      // La fin du programme, c'est le début du suivant !
       let fin;
       if (j + 1 < programmesDeLaJournee.length) {
         fin = programmesDeLaJournee[j + 1].dateDebut;
       } else {
-        fin = new Date(debut.getTime() + 2 * 60 * 60 * 1000); // +2h si c'est le dernier
+        fin = new Date(debut.getTime() + 2 * 60 * 60 * 1000);
       }
 
       // EST-CE QU'ON EST EN DIRECT SUR CE PROGRAMME ?
@@ -157,7 +164,6 @@ async function checkLiveProgram() {
         const tempsPasse = maintenant - debut;
         const pourcentage = Math.min((tempsPasse / dureeTotale) * 100, 100);
 
-        // NOUVEAU : On formate l'heure (ex: rajoute un 0 devant 9h -> 09:00)
         const formatHeure = (d) =>
           String(d.getHours()).padStart(2, "0") +
           ":" +
@@ -167,7 +173,6 @@ async function checkLiveProgram() {
         document.querySelector(".progress-fill").style.width =
           pourcentage + "%";
 
-        // On affiche les heures de début et fin !
         const startElem = document.querySelector(".live-time-start");
         const endElem = document.querySelector(".live-time-end");
         if (startElem) startElem.textContent = formatHeure(debut);
@@ -184,11 +189,10 @@ async function checkLiveProgram() {
     afficherDefaut();
   }
 }
-
 function afficherDefaut() {
   const prog = document.querySelector(".live-program");
   const barre = document.querySelector(".progress-fill");
-  if (prog) prog.textContent = "Programmes habituels";
+  if (prog) prog.textContent = "Programmes non trouvés";
   if (barre) barre.style.width = "0%";
 }
 // Fonction pour afficher la description quand on clique sur une affiche
