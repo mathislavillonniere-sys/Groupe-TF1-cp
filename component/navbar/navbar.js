@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="#">Nos Chaînes ▾</a>
             <ul class="dropdown-content">
               <li><a href="${prefixe}component/chaines/chaines.html" class="nav-link">Chaînes & Streaming</a></li>
-              <li><a href="${prefixe}component/pro/pro.html" class="nav-link">Grille TV (Pro)</a></li>
+              <li><a href="${prefixe}component/pro/pro.html" class="nav-link">Grille des Programmes</a></li>
             </ul>
           </li>
           <li class="dropdown">
