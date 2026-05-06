@@ -799,4 +799,9 @@
   .badge-inedit {
     display: none !important;
   }
+  /* On désactive proprement le parallaxe pour éviter les bugs sur iPhone */
+  .parallax-quote {
+    background-attachment: scroll;
+    background-position: center center;
+  }
 }
