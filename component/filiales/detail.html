@@ -2,6 +2,9 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#00152b" />
     <meta name="theme-color" content="#00152b" />
     <link rel="shortcut icon" href="./photo/logo_claire-removebg-preview.png" />
     <link
@@ -100,6 +103,34 @@
         margin: 0;
         color: #64748b; /* Gris pro */
         line-height: 1.5;
+      }
+      /* ==========================================
+         ADAPTATION MOBILE (< 768px)
+         ========================================== */
+      @media (max-width: 768px) {
+        .fiche-detail {
+          margin: 30px 15px;
+          padding: 30px 20px;
+        }
+
+        .header-fiche {
+          flex-direction: column;
+          text-align: center;
+          gap: 15px;
+        }
+
+        .header-fiche i {
+          font-size: 3em;
+        }
+
+        .header-fiche h2 {
+          font-size: 1.5em;
+        }
+
+        .filiales-list {
+          grid-template-columns: 1fr; /* Force 1 seule colonne au lieu de 2 */
+          gap: 15px;
+        }
       }
     </style>
   </head>
