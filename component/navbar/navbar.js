@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="#">Notre Groupe ▾</a>
             <ul class="dropdown-content">
               <li><a href="${prefixe}component/histoire/histoire.html" class="nav-link">Notre Histoire</a></li>
-              <li><a href="${prefixe}component/direction/direction.html" class="nav-link">Direction</a></li>
+              <li><a href="${prefixe}component/direction/direction.html" class="nav-link">Notre Direction</a></li>
               <li><a href="${prefixe}component/filiales/filiales.html" class="nav-link">Nos Pôles</a></li>
               <li><a href="${prefixe}index.html" class="nav-link">Chiffres Clés</a></li>
             </ul>
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <li class="dropdown">
             <a href="#">Nos Chaînes ▾</a>
             <ul class="dropdown-content">
-              <li><a href="${prefixe}component/chaines/chaines.html" class="nav-link">Chaînes & Streaming</a></li>
+              <li><a href="${prefixe}component/chaines/chaines.html" class="nav-link">Nos Chaînes</a></li>
               <li><a href="${prefixe}component/pro/pro.html" class="nav-link">Grille des Programmes</a></li>
             </ul>
           </li>
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="#">Nos Programmes ▾</a>
             <ul class="dropdown-content">
               <li><a href="${prefixe}component/renouvellement/renouvellement.html" class="nav-link">Renouvellement 2026-2027</a></li>
-              <li><a href="${prefixe}component/Grille de rentrée et d'été/pro.html" class="nav-link">Grille de rentrée et d'été</a></li>
+              <li><a href="${prefixe}component/Grille de rentrée et d'été/pro.html" class="nav-link">Grille saisonnière</a></li>
             </ul>
           </li>
           <li class="dropdown">

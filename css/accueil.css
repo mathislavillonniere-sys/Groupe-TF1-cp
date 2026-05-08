@@ -730,6 +730,85 @@
   background: #e2001a;
   border-color: #e2001a;
 }
+/* =========================================
+   6. SECTION PÔLES D'ACTIVITÉS (AMÉLIORÉE & RESPONSIVE)
+   ========================================= */
+.poles-preview-section {
+  padding: 100px 20px;
+  background-color: #fdfdfd; /* Un blanc très légèrement cassé */
+  border-bottom: 1px solid #edf2f7;
+}
+
+.poles-grid {
+  display: grid;
+  /* Sur ordinateur : 7 colonnes égales */
+  grid-template-columns: repeat(7, 1fr);
+  gap: 15px;
+  margin-bottom: 50px;
+}
+
+.pole-card-preview {
+  background: white;
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  padding: 35px 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #00152b; /* Ton bleu corporate */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animation rebondie */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Effet au survol */
+.pole-card-preview:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 21, 43, 0.1);
+  border-color: #e31e24; /* Ton rouge TF1 */
+}
+
+.pole-icon-preview {
+  font-size: 2.2em;
+  color: #e31e24;
+  margin-bottom: 18px;
+  transition: transform 0.3s ease;
+}
+
+.pole-card-preview h3 {
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.3;
+}
+
+/* Bouton Découvrir */
+.poles-btn-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-primary-poles {
+  display: inline-block;
+  padding: 16px 40px;
+  background-color: #00152b;
+  color: white;
+  text-decoration: none;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 50px; /* Style pilule plus moderne */
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.btn-primary-poles:hover {
+  background-color: #e31e24;
+  box-shadow: 0 10px 20px rgba(227, 30, 36, 0.2);
+}
 /* ==========================================
    VERSION MOBILE (< 768px)
    ========================================== */
@@ -803,5 +882,53 @@
   .parallax-quote {
     background-attachment: scroll;
     background-position: center center;
+  }
+}
+/* --- ADAPTATION MOBILE & TABLETTE --- */
+
+/* Tablettes (moins de 1024px) */
+@media (max-width: 1024px) {
+  .poles-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes sur tablette */
+    gap: 15px;
+  }
+}
+
+/* Mobiles (moins de 768px) */
+@media (max-width: 768px) {
+  .poles-preview-section {
+    padding: 60px 15px;
+  }
+
+  .poles-grid {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* 2 colonnes sur mobile pour que ce soit lisible */
+    gap: 12px;
+  }
+
+  .pole-card-preview {
+    padding: 25px 10px;
+  }
+
+  .pole-icon-preview {
+    font-size: 1.8em;
+  }
+
+  .pole-card-preview h3 {
+    font-size: 0.75rem;
+  }
+
+  .btn-primary-poles {
+    width: 100%; /* Le bouton prend toute la largeur sur mobile */
+    padding: 14px 20px;
+  }
+}
+
+/* Très petits mobiles */
+@media (max-width: 480px) {
+  .poles-grid {
+    grid-template-columns: 1fr; /* 1 seule colonne si l'écran est minuscule */
   }
 }

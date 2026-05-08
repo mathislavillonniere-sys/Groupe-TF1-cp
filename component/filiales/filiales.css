@@ -39,11 +39,15 @@ body {
   margin: 0 0 10px 0;
 }
 
-/* --- BANDE DE STATS --- */
+/* --- BANDE DE STATS AMÉLIORÉE --- */
 .stats-band {
-  background-color: #001836;
-  padding: 20px 0;
+  background-color: #00152b; /* Bleu corporate profond */
+  padding: 35px 0; /* Plus d'espace en haut et en bas pour laisser respirer */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Belle ombre pour détacher la barre du fond clair */
+  position: relative;
+  z-index: 2; /* S'assure que l'ombre passe au-dessus du contenu en dessous */
 }
+
 .stats-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -51,29 +55,42 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
 .stat-box {
   flex: 1;
   text-align: center;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid rgba(74, 109, 150, 0.3);
-}
-.stat-box:last-child {
-  border-right: none;
-}
-.stat-val {
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-.stat-lab {
-  color: #4a6d96;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15); /* Ligne de séparation plus blanche et élégante */
+  padding: 0 15px;
+  transition: transform 0.3s ease; /* Prépare une animation fluide */
 }
 
+.stat-box:hover {
+  transform: translateY(
+    -3px
+  ); /* Petit effet dynamique : le chiffre se soulève au passage de la souris */
+}
+
+.stat-box:last-child {
+  border-right: none; /* Enlève la ligne après le dernier élément */
+}
+
+.stat-val {
+  color: white;
+  font-size: 2.2rem; /* Chiffres beaucoup plus gros et percutants */
+  font-weight: 900;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.stat-lab {
+  color: #7a9cc4; /* Bleu clair beaucoup plus lisible que l'ancien gris foncé */
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
 /* --- CONTENU PRINCIPAL & FILTRES --- */
 .page-content {
   max-width: 1200px; /* PLEINE LARGEUR */
@@ -358,13 +375,19 @@ body {
 
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
+  .stats-band {
+    padding: 25px 0;
+  }
   .stats-container {
     flex-wrap: wrap;
+    gap: 25px 0; /* Espace vertical entre les lignes sur mobile */
   }
   .stat-box {
-    min-width: 45%;
-    border-right: none;
-    margin-bottom: 15px;
+    min-width: 50%; /* 2 chiffres par ligne sur téléphone */
+    border-right: none; /* On cache les lignes sur mobile pour faire plus propre */
+  }
+  .stat-val {
+    font-size: 1.8rem; /* On réduit légèrement la taille sur petit écran */
   }
   .tl-header {
     flex-direction: column;

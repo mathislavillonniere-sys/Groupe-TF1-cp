@@ -81,7 +81,7 @@
           titre: "Pôle Médias",
           couleur: "#00152b",
           couleurPastel: "rgba(0, 21, 43, 0.08)",
-          icone: "fa-tv",
+          logo: "../../photo/pole_media-removebg-preview.png", // <--- AJOUTE CETTE LIGNE          directeur: "Mathis Lavillonnière",
           directeur: "Mathis Lavillonnière",
           roleDir: "Directeur Général du Pôle & PDG",
           init: "ML",
@@ -104,7 +104,7 @@
           titre: "Pôle Télécom",
           couleur: "#E31E24",
           couleurPastel: "rgba(227, 30, 36, 0.08)",
-          icone: "fa-tower-broadcast",
+          logo: "../../photo/pole_telecom-removebg-preview.png",
           directeur: "Damien Menard",
           roleDir: "Directeur Général",
           init: "DM",
@@ -121,7 +121,7 @@
           titre: "Pôle Finance",
           couleur: "#185FA5",
           couleurPastel: "rgba(24, 95, 165, 0.08)",
-          icone: "fa-chart-line",
+          logo: "../../photo/pole_finance-removebg-preview.png",
           directeur: "Hervé Bourges",
           roleDir: "Directeur Général",
           init: "HB",
@@ -138,7 +138,7 @@
           titre: "Pôle Commerce",
           couleur: "#D85A30",
           couleurPastel: "rgba(216, 90, 48, 0.08)",
-          icone: "fa-store",
+          logo: "../../photo/pole_commercant-removebg-preview.png",
           directeur: "Aline Girard",
           roleDir: "Directrice Générale",
           init: "AG",
@@ -152,10 +152,10 @@
           ],
         },
         infra: {
-          titre: "Pôle Infrastructures & Mobilités",
+          titre: "Pôle Immobilier, Infrastructures & Mobilités",
           couleur: "#854F0B",
           couleurPastel: "rgba(133, 79, 11, 0.08)",
-          icone: "fa-train-subway",
+          logo: "../../photo/pole_immo_trans_infrastructure-removebg-preview.png",
           directeur: "Justine Segrestan",
           roleDir: "Directrice Générale",
           init: "JS",
@@ -173,33 +173,33 @@
             "Aménagement territorial",
           ],
         },
-        immobilier: {
-          titre: "Pôle Immobilier",
+        inter: {
+          titre: "Pôle International",
           couleur: "#533AB7",
           couleurPastel: "rgba(83, 58, 183, 0.08)",
-          icone: "fa-building-user",
+          logo: "../../photo/pole_internationnal-removebg-preview.png",
           directeur: "Sophie Lachaud",
           roleDir: "Directrice Générale",
           init: "SL",
-          entreprise: "Pôle Développement Immobilier",
+          entreprise: "TF1 CP International",
           mission:
-            "Le pôle immobilier développe et gère des projets urbains liés à l’expansion économique du groupe.",
+            "Le pôle international a pour mission de faire rayonner l'expertise et la marque TF1 Camping Paradis à travers le monde.",
           objectifs: [
-            "Accompagner la croissance économique",
-            "Créer de nouvelles zones d’activités",
-            "Soutenir les projets d’infrastructures",
+            "Exporter nos formats originaux à l'étranger",
+            "Gérer et développer nos filiales internationales",
+            "Négocier les droits de diffusion mondiaux",
           ],
           activites: [
-            "Promotion immobilière",
-            "Développement de quartiers d’affaires",
-            "Gestion d’actifs immobiliers",
+            "Gestion des filiales étrangères (TF1 CP International)",
+            "Ventes de formats audiovisuels",
+            "Distribution internationale des droits",
           ],
         },
         logistique: {
           titre: "Pôle Logistique et E-Commerce",
           couleur: "#0F6E56",
           couleurPastel: "rgba(15, 110, 86, 0.08)",
-          icone: "fa-truck-fast",
+          logo: "../../photo/pole_logistique_et_ecomerce-removebg-preview.png",
           directeur: "Marc Lavillonnière",
           roleDir: "PDG de la société",
           init: "ML",
@@ -266,13 +266,15 @@
             <div class="tl-card fiche-detail-card">
                 
                 <div class="tl-header" style="border-bottom: 2px solid #f1f5f9; padding-bottom: 30px;">
-                    <div class="tl-logo-box" style="background-color: ${data.couleurPastel}; border: 1px solid ${data.couleur}33; width: 100px; height: 100px; font-size: 40px; color: ${data.couleur};">
-                        <i class="fa-solid ${data.icone}"></i>
+                    <div class="tl-logo-box" style="background-color: ${data.couleurPastel}; border: 1px solid ${data.couleur}33; width: 90px; height: 90px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 16px; overflow: hidden;">
+                        <img src="${data.logo}" alt="" style="width: 100%; height: 100%; object-fit: contain; padding: 12px;" onerror="this.style.display='none'">
                     </div>
                     <div class="tl-title-wrap">
-                        ${entrepriseBadge}
+                        <div class="tl-tag" style="background-color: ${data.couleurPastel}; color: ${data.couleur}; font-size: 13px; margin-bottom: 10px; display: inline-block;">
+                            ${data.entreprise || "Fiche Officielle"}
+                        </div>
                         <div class="tl-title" style="font-size: 32px;">${data.titre}</div>
-                        <div class="tl-date" style="color: #64748b; font-size: 16px;">Fiche Secteur Détaillée</div>
+                        <div class="tl-date" style="color: #64748b; font-size: 16px;">Détails du secteur d'activité</div>
                     </div>
                 </div>
 
