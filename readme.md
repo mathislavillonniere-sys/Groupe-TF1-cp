@@ -36,6 +36,17 @@ Effet Parallaxe : Intégration d'une citation du PDG sur une image de fond fixe 
 
 Carrousel d'Actualités : Création d'un slider horizontal en CSS (overflow-x: auto) avec des cartes d'articles interactives (ombres douces au survol, badges de catégories "Stratégie", "RSE").
 
+Voici la suite de ton README, rédigée exactement avec le même modèle que tu as fourni pour les parties précédentes :
+
+Partie 4 : Aperçu des Pôles d'Activités (Accueil)
+Description : Intégration d'une nouvelle section de prévisualisation interactive permettant d'accéder rapidement aux différents secteurs stratégiques du groupe depuis la page d'accueil.
+
+Grille Responsive : Mise en place d'un affichage adaptatif via display: grid (7 colonnes sur grand écran, 4 sur tablette, et 2 sur mobile) pour garantir une lisibilité parfaite sur tous les supports.
+
+Design & Animations Premium : Création de cartes avec un effet de rebond au survol (utilisation de la transition cubic-bezier), ajout d'ombres portées dynamiques et intégration d'un bouton central modernisé au style "pilule" (border-radius: 50px).
+
+Mise à jour Stratégique : Remplacement de l'encart dédié au pôle "Immobilier" par le pôle "International" (avec son icône globe) directement sur la grille d'accueil pour refléter la nouvelle organisation.
+
 ### Partie 5 : L'Espace Professionnel et la Gestion des Grilles (Page Pro)
 
 Description : Traitement des données externes pour afficher les plannings de diffusion.
