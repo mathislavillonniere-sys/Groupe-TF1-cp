@@ -1,4 +1,11 @@
-/* NOUVEAU HERO POUR LES PAGES SECONDAIRES */
+/* component/filiales/filiales.css */
+
+/* --- FOND DE PAGE --- */
+body {
+  background-color: #f4f6f9;
+}
+
+/* --- HERO BANNER --- */
 .hero-banner {
   position: relative;
   background-image: url("../../photo/hero-nospole.jpg");
@@ -6,151 +13,383 @@
   background-position: center;
   color: white;
   text-align: center;
-
-  /* 👉 C'EST ICI QUE LA MAGIE OPÈRE : On force la boîte à être plus haute */
   min-height: 350px;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Ça centre ton texte parfaitement à la verticale */
+  justify-content: center;
   align-items: center;
   padding: 20px;
-
-  border-bottom: 4px solid var(--rouge-tf1);
+  border-bottom: 3px solid #e31e24;
   z-index: 1;
 }
-/* LE FAMEUX VOILE BLEU MARINE (OVERLAY) */
+
 .hero-banner::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* CORRECTION 2 : Utilisation du code rgba pour la transparence à 85% */
-  background: rgba(0, 21, 43, 0.8);
+  inset: 0;
+  background: rgba(0, 21, 43, 0.85);
   z-index: -1;
 }
 
-/* UNIFICATION DES TITRES */
 .hero-banner h1 {
   font-size: 2.5em;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin: 0 0 15px 0;
+  margin: 0 0 10px 0;
 }
 
-.section-container {
+/* --- BANDE DE STATS --- */
+.stats-band {
+  background-color: #001836;
+  padding: 20px 0;
+}
+.stats-container {
   max-width: 1200px;
-  margin: 60px auto;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.stat-box {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(74, 109, 150, 0.3);
+}
+.stat-box:last-child {
+  border-right: none;
+}
+.stat-val {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.stat-lab {
+  color: #4a6d96;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* --- CONTENU PRINCIPAL & FILTRES --- */
+.page-content {
+  max-width: 1200px; /* PLEINE LARGEUR */
+  margin: 40px auto;
   padding: 0 20px;
 }
 
-.poles-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(280px, 1fr)
-  ); /* Cartes plus fines */
-  gap: 30px; /* Espace légèrement réduit entre les cartes */
-  padding-bottom: 40px;
-}
-
-/* --- NOUVEAU DESIGN DES CARTES (Avec Image) --- */
-.pole-card {
-  background: white;
-  border-radius: 16px; /* Bords bien arrondis */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); /* Ombre très douce */
-  border: 1px solid #e2e8f0; /* Bordure grise très discrète */
-  transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease,
-    border-color 0.4s ease;
+.filter-bar {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 40px;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.filter-pill {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #64748b;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-pill:hover {
+  border-color: #94a3b8;
+  color: #334155;
+  background: #f8fafc;
+}
+
+.filter-pill.active {
+  background: #00152b;
+  color: white;
+  border-color: #00152b;
+}
+
+/* --- TIMELINE (LIGNE ET ICÔNES) --- */
+.timeline-container {
   position: relative;
-  overflow: hidden; /* Indispensable : coupe les coins de l'image pour épouser la carte */
+  margin-top: 30px;
 }
 
-/* L'effet au survol de la carte */
-.pole-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-  border-color: var(
-    --rouge-tf1
-  ); /* La bordure devient rouge très subtilement */
+.tl-line {
+  position: absolute;
+  left: 30px; /* Décalé pour faire place à la grande icône */
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e2e8f0;
 }
 
-/* --- L'image d'en-tête --- */
-/* --- L'image d'en-tête --- */
-.pole-image {
-  width: 100%;
-  height: 160px;
-  padding: 20px;
-  box-sizing: border-box; /* LA CORRECTION : Empêche le padding de décaler le centre à droite */
+.tl-item {
+  position: relative;
+  padding-left: 90px; /* Marge augmentée pour laisser respirer la grande icône */
+  margin-bottom: 50px;
+}
+
+.tl-node {
+  position: absolute;
+  left: 7px; /* Alignement parfait sur la ligne */
+  top: 20px;
+  width: 48px; /* ICÔNE PLUS GRANDE */
+  height: 48px; /* ICÔNE PLUS GRANDE */
+  border-radius: 50%;
+  border: 4px solid; /* Bordure épaissie */
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px; /* Taille de l'icône augmentée */
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* --- LA CARTE --- */
+.tl-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  padding: 30px; /* Espace intérieur aéré */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+.tl-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* a) En-tête (Logos et Titres) */
+.tl-header {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+.tl-logo-box {
+  width: 90px;
+  height: 90px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  overflow: hidden;
+  padding: 12px;
 }
-
-.pole-image img {
+.tl-logo-box img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  margin: 0 auto; /* Force le centrage parfait des marges */
-  display: block;
-  transition: transform 0.6s ease;
 }
-/* Petit effet de zoom sur la photo quand on survole la carte */
-.pole-card:hover .pole-image img {
-  transform: scale(1.08);
-}
-
-/* --- Le contenu textuel --- */
-.pole-content {
-  padding: 10px 25px 75px 25px; /* J'ai réduit le padding haut à 10px pour rapprocher le texte de l'image */
-  display: flex;
-  flex-direction: column;
+.tl-title-wrap {
   flex-grow: 1;
-  text-align: center; /* CENTRE le titre et le paragraphe */
-  align-items: center; /* Aligne tout au milieu de la carte */
+}
+.tl-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #00152b;
+  margin-bottom: 6px;
+}
+.tl-date {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+.tl-kpi-main {
+  text-align: right;
+}
+.kpi-main-val {
+  font-size: 28px;
+  font-weight: 900;
+}
+.kpi-main-lab {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94a3b8;
+  font-weight: bold;
 }
 
-.pole-title {
-  font-size: 1.4em;
-  color: var(--bleu-corporate);
-  margin: 0 0 15px 0;
+/* b) Directeur */
+.tl-director {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+.tl-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
   font-weight: 800;
 }
+.dir-name {
+  font-size: 15px;
+  color: #1e293b;
+  font-weight: 600;
+}
+.dir-role {
+  font-size: 13px;
+  color: #64748b;
+}
 
-.pole-desc {
-  color: var(--texte-gris);
-  font-size: 0.95em;
+/* c) Description */
+.tl-desc {
+  font-size: 15px;
+  color: #475569;
   line-height: 1.6;
-  margin: 0;
+  margin-bottom: 25px;
 }
 
-/* --- Le nouveau bouton (intégré dans la carte) --- */
-.btn-voir-plus {
-  position: absolute;
-  bottom: 25px;
-  left: 25px;
-  right: 25px;
-  background: #f8fafc; /* Fond gris très clair par défaut */
-  color: var(--bleu-corporate);
-  padding: 12px 20px;
-  border-radius: 8px; /* Carré arrondi, plus moderne que la pilule rouge */
-  font-weight: bold;
-  font-size: 0.95em;
-  transition: all 0.3s;
-  text-align: center;
-  text-decoration: none;
+/* d) Métriques (Correction de l'alignement) */
+.tl-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+.metric-box {
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  min-width: 140px; /* Empêche les boîtes de s'écraser */
+  flex: 1; /* Permet aux boîtes de remplir l'espace */
+}
+.m-val {
+  font-size: 18px;
+  font-weight: 800;
+}
+.m-lab {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 4px;
 }
 
-.btn-voir-plus:hover {
-  background: var(--rouge-tf1);
+/* e) Filiales (Correction de la grille) */
+.tl-filiales {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+.filiales-titre {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94a3b8;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+.filiales-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Crée automatiquement 2 ou 3 colonnes selon la place */
+  gap: 12px;
+}
+.filiale-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #475569;
+  font-weight: 500;
+}
+
+/* f) Pied de carte (Tags et Bouton) */
+.tl-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* Aligne le bouton en bas */
+  margin-top: 15px;
+  gap: 20px; /* Sécurité pour éviter le chevauchement */
+}
+.tl-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1; /* Force les tags à prendre l'espace restant */
+}
+.tl-tag {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.tl-btn {
   color: white;
-  border-color: var(--rouge-tf1);
+  font-size: 14px;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  white-space: nowrap; /* Empêche le texte du bouton de se couper en deux lignes */
+}
+.tl-btn:hover {
+  opacity: 0.9;
+  transform: translateX(4px);
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+  .stats-container {
+    flex-wrap: wrap;
+  }
+  .stat-box {
+    min-width: 45%;
+    border-right: none;
+    margin-bottom: 15px;
+  }
+  .tl-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  .tl-kpi-main {
+    text-align: center;
+  }
+  .filiales-grid {
+    grid-template-columns: 1fr; /* Sur mobile, 1 seule colonne */
+  }
+  .tl-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+  .tl-btn {
+    text-align: center;
+  }
+  .tl-item {
+    padding-left: 0;
+  }
+  .tl-line,
+  .tl-node {
+    display: none; /* Cache la timeline sur mobile pour gagner de la place */
+  }
 }

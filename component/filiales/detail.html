@@ -2,16 +2,15 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#00152b" />
     <meta name="theme-color" content="#00152b" />
     <link rel="shortcut icon" href="./photo/logo_claire-removebg-preview.png" />
     <link
       rel="apple-touch-icon"
       href="./photo/logo_claire-removebg-preview.png"
     />
-    <title>Fiche Secteur - TF1 CP</title>
+    <title>Détail Secteur - TF1 CP</title>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -22,265 +21,195 @@
     <link rel="stylesheet" href="../footer/footer.css" />
 
     <style>
-      /* --- Le conteneur principal --- */
-      .fiche-detail {
-        max-width: 900px;
-        margin: 60px auto;
-        background: white;
-        padding: 50px;
-        border-radius: 16px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        border-top: 5px solid var(--rouge-tf1);
-      }
-
-      .header-fiche {
-        display: flex;
-        align-items: center;
-        gap: 25px;
-        margin-bottom: 30px;
-      }
-
-      .header-fiche i {
-        font-size: 3.5em;
-        color: var(--bleu-corporate);
-      }
-
+      /* Styles spécifiques pour le bouton retour */
       .btn-retour {
-        margin-bottom: 20px;
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        color: var(--texte-gris);
+        color: #475569;
         text-decoration: none;
         font-weight: bold;
         transition: color 0.2s;
+        margin-bottom: 20px;
+        font-size: 14px;
       }
-
       .btn-retour:hover {
-        color: var(--rouge-tf1);
+        color: #e31e24;
       }
-
-      /* --- Le nouveau design des sous-cartes (Filiales) --- */
-      .filiales-list {
-        display: grid;
-        /* S'adapte automatiquement à la taille de l'écran */
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 25px;
-        margin-top: 30px;
+      /* Ajustement pour que la grande carte n'ait pas la marge de la timeline */
+      .tl-card.fiche-detail-card {
+        margin-top: 10px;
+        padding: 40px;
       }
-
-      .filiale-item {
-        padding: 25px;
-        background: #ffffff;
-        border-radius: 12px;
-        border-left: 5px solid var(--bleu-corporate); /* Liseré bleu de base */
-        border-top: 1px solid #f1f5f9;
-        border-right: 1px solid #f1f5f9;
-        border-bottom: 1px solid #f1f5f9;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); /* Ombre très légère */
-        transition: all 0.3s ease; /* Animation fluide */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      /* L'effet magique au survol de la carte ! */
-      .filiale-item:hover {
-        transform: translateY(-5px); /* Se soulève légèrement */
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08); /* Ombre plus marquée */
-        border-left-color: var(--rouge-tf1); /* Le liseré devient rouge TF1 */
-      }
-
-      .filiale-item h4 {
-        margin: 0 0 8px 0;
-        color: var(--bleu-corporate);
-        font-size: 1.15em;
-        transition: color 0.3s ease;
-      }
-
-      .filiale-item p {
-        font-size: 0.95em;
-        margin: 0;
-        color: #64748b; /* Gris pro */
-        line-height: 1.5;
-      }
-      /* ==========================================
-         ADAPTATION MOBILE (< 768px)
-         ========================================== */
-      @media (max-width: 768px) {
-        .fiche-detail {
-          margin: 30px 15px;
-          padding: 30px 20px;
-        }
-
-        .header-fiche {
-          flex-direction: column;
-          text-align: center;
-          gap: 15px;
-        }
-
-        .header-fiche i {
-          font-size: 3em;
-        }
-
-        .header-fiche h2 {
-          font-size: 1.5em;
-        }
-
-        .filiales-list {
-          grid-template-columns: 1fr; /* Force 1 seule colonne au lieu de 2 */
-          gap: 15px;
-        }
+      .section-titre {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #94a3b8;
+        margin: 30px 0 15px 0;
+        font-weight: 800;
+        border-bottom: 2px solid #f1f5f9;
+        padding-bottom: 10px;
       }
     </style>
   </head>
+
   <body>
     <script src="../navbar/navbar.js"></script>
 
-    <main class="section-container">
+    <main
+      class="page-content"
+      style="max-width: 1000px; padding-top: 40px; padding-bottom: 60px"
+    >
       <a href="filiales.html" class="btn-retour">
-        <i class="fa-solid fa-arrow-left"></i> Retour aux pôles</a
-      >
+        <i class="fa-solid fa-arrow-left"></i> Retour à la vue d'ensemble
+      </a>
 
-      <div id="contenu-fiche" class="fiche-detail">
-        <p>Chargement des informations...</p>
+      <div id="contenu-fiche">
+        <p style="text-align: center; padding: 50px; color: #64748b">
+          Chargement des données du pôle...
+        </p>
       </div>
     </main>
 
     <script src="../footer/footer.js"></script>
 
     <script>
+      // La base de données complète pour la page détail
       const polesDetails = {
         medias: {
-          titre: "Télévision & Médias",
-          icone: "fa-solid fa-tv",
+          titre: "Pôle Médias",
+          couleur: "#00152b",
+          couleurPastel: "rgba(0, 21, 43, 0.08)",
+          icone: "fa-tv",
           directeur: "Mathis Lavillonnière",
+          roleDir: "Directeur Général du Pôle & PDG",
+          init: "ML",
+          entreprise: "",
           mission:
-            "Leader de l'audiovisuel, notre pôle média façonne le divertissement de demain à travers une offre multi-canal unique.",
-          filiales: [
-            {
-              nom: "TF1 Camping Paradis",
-              role: "Chaîne généraliste leader (22.5% pda).",
-            },
-            { nom: "CP Info", role: "Chaîne d'information en continu 24/7." },
-            {
-              nom: "Studios Paradis",
-              role: "Production de fictions et formats originaux.",
-            },
-            {
-              nom: "TF1 CP +",
-              role: "Plateforme de streaming et SVOD premium.",
-            },
+            "Le pôle médias est l’activité historique du groupe et regroupe l’ensemble des activités audiovisuelles et de production.",
+          objectifs: [
+            "Produire des contenus originaux",
+            "Soutenir la création française",
+            "Développer les services numériques",
+          ],
+          activites: [
+            "Chaînes de télévision généralistes et thématiques",
+            "Production de programmes et de séries",
+            "Plateformes numériques et replay",
+            "Activités de presse avec CP Press",
           ],
         },
         telecom: {
           titre: "Pôle Télécom",
-          icone: "fa-solid fa-tower-broadcast",
+          couleur: "#E31E24",
+          couleurPastel: "rgba(227, 30, 36, 0.08)",
+          icone: "fa-tower-broadcast",
           directeur: "Damien Menard",
+          roleDir: "Directeur Général",
+          init: "DM",
+          entreprise: "Camping Paradis Télécom",
           mission:
-            "Connecter les territoires en développant des réseaux très haut débit et des services numériques innovants.",
-          filiales: [
-            {
-              nom: "CP Télécom",
-              role: "Opérateur réseau et déploiement fibre.",
-            },
-            {
-              nom: "Société & Moi",
-              role: "Services interactifs (Météo, Nature & Moi).",
-            },
-          ],
-        },
-        commerce: {
-          titre: "Commerce & Licences",
-          icone: "fa-solid fa-store",
-          directeur: "Aline Girard",
-          mission:
-            "Valoriser nos marques et accompagner le développement économique de nos partenaires.",
-          filiales: [
-            {
-              nom: "Color School",
-              role: "Centre de formation aux métiers du groupe.",
-            },
-            {
-              nom: "Union des Commerçants",
-              role: "Réseau de boutiques officielles.",
-            },
-            {
-              nom: "CP Licensing",
-              role: "Gestion des droits dérivés et produits.",
-            },
-          ],
-        },
-        france: {
-          titre: "France CP",
-          icone: "fa-solid fa-flag",
-          directeur: "Patrice Lamart",
-          mission:
-            "Assurer la mission de service public de l'État (actionnaire à 80%) et produire des contenus fédérateurs.",
-          filiales: [
-            {
-              nom: "France CP Production",
-              role: "Production de documentaires et fictions publiques.",
-            },
-            {
-              nom: "Camping Paradis TV",
-              role: "Chaîne institutionnelle de l'État.",
-            },
-          ],
-        },
-        infra: {
-          titre: "Immobilier & Resorts",
-          icone: "fa-solid fa-building",
-          directeur: "Justine Segrestan",
-          mission:
-            "Bâtir et gérer les infrastructures hôtelières et le parc immobilier de l'écosystème Camping Paradis.",
-          filiales: [
-            {
-              nom: "Resorts Camping Paradis",
-              role: "Gestion des complexes hôteliers internationaux.",
-            },
-            {
-              nom: "CP Immobilier",
-              role: "Aménagement foncier et gestion du patrimoine (75%).",
-            },
-            {
-              nom: "CP Infrastructure",
-              role: "Gros œuvre et chantiers (50%).",
-            },
+            "L’entreprise a été privatisée en 2020 et appartient désormais à un autre groupe, mais elle reste un acteur important de l’écosystème économique de la région.",
+          activites: [
+            "Réseaux de télécommunications",
+            "Internet fixe et mobile",
+            "Services numériques pour particuliers et entreprises",
           ],
         },
         finance: {
           titre: "Pôle Finance",
-          icone: "fa-solid fa-chart-line",
+          couleur: "#185FA5",
+          couleurPastel: "rgba(24, 95, 165, 0.08)",
+          icone: "fa-chart-line",
           directeur: "Hervé Bourges",
+          roleDir: "Directeur Général",
+          init: "HB",
+          entreprise: "Crédit Camping Paradis",
           mission:
-            "Garant de la stabilité du groupe, le pôle finance propose des services bancaires et de protection innovants.",
-          filiales: [
-            {
-              nom: "Crédit Camping Paradis",
-              role: "Établissement bancaire et solutions de financement.",
-            },
-            {
-              nom: "CP Assurances",
-              role: "Protection globale des biens et des personnes du réseau.",
-            },
+            "Le pôle finance est centré autour de la banque du groupe. Cette banque est l’une des institutions financières majeures de la région du Camping Paradis.",
+          activites: [
+            "Banque de détail",
+            "Financement de projets économiques",
+            "Services bancaires pour particuliers et entreprises",
           ],
         },
-        inter: {
-          titre: "Pôle International",
-          icone: "fa-solid fa-globe",
-          directeur: "Sophie Lachaud",
+        commerce: {
+          titre: "Pôle Commerce",
+          couleur: "#D85A30",
+          couleurPastel: "rgba(216, 90, 48, 0.08)",
+          icone: "fa-store",
+          directeur: "Aline Girard",
+          roleDir: "Directrice Générale",
+          init: "AG",
+          entreprise: "Groupe Association des Commerçants",
           mission:
-            "Faire rayonner l'expertise et la marque TF1 Camping Paradis à travers le monde.",
-          filiales: [
-            {
-              nom: "TF1 CP International",
-              role: "Gestion des filiales étrangères.",
-            },
-            {
-              nom: "Distribution",
-              role: "Ventes de formats et droits à l'international.",
-            },
+            "Le groupe dispose d'un réseau commercial important assurant la gestion et le développement du commerce régional.",
+          activites: [
+            "Gestion d’un réseau d’environ 150 commerces",
+            "Développement du commerce régional",
+            "Plateforme e-commerce Paradis Market",
+          ],
+        },
+        infra: {
+          titre: "Pôle Infrastructures & Mobilités",
+          couleur: "#854F0B",
+          couleurPastel: "rgba(133, 79, 11, 0.08)",
+          icone: "fa-train-subway",
+          directeur: "Justine Segrestan",
+          roleDir: "Directrice Générale",
+          init: "JS",
+          entreprise: "CPIM & RACP",
+          mission:
+            "Ce pôle est organisé autour du groupe Camping Paradis Infrastructures & Mobilités (CPIM). La filiale principale, la RACP (Régie Autonome des Transports), exploite notamment le réseau de métro de la métropole de La Garette.",
+          actionnariat: [
+            "55 % État français",
+            "40 % TF1 Camping Paradis",
+            "5 % Salariés",
+          ],
+          activites: [
+            "Développement d’infrastructures publiques",
+            "Transport urbain et mobilité",
+            "Aménagement territorial",
+          ],
+        },
+        immobilier: {
+          titre: "Pôle Immobilier",
+          couleur: "#533AB7",
+          couleurPastel: "rgba(83, 58, 183, 0.08)",
+          icone: "fa-building-user",
+          directeur: "Sophie Lachaud",
+          roleDir: "Directrice Générale",
+          init: "SL",
+          entreprise: "Pôle Développement Immobilier",
+          mission:
+            "Le pôle immobilier développe et gère des projets urbains liés à l’expansion économique du groupe.",
+          objectifs: [
+            "Accompagner la croissance économique",
+            "Créer de nouvelles zones d’activités",
+            "Soutenir les projets d’infrastructures",
+          ],
+          activites: [
+            "Promotion immobilière",
+            "Développement de quartiers d’affaires",
+            "Gestion d’actifs immobiliers",
+          ],
+        },
+        logistique: {
+          titre: "Pôle Logistique et E-Commerce",
+          couleur: "#0F6E56",
+          couleurPastel: "rgba(15, 110, 86, 0.08)",
+          icone: "fa-truck-fast",
+          directeur: "Marc Lavillonnière",
+          roleDir: "PDG de la société",
+          init: "ML",
+          entreprise: "TF1 Camping Paradis Logistique",
+          mission:
+            "Le pôle logistique assure la gestion des flux de marchandises et des opérations du groupe.",
+          activites: [
+            "Transport et distribution",
+            "Gestion des entrepôts",
+            "Logistique pour le commerce et les infrastructures",
           ],
         },
       };
@@ -290,33 +219,103 @@
       const data = polesDetails[id];
 
       if (data) {
-        document.getElementById("contenu-fiche").innerHTML = `
-                <div class="header-fiche">
-                    <i class="${data.icone}"></i>
-                    <div>
-                        <h2 style="margin:0; color:var(--bleu-corporate)">${data.titre}</h2>
-                        <p style="color:var(--rouge-tf1); font-weight:bold; margin:0">FICHE SECTEUR OFFICIELLE</p>
-                    </div>
-                </div>
-                <p><strong>Directeur(s) :</strong> ${data.directeur}</p>
-                <p><strong>Mission :</strong> ${data.mission}</p>
-                <h3 style="margin-top:40px; border-bottom:2px solid #eee; padding-bottom:10px; color:var(--bleu-corporate);">Filiales et Activités</h3>
-                <div class="filiales-list">
-                    ${data.filiales
+        // Construction dynamique des blocs HTML optionnels
+        let objectifsHTML = "";
+        if (data.objectifs) {
+          objectifsHTML = `
+                <div class="section-titre">Objectifs Stratégiques</div>
+                <div class="tl-metrics">
+                    ${data.objectifs
                       .map(
-                        (f) => `
-                        <div class="filiale-item">
-                            <h4>${f.nom}</h4>
-                            <p style="font-size:0.9em; margin:0; color:var(--texte-gris);">${f.role}</p>
+                        (obj) => `
+                        <div class="metric-box" style="flex: 1; min-width: 250px;">
+                            <i class="fa-solid fa-bullseye" style="color:${data.couleur}; font-size: 16px; margin-bottom: 8px;"></i>
+                            <span class="m-lab" style="font-size: 14px; color: #1e293b; font-weight: 500;">${obj}</span>
                         </div>
                     `,
                       )
                       .join("")}
                 </div>
             `;
+        }
+
+        let actionnariatHTML = "";
+        if (data.actionnariat) {
+          actionnariatHTML = `
+                <div class="section-titre">Actionnariat du groupe</div>
+                <div class="tl-metrics">
+                    ${data.actionnariat
+                      .map(
+                        (act) => `
+                        <div class="metric-box" style="flex: 1; min-width: 150px; text-align: center; border-color: ${data.couleur}44;">
+                            <span class="m-val" style="color: ${data.couleur}">${act.split(" ")[0]}</span>
+                            <span class="m-lab" style="font-size: 13px;">${act.substring(act.indexOf(" ") + 1)}</span>
+                        </div>
+                    `,
+                      )
+                      .join("")}
+                </div>
+            `;
+        }
+
+        let entrepriseBadge = data.entreprise
+          ? `<div class="tl-tag" style="background-color: ${data.couleurPastel}; color: ${data.couleur}; font-size: 13px; margin-bottom: 10px; display: inline-block;">${data.entreprise}</div>`
+          : "";
+
+        document.getElementById("contenu-fiche").innerHTML = `
+            <div class="tl-card fiche-detail-card">
+                
+                <div class="tl-header" style="border-bottom: 2px solid #f1f5f9; padding-bottom: 30px;">
+                    <div class="tl-logo-box" style="background-color: ${data.couleurPastel}; border: 1px solid ${data.couleur}33; width: 100px; height: 100px; font-size: 40px; color: ${data.couleur};">
+                        <i class="fa-solid ${data.icone}"></i>
+                    </div>
+                    <div class="tl-title-wrap">
+                        ${entrepriseBadge}
+                        <div class="tl-title" style="font-size: 32px;">${data.titre}</div>
+                        <div class="tl-date" style="color: #64748b; font-size: 16px;">Fiche Secteur Détaillée</div>
+                    </div>
+                </div>
+
+                <div class="tl-director" style="margin-top: 30px;">
+                    <div class="tl-avatar" style="width: 45px; height: 45px; font-size: 16px; background-color: ${data.couleurPastel}; color: ${data.couleur};">
+                        ${data.init}
+                    </div>
+                    <div>
+                        <div class="dir-name" style="font-size: 18px;">${data.directeur}</div>
+                        <div class="dir-role" style="font-size: 14px;">${data.roleDir}</div>
+                    </div>
+                </div>
+
+                <div class="section-titre">Mission & Situation</div>
+                <div class="tl-desc" style="font-size: 16px;">${data.mission}</div>
+
+                ${objectifsHTML}
+                ${actionnariatHTML}
+
+                <div class="section-titre">Périmètre d'Activités</div>
+                <div class="filiales-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+                    ${data.activites
+                      .map(
+                        (act) => `
+                        <div class="filiale-chip" style="background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                            <i class="fa-solid fa-circle-dot" style="color: ${data.couleur}; font-size: 18px;"></i>
+                            <span style="font-size: 15px; font-weight: 600; color: #334155;">${act}</span>
+                        </div>
+                    `,
+                      )
+                      .join("")}
+                </div>
+
+            </div>
+        `;
       } else {
-        document.getElementById("contenu-fiche").innerHTML =
-          "<p>Pôle introuvable. Veuillez retourner à la page précédente.</p>";
+        document.getElementById("contenu-fiche").innerHTML = `
+            <div style="text-align:center; padding: 50px;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 50px; color: #e31e24; margin-bottom: 20px;"></i>
+                <h2>Pôle introuvable</h2>
+                <p>Les informations pour ce pôle ne sont pas disponibles. Veuillez retourner à la page précédente.</p>
+            </div>
+        `;
       }
     </script>
   </body>
