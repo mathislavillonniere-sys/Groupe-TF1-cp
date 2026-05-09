@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     {
       id: "tf1",
       logo: "./photo/logo-TF1.jpg",
-      fichierCSV: "./csv/tf1_semaine_2mai.csv",
+      fichierCSV: "./csv/tf1_annuel2025-2026misaison.csv",
     },
     {
       id: "m6",

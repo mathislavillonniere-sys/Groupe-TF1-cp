@@ -1,0 +1,314 @@
+/* =========================================
+   DIRECTION ARTISTIQUE : CHIFFRES & VISION (CLASSIQUE ET PROPRE)
+   ========================================= */
+
+:root {
+  --bleu-corporate: #00152b;
+  --rouge-tf1: #e31e24;
+  --fond-gris: #f8fafc;
+  --texte-gris: #64748b;
+}
+
+body {
+  background-color: var(--fond-gris);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  text-align: center;
+  color: var(--bleu-corporate);
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+/* --- 1. HERO BANNER (Méthode Infaillible sans conflit) --- */
+.hero-banner {
+  /* Le voile bleu et l'image sont fusionnés ici, impossible à casser */
+  background-image:
+    linear-gradient(rgba(0, 21, 43, 0.8), rgba(0, 21, 43, 0.8)),
+    url("../../photo/image-hero-chiffres.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 120px 20px;
+  text-align: center;
+  color: white;
+  border-bottom: 4px solid var(--rouge-tf1);
+}
+
+.hero-banner h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+.hero-banner p {
+  font-size: 1.2rem;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0;
+}
+
+/* --- 2. STATS GRID (Alignement standard, plus de chevauchement buggé) --- */
+.stats-section {
+  background-color: var(--fond-gris);
+  padding: 80px 0;
+}
+
+/* Annule l'ancienne classe overlap au cas où elle est dans ton HTML */
+.stats-overlap-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.stat-clean-card {
+  background: #ffffff;
+  padding: 40px 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 21, 43, 0.05);
+  border-top: 4px solid var(--bleu-corporate);
+  transition: transform 0.3s ease;
+}
+
+.stat-clean-card:hover {
+  transform: translateY(-5px);
+  border-top-color: var(--rouge-tf1);
+}
+
+.stat-icon {
+  font-size: 2.2rem;
+  color: var(--rouge-tf1);
+  margin-bottom: 15px;
+}
+
+.stat-number {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--bleu-corporate);
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--texte-gris);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* --- 3. VISION (Cartes alignées proprement) --- */
+.vision-section {
+  background-color: #ffffff;
+  padding: 80px 0;
+}
+
+.vision-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 50px;
+}
+
+.vision-intro {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--texte-gris);
+}
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.editorial-item {
+  background: var(--fond-gris);
+  padding: 40px 30px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  position: relative;
+}
+
+/* Filigrane 01, 02, 03 discret et bien placé */
+.bg-number {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 4rem;
+  font-weight: 900;
+  color: rgba(219, 9, 16, 0.5);
+  line-height: 1;
+}
+
+.editorial-content {
+  position: relative;
+  z-index: 1;
+}
+
+.editorial-content h3 {
+  color: var(--bleu-corporate);
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.editorial-content p {
+  color: var(--texte-gris);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* --- 4. ENGAGEMENT (Bloc simple et efficace) --- */
+.engagement-section {
+  background-color: var(--fond-gris);
+  padding: 80px 0 100px;
+}
+
+.engagement-card {
+  background: var(--bleu-corporate);
+  border-radius: 16px;
+  display: flex;
+  color: white;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 21, 43, 0.1);
+  border-bottom: 5px solid var(--rouge-tf1);
+}
+
+.engagement-content {
+  flex: 1.5;
+  padding: 50px;
+}
+
+.badge-climat {
+  background: var(--rouge-tf1);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.engagement-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  font-weight: 900;
+}
+
+.engagement-content p {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.actions-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.actions-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+}
+
+.actions-list i {
+  color: var(--rouge-tf1);
+}
+
+.engagement-info {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.info-item i {
+  font-size: 1.5rem;
+  color: var(--rouge-tf1);
+  margin-top: 3px;
+}
+
+.info-item h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 5px;
+}
+
+.info-item p {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .editorial-grid {
+    grid-template-columns: 1fr;
+  }
+  .actions-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-banner {
+    padding: 80px 20px;
+  }
+  .hero-banner h1 {
+    font-size: 2.2rem;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .engagement-card {
+    flex-direction: column;
+  }
+  .engagement-content,
+  .engagement-info {
+    padding: 30px;
+  }
+}

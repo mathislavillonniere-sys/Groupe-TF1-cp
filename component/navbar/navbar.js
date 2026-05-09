@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <li><a href="${prefixe}component/histoire/histoire.html" class="nav-link">Notre Histoire</a></li>
               <li><a href="${prefixe}component/direction/direction.html" class="nav-link">Notre Direction</a></li>
               <li><a href="${prefixe}component/filiales/filiales.html" class="nav-link">Nos Pôles</a></li>
-              <li><a href="${prefixe}index.html" class="nav-link">Chiffres Clés</a></li>
+              <li><a href="${prefixe}component/chiffres/chiffre.html" class="nav-link">Chiffres Clés</a></li>
             </ul>
           </li>
           <li class="dropdown">
@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="#">Presse ▾</a>
             <ul class="dropdown-content">
               <li><a href="${prefixe}component/presse/presse.html" class="nav-link">Espace Presse</a></li>
+              <li><a href="${prefixe}component/pressekit/pressekit.html" class="nav-link">Press Kit Média</a></li>
             </ul>
           </li>
         </ul>

@@ -1,0 +1,93 @@
+/* NOUVEAU HERO POUR LES PAGES SECONDAIRES */
+.hero-banner {
+  position: relative;
+  background-image: url("../../photo/hero-presse.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+
+  /* 👉 C'EST ICI QUE LA MAGIE OPÈRE : On force la boîte à être plus haute */
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Ça centre ton texte parfaitement à la verticale */
+  align-items: center;
+  padding: 20px;
+
+  border-bottom: 4px solid var(--rouge-tf1);
+  z-index: 1;
+}
+/* LE FAMEUX VOILE BLEU MARINE (OVERLAY) */
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* CORRECTION 2 : Utilisation du code rgba pour la transparence à 85% */
+  background: rgba(0, 21, 43, 0.8);
+  z-index: -1;
+}
+
+/* UNIFICATION DES TITRES */
+.hero-banner h1 {
+  font-size: 2.5em;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 15px 0;
+}
+.presse-list {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--bordure);
+  margin-top: 20px;
+}
+.presse-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--bordure);
+}
+.presse-item:last-child {
+  border-bottom: none;
+}
+.presse-item strong {
+  color: var(--bleu-corporate);
+  display: block;
+  margin-bottom: 5px;
+}
+.presse-item a {
+  color: var(--rouge-tf1);
+  font-weight: bold;
+  text-decoration: none;
+  border: 1px solid var(--rouge-tf1);
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+.presse-item a:hover {
+  background-color: var(--rouge-tf1);
+  color: white;
+}
+/* ==========================================
+   VERSION MOBILE (< 768px)
+   ========================================== */
+@media (max-width: 768px) {
+  .presse-item {
+    flex-direction: column; /* On empile les éléments au lieu de les mettre côte à côte */
+    align-items: flex-start; /* On aligne tout proprement à gauche */
+    gap: 15px; /* On crée un petit espace entre le texte et le bouton */
+    padding: 15px;
+  }
+
+  .presse-item a {
+    display: block; /* Nécessaire pour prendre toute la largeur */
+    width: 100%; /* Le bouton prend 100% de la largeur du téléphone */
+    text-align: center; /* On centre le texte "Télécharger le PDF" dans le bouton */
+    box-sizing: border-box; /* Empêche le bouton de déborder de la boîte */
+  }
+}

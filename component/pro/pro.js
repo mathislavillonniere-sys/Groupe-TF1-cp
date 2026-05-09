@@ -55,6 +55,16 @@ const baseDeDonnees = {
       },
     },
   },
+  tmc: {
+    nom: "TMC Camping Paradis",
+    type: "Grille Annuelle 2025 - 2026",
+    data: {
+      2026: {
+        label: "Grille Annuelle 2025 - 2026",
+        fichier: "../../csv/tmc_annuel2025-2026.csv",
+      },
+    },
+  },
   // Ajoutez TMC et TFX sur le même modèle que M6
 };
 
