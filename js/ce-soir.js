@@ -185,6 +185,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="tv-card">
               <div class="tv-card-header">
                 <img src="${chaine.logo}" alt="Logo ${chaine.id.toUpperCase()}" onerror="this.style.display='none'">
+                <div class="tv-card-nom">CAMPING PARADIS</div>
               </div>
               <div class="tv-card-body">
                 ${programmesHTML}

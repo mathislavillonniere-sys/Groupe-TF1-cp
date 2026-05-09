@@ -978,22 +978,31 @@
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0, 21, 43, 0.08);
 }
-
+/* --- HEADER DES CARTES TV --- */
 .tv-card-header {
-  background: #00152b; /* Bleu TF1 */
-  padding: 15px;
+  background: #00152b;
+  padding: 20px 15px; /* Un peu plus de padding pour l'empilement */
   display: flex;
+  flex-direction: column; /* FORCE LE TEXTE EN DESSOUS DU LOGO */
   justify-content: center;
   align-items: center;
+  gap: 10px;
   border-bottom: 3px solid #e31e24;
-  height: 60px;
+  min-height: 110px; /* Taille augmentée pour accueillir les deux éléments */
+}
+.tv-card-nom {
+  color: white;
+  font-weight: 900;
+  font-size: 0.9rem; /* Taille ajustée pour le sous-titre */
+  letter-spacing: 1px;
+  text-align: center;
 }
 
 .tv-card-header img {
   max-height: 35px;
-  max-width: 100%;
+  width: auto;
+  object-fit: contain;
 }
-
 .tv-card-body {
   padding: 20px 15px;
   flex-grow: 1;
@@ -1027,19 +1036,61 @@
   line-height: 1.3;
   margin-top: 3px;
 }
-
-/* RESPONSIVE */
+/* --- ADAPTATION TABLETTE & MOBILE (CARROUSEL TACTILE) --- */
 @media (max-width: 1024px) {
   .ce-soir-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes sur tablette */
+    display: flex; /* Aligne les cartes sur une seule ligne horizontale */
+    overflow-x: auto; /* Active le glissement horizontal */
+    scroll-snap-type: x mandatory; /* Active l'effet "aimant" */
+    -webkit-overflow-scrolling: touch; /* Glissement ultra fluide sur iPhone/iPad */
+    gap: 15px;
+    padding-bottom: 20px;
+
+    /* Cache la barre de défilement pour un vrai look "Application" */
+    scrollbar-width: none; /* Pour Firefox */
+  }
+
+  .ce-soir-grid::-webkit-scrollbar {
+    display: none; /* Pour Chrome, Safari et Edge */
+  }
+
+  .tv-card {
+    /* Sur tablette, on fixe la largeur à environ 300px par carte */
+    flex: 0 0 300px;
+    scroll-snap-align: center; /* La carte s'aimante au milieu de l'écran quand on lâche le doigt */
   }
 }
 
 @media (max-width: 768px) {
-  .ce-soir-grid {
-    grid-template-columns: 1fr; /* 1 colonne sur mobile */
+  .tv-card {
+    /* Sur téléphone, la carte prend 85% de l'écran pour laisser deviner le bord de la carte suivante ! */
+    flex: 0 0 85vw;
   }
-  .tv-card-header {
-    height: 70px;
+
+  /* --- LE CENTRAGE DU TEXTE SUR MOBILE --- */
+  .tv-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .prog-item {
+    flex-direction: column; /* Heure au-dessus du titre */
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 25px;
+    width: 100%;
+  }
+
+  .prog-time {
+    font-size: 0.9rem;
+    padding: 5px 12px;
+  }
+
+  .prog-title {
+    font-size: 1rem;
+    max-width: 90%;
   }
 }
