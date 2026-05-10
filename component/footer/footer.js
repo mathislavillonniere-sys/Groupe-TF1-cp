@@ -1,68 +1,67 @@
-// js/footer.js
-
 document.addEventListener("DOMContentLoaded", function () {
-  // 1. On vérifie si on est dans un sous-dossier "component"
   const estDansSousDossier = window.location.pathname.includes("/component/");
-
-  // 2. Si oui, on recule de 2 dossiers (../../). Sinon, on reste à la racine (./)
   const prefixe = estDansSousDossier ? "../../" : "./";
   const currentYear = new Date().getFullYear();
 
-  // 3. Le HTML du footer (stocké dans le Javascript)
   const footerHTML = `
-    <footer class="corporate-footer">
-        <div class="footer-container">
-            
-            <div class="footer-col brand-col">
+     <footer class="corporate-footer">
+
+        <div class="footer-top">
+            <div class="footer-brand">
                <a href="${prefixe}index.html">
                    <div class="footer-logo-container">
                        <img src="${prefixe}photo/logo_sombre-removebg-preview.png" alt="Logo TF1 CP Groupe" class="footer-logo-img">
                    </div>
                </a>
-                
-                <div class="footer-address">
-                    <p>
-                        <strong>Siège Social</strong><br>
-                        Tour TF1 Camping Paradis<br>
-                        358 avenue Notre Dame de Paris<br>
-                        79230 La Garette <br>
-                        France
-                    </p>
+               <p class="footer-desc">Premier groupe média fictif français, TF1 Camping Paradis rassemble chaque semaine des millions de téléspectateurs sur ses antennes et sa plateforme digitale.</p>
+            </div>
+
+            <div class="footer-nav">
+                <div class="footer-col">
+                    <h3>Notre Groupe</h3>
+                    <ul>
+                        <li><a href="${prefixe}component/histoire/histoire.html">Notre Histoire</a></li>
+                        <li><a href="${prefixe}component/direction/direction.html">Notre Direction</a></li>
+                        <li><a href="${prefixe}component/filiales/filiales.html">Nos Pôles</a></li>
+                        <li><a href="${prefixe}component/chiffres/chiffre.html">Chiffres Clés</a></li>
+                        <li><a href="${prefixe}component/organigramme/organigramme.html">Organigramme</a></li>
+                    </ul>
                 </div>
-            </div>
-
-            <div class="footer-col">
-                <h3>Le Groupe</h3>
-                <ul>
-                    <li><a href="${prefixe}index.html">Accueil</a></li>
-                    <li><a href="${prefixe}component/direction/direction.html">Direction</a></li>
-                    <li><a href="${prefixe}component/organigramme/organigramme.html">Organigramme</a></li>
-                    <li><a href="${prefixe}component/filiales/filiales.html">Nos Pôles</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h3>Espace Presse</h3>
-                <ul>
-                    <li><a href="${prefixe}component/presse/presse.html">Communiqués</a></li>
-                    <li><a href="#">Médiathèque</a></li>
-                    <li><a href="#">Contacts</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h3>Suivez-nous</h3>
-                <div class="social-links">
-                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <div class="footer-col">
+                    <h3>Nos Chaînes & Programmes</h3>
+                    <ul>
+                        <li><a href="${prefixe}component/chaines/chaines.html">Nos Chaînes</a></li>
+                        <li><a href="${prefixe}component/pro/pro.html">Grille des Programmes</a></li>
+                        <li><a href="${prefixe}component/renouvellement/renouvellement.html">Renouvellement 2026-2027</a></li>
+                        <li><a href="${prefixe}component/Grille de rentrée et d'été/pro.html">Grille Saisonnière</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Presse</h3>
+                    <ul>
+                        <li><a href="${prefixe}component/presse/presse.html">Espace Presse</a></li>
+                        <li><a href="${prefixe}component/pressekit/pressekit.html">Press Kit Média</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <div class="footer-address-bar">
+            <i class="fa-solid fa-location-dot"></i>
+            <p><strong>Siège Social</strong> — Tour TF1 Camping Paradis, 358 avenue Notre Dame de Paris, 79230 La Garette, France</p>
+        </div>
+
         <div class="footer-bottom">
             <div class="footer-bottom-container">
-                <p>&copy; ${currentYear} Groupe TF1 Camping Paradis - Tous droits réservés.</p>
+                <p>&copy; ${currentYear} Groupe TF1 Camping Paradis — Tous droits réservés.</p>
                 <ul class="legal-links">
                     <li><a href="${prefixe}component/mentionlegal/mention.html">Mentions Légales</a></li>
                     <li><a href="#">Confidentialité</a></li>
@@ -76,24 +75,20 @@ document.addEventListener("DOMContentLoaded", function () {
     </button>
   `;
 
-  // 4. INJECTION MAGIQUE : C'est cette ligne qui dessine le footer sur la page !
   document.body.insertAdjacentHTML("beforeend", footerHTML);
 
-  // 5. --- Logique du bouton Retour en haut ---
   const backToTopBtn = document.getElementById("back-to-top");
-
   if (backToTopBtn) {
     window.onscroll = function () {
       if (
         document.body.scrollTop > 300 ||
         document.documentElement.scrollTop > 300
       ) {
-        backToTopBtn.style.display = "flex"; // Affiche et centre la flèche
+        backToTopBtn.style.display = "flex";
       } else {
         backToTopBtn.style.display = "none";
       }
     };
-
     backToTopBtn.onclick = function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     };

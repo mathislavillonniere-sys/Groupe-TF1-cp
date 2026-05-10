@@ -213,17 +213,15 @@ const baseProgrammes = [
   },
 ];
 
-// 2. LE MOTEUR QUI CONSTRUIT LE HTML TOUT SEUL
 document.addEventListener("DOMContentLoaded", function () {
   const gridRenouveles = document.getElementById("grid-renouveles");
   const gridAnnules = document.getElementById("grid-annules");
   const gridNouveaux = document.getElementById("grid-nouveaux");
 
+  // Construction des cartes (identique à avant)
   baseProgrammes.forEach((prog) => {
-    // Définition des couleurs/classes CSS en fonction du statut
     let classCard = "";
     let classSeason = "";
-
     if (prog.statut === "renouvele") {
       classCard = "card-renewed";
       classSeason = "season-renewed";
@@ -235,21 +233,57 @@ document.addEventListener("DOMContentLoaded", function () {
       classSeason = "season-new";
     }
 
-    // Création de la carte HTML
     const cardHTML = `
-            <div class="program-card ${classCard}">
-                <div class="show-title">${prog.titre}</div>
-                <div class="show-season ${classSeason}">${prog.saison}</div>
-                <div class="show-date"><i class="fa-regular fa-calendar"></i> ${prog.date}</div>
-            </div>
-        `;
+      <div class="program-card ${classCard}" data-statut="${prog.statut}" data-titre="${prog.titre.toLowerCase()}">
+        <div class="show-title">${prog.titre}</div>
+        <div class="show-season ${classSeason}">${prog.saison}</div>
+        <div class="show-date"><i class="fa-regular fa-calendar"></i> ${prog.date}</div>
+      </div>
+    `;
 
-    // Rangement dans la bonne boîte
     if (prog.statut === "renouvele" && gridRenouveles)
       gridRenouveles.innerHTML += cardHTML;
     if (prog.statut === "annule" && gridAnnules)
       gridAnnules.innerHTML += cardHTML;
     if (prog.statut === "nouveau" && gridNouveaux)
       gridNouveaux.innerHTML += cardHTML;
+  });
+
+  // LOGIQUE RECHERCHE + FILTRES
+  const searchInput = document.getElementById("search-input");
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  let activeFilter = "all";
+
+  function applyFilters() {
+    const query = searchInput.value.toLowerCase().trim();
+    const allCards = document.querySelectorAll(".program-card");
+
+    allCards.forEach((card) => {
+      const titre = card.dataset.titre;
+      const statut = card.dataset.statut;
+      const matchSearch = titre.includes(query);
+      const matchFilter = activeFilter === "all" || statut === activeFilter;
+      card.classList.toggle("hidden", !(matchSearch && matchFilter));
+    });
+
+    // Cache les sections vides
+    document.querySelectorAll(".program-section").forEach((section) => {
+      const grid = section.querySelector(".program-grid");
+      const visibles = grid
+        ? grid.querySelectorAll(".program-card:not(.hidden)")
+        : [];
+      section.classList.toggle("section-hidden", visibles.length === 0);
+    });
+  }
+
+  searchInput.addEventListener("input", applyFilters);
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
   });
 });

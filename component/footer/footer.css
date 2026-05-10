@@ -1,102 +1,75 @@
-/* css/footer.css */
-
 .corporate-footer {
   background-color: var(--bleu-corporate);
   color: #e1e5ea;
   font-family: "Inter", "Segoe UI", sans-serif;
-
-  /* 1. On équilibre l'espace en haut (40px) pour qu'il soit identique à l'espace en bas */
-  padding-top: 40px;
-
   margin-top: 80px;
   border-top: 5px solid var(--rouge-tf1);
 }
-.footer-container {
+
+/* ── BANDE 1 : Logo + Nav ── */
+.footer-top {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px 40px 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 40px;
-
-  /* 1. LA CORRECTION : On aligne tout par le haut. 
-        Les titres seront rigoureusement sur la même ligne ! */
+  padding: 50px 20px 40px 20px;
+  display: flex;
   align-items: flex-start;
+  gap: 60px;
 }
 
-/* 2. LE CENTRAGE : On cible uniquement les 3 colonnes de droite, 
-      et on les pousse ensemble vers le bas pour les centrer par rapport au logo */
-.footer-col:not(.brand-col) {
-  margin-top: 45px;
-}
-/* --- Typographie et Titres --- */
-.footer-col h3 {
-  color: var(--blanc);
-  font-size: 1.1em;
-  margin-top: 0;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* --- Colonne Identité --- */
-
-.footer-col.brand-col {
+.footer-brand {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 100%; /* Empêche la colonne de s'étirer à l'infini */
+  flex-shrink: 0;
+  width: 260px;
 }
+
 .footer-logo-container {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   display: block;
-  max-width: 220px; /* LE SECRET EST ICI : on bloque la largeur de la boîte ! */
+  max-width: 200px;
   width: 100%;
-}
-.footer-logo {
-  color: white;
-  font-size: 1.5em;
-  font-weight: 900;
-  margin-bottom: 15px;
 }
 
 .footer-logo-img {
-  width: 100%; /* L'image s'adapte parfaitement aux 220px de sa boîte */
-  height: auto; /* Conserve les proportions sans déformer le logo */
+  width: 100%;
+  height: auto;
   display: block;
-  /* filter: brightness(0) invert(1); */
-  transition: transform 0.3s ease;
-}
-.footer-logo span {
-  color: var(--rouge-tf1);
 }
 
 .footer-desc {
-  font-size: 0.9em;
-  line-height: 1.5;
-  margin-bottom: 20px;
-  color: #a0aec0;
-}
-
-.footer-address {
-  display: flex;
-  gap: 15px;
-  font-size: 0.85em;
+  font-size: 0.88em;
   line-height: 1.6;
   color: #a0aec0;
+  margin: 0;
 }
 
-.footer-address i {
-  color: var(--rouge-tf1);
-  font-size: 1.2em;
-  margin-top: 4px;
+.footer-nav {
+  display: flex;
+  gap: 30px;
+  flex: 1;
+  align-items: flex-start;
+  min-width: 0;
 }
 
-.footer-address strong {
-  color: var(--blanc);
+.footer-col {
+  flex: 1;
+  min-width: 0;
 }
 
-/* --- Listes de Liens --- */
+.footer-col h3 {
+  color: #ffffff;
+  font-size: 0.78em;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: normal;
+  word-break: break-word;
+  min-height: 32px;
+}
+
 .footer-col ul {
   list-style: none;
   padding: 0;
@@ -104,40 +77,52 @@
 }
 
 .footer-col ul li {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .footer-col ul li a {
   color: #a0aec0;
   text-decoration: none;
-  font-size: 0.9em;
+  font-size: 0.87em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   transition:
-    color 0.3s ease,
-    padding-left 0.3s ease;
+    color 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+.footer-col ul li a::before {
+  content: "›";
+  color: var(--rouge-tf1);
+  font-size: 1.1em;
 }
 
 .footer-col ul li a:hover {
-  color: var(--rouge-tf1);
-  padding-left: 5px; /* Petit effet de glissement au survol */
+  color: #ffffff;
+  padding-left: 4px;
 }
 
-/* --- Réseaux Sociaux --- */
 .social-links {
   display: flex;
-  gap: 15px;
+  gap: 12px;
+  margin-top: 4px;
 }
 
 .social-links a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--blanc);
+  width: 38px;
+  height: 38px;
+  background-color: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
   border-radius: 50%;
   text-decoration: none;
-  transition: all 0.3s ease;
+  font-size: 0.9em;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .social-links a:hover {
@@ -145,16 +130,39 @@
   transform: translateY(-3px);
 }
 
-/* --- Barre inférieure (Copyright & Mentions légales) --- */
+/* ── BANDE 2 : Adresse ── */
+.footer-address-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.83em;
+  color: #a0aec0;
+}
+.footer-address-bar i {
+  color: var(--rouge-tf1);
+  font-size: 0.95em;
+  flex-shrink: 0;
+}
+
+.footer-address-bar p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.footer-address-bar strong {
+  color: #ffffff;
+}
+
+/* ── BANDE 3 : Copyright ── */
 .footer-bottom {
   background-color: #00152b;
-
-  /* L'astuce est ici : on garde les 25px d'origine en haut, 
-     mais en bas on ajoute dynamiquement la taille de la "Safe Area" d'Apple */
-  padding-top: 25px;
-  padding-bottom: calc(25px + env(safe-area-inset-bottom));
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 20px;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
 }
 
 .footer-bottom-container {
@@ -162,17 +170,16 @@
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
-  flex-direction: column; /* Empile le texte et les liens */
-  justify-content: center;
-  align-items: center; /* Centre parfaitement au milieu */
-  gap: 12px; /* Espace entre le copyright et les liens */
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
 }
 
 .footer-bottom p {
   margin: 0;
-  font-size: 1em; /* Texte plus gros (au lieu de 0.8em) */
+  font-size: 0.82em;
   color: #718096;
-  text-align: center;
 }
 
 .legal-links {
@@ -181,29 +188,25 @@
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Centre les liens sur leur ligne */
-  gap: 25px;
+  justify-content: center;
+  gap: 20px;
 }
 
 .legal-links li a {
   color: #718096;
   text-decoration: none;
-  font-size: 1em; /* Texte plus gros (au lieu de 0.8em) */
+  font-size: 0.82em;
   transition: color 0.2s;
 }
 
 .legal-links li a:hover {
-  color: var(--blanc);
+  color: #ffffff;
 }
-/* =======================================
-   Bouton Retour en haut
-   ======================================= */
-/* =======================================
-   Bouton Retour en haut
-   ======================================= */
+
+/* ── Bouton retour en haut ── */
 #back-to-top,
 .back-to-top {
-  display: none; /* Caché par défaut de manière stricte ! */
+  display: none;
   position: fixed;
   bottom: 30px;
   right: 30px;
@@ -214,15 +217,13 @@
   color: white;
   cursor: pointer;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition:
     background-color 0.3s ease,
     transform 0.3s ease;
-
-  /* L'astuce pour centrer sans casser le "display: none" */
   align-items: center;
   justify-content: center;
 }
@@ -232,68 +233,50 @@
   background-color: var(--bleu-corporate);
   transform: scale(1.1);
 }
-/* ==========================================
-   VERSION MOBILE (< 768px) - LE FOOTER
-   ========================================== */
-@media (max-width: 768px) {
-  .footer-container {
-    /* Force 1 seule colonne pour éviter que le texte ne s'écrase */
-    grid-template-columns: 1fr;
+
+/* ── Mobile ── */
+@media (max-width: 992px) {
+  .footer-top {
+    flex-direction: column;
     gap: 30px;
-    text-align: center; /* Centre tout le texte ! */
   }
 
-  /* 1. On supprime l'énorme marge du haut qui servait pour l'ordinateur */
-  .footer-col:not(.brand-col) {
-    margin-top: 0;
+  .footer-brand {
+    width: 100%;
   }
 
-  /* 2. On centre parfaitement le bloc de la marque et le logo */
-  .footer-col.brand-col {
-    align-items: center;
+  .footer-nav {
+    flex-wrap: wrap;
+    gap: 30px;
   }
 
-  .footer-logo-container {
-    margin: 0 auto 20px auto;
+  .footer-col {
+    flex: 0 0 calc(50% - 15px);
   }
 
-  /* 3. On ajuste l'adresse et l'icône pour les centrer */
-  .footer-address {
+  .footer-address-bar p {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-nav {
     flex-direction: column;
-    align-items: center;
-    gap: 5px;
+    gap: 25px;
   }
 
-  .footer-address i {
-    margin-top: 0;
-    margin-bottom: 5px;
+  .footer-col {
+    flex: 1 1 100%;
   }
 
-  /* 4. On centre les boutons des réseaux sociaux */
-  .social-links {
-    justify-content: center;
-    margin-top: 10px;
+  .footer-col ul li a {
+    justify-content: flex-start;
   }
 
-  /* 5. Mentions légales et copyright empilés et centrés */
-  .footer-bottom-container {
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
-  }
-
-  .legal-links {
-    flex-direction: column; /* Empile les liens (Mentions légales, CGU, etc.) */
-    gap: 15px;
-  }
-
-  /* 6. On rétrécit un peu le bouton "Retour en haut" pour ne pas gêner le pouce */
   .back-to-top {
     bottom: 20px;
     right: 20px;
-    width: 45px;
-    height: 45px;
-    padding: 12px;
-    font-size: 16px;
+    width: 44px;
+    height: 44px;
   }
 }

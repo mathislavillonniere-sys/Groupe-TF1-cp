@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="#">Presse ▾</a>
             <ul class="dropdown-content">
               <li><a href="${prefixe}component/presse/presse.html" class="nav-link">Espace Presse</a></li>
-              <li><a href="${prefixe}component/pressekit/pressekit.html" class="nav-link">Press Kit Média</a></li>
+              <li><a href="${prefixe}component/pressekit/pressekit.html" class="nav-link">Presse Kit Média</a></li>
             </ul>
           </li>
         </ul>

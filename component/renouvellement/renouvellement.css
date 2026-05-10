@@ -139,3 +139,161 @@
   border-top: 1px dashed var(--bordure);
   padding-top: 12px;
 }
+/* BARRE DE RECHERCHE ET FILTRES */
+.filter-bar {
+  max-width: 1400px;
+  margin: 30px auto 0;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#search-input {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 1em;
+  border: 2px solid var(--bordure);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+#search-input:focus {
+  border-color: var(--bleu-corporate);
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 2px solid var(--bordure);
+  background: white;
+  font-size: 0.85em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--bleu-corporate);
+  color: white;
+  border-color: var(--bleu-corporate);
+}
+
+.filter-btn.filter-renouvele.active {
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+}
+.filter-btn.filter-annule.active {
+  background: var(--rouge-tf1);
+  border-color: var(--rouge-tf1);
+  color: white;
+}
+.filter-btn.filter-nouveau.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+/* CARTE AMÉLIORÉE */
+.program-card {
+  background: white;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--bordure);
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.program-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.card-renewed::after {
+  background: #10b981;
+}
+.card-canceled::after {
+  background: var(--rouge-tf1);
+}
+.card-new::after {
+  background: #3b82f6;
+}
+
+.program-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.show-title {
+  font-size: 1.1em;
+  font-weight: 800;
+  color: var(--bleu-corporate);
+  line-height: 1.3;
+}
+
+.show-season {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.82em;
+  font-weight: 700;
+  width: fit-content;
+}
+
+.show-date {
+  font-size: 0.78em;
+  color: var(--texte-gris);
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-top: 1px dashed var(--bordure);
+  padding-top: 10px;
+}
+
+/* CARTE MASQUÉE (filtre) */
+.program-card.hidden {
+  display: none;
+}
+
+/* COMPTEUR de résultats */
+.result-count {
+  font-size: 0.85em;
+  color: var(--texte-gris);
+  margin-bottom: -10px;
+}
+
+/* SECTION VIDE quand filtre actif */
+.program-section.section-hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .filter-bar {
+    flex-direction: column;
+  }
+  .filter-buttons {
+    justify-content: flex-start;
+  }
+}
