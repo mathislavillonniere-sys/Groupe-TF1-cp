@@ -1,6 +1,6 @@
 // component/renouvellement/renouvellement.js
 
-// 1. VOTRE BASE DE DONNÉES FACILE À MODIFIER
+// 1. VOTRE BASE DE DONNÉES COMPLÈTE MISE À JOUR
 const baseProgrammes = [
   // --- RENOUVELLEMENTS ---
   {
@@ -51,6 +51,7 @@ const baseProgrammes = [
     date: "22 janvier 2026",
     statut: "renouvele",
   },
+
   {
     titre: "Will Trent",
     saison: "Saison 3",
@@ -105,6 +106,7 @@ const baseProgrammes = [
     date: "4 mars 2026",
     statut: "renouvele",
   },
+
   {
     titre: "My cats",
     saison: "Saison 11",
@@ -120,6 +122,12 @@ const baseProgrammes = [
   {
     titre: "Demain nous appartient 19",
     saison: "Saison 10",
+    date: "16 avril 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "CSI: Alerte Attentat",
+    saison: "Saison 6",
     date: "16 avril 2026",
     statut: "renouvele",
   },
@@ -148,7 +156,7 @@ const baseProgrammes = [
     statut: "renouvele",
   },
   {
-    titre: "Alerte : unité des personne disparues",
+    titre: "Alerte : unité des personnes disparues",
     saison: "Saison 5",
     date: "16 avril 2026",
     statut: "renouvele",
@@ -172,6 +180,271 @@ const baseProgrammes = [
     statut: "renouvele",
   },
 
+  {
+    titre: "Le Late Show",
+    saison: "Saison 5",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Les acteurs de DNA",
+    saison: "Saison 10",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "DNA Family",
+    saison: "Saison 10",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "DNA Info",
+    saison: "Saison 10",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Un œil sur le monde",
+    saison: "Saison 3",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Alo Quoi.com",
+    saison: "Saison 19",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Les Thundermans",
+    saison: "Saison 9",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "The camping paradis game",
+    saison: "Saison 16",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Total écran: nouvelle génération",
+    saison: "Saison 7",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Camping comedy show",
+    saison: "Saison 5",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Friends",
+    saison: "Saison 17",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "La villa de TF1 Camping Paradis",
+    saison: "Saison 5",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Les Gens d'à Coté",
+    saison: "Saison 2",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "La vie dans le monde",
+    saison: "Saison 6",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Bonjour!",
+    saison: "Saison 4",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Les Marseillais",
+    saison: "Saison 20 et 21",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "10 couples parfaits",
+    saison: "Saison 10",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "La villa des coeurs brisés",
+    saison: "Saison 12",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Mon chat, Ma vie",
+    saison: "Saison 8",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "13 novembre 2015",
+    saison: "Saison 12",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "La déjanté: nouvelle génération",
+    saison: "Saison 9",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "La vie est injuste",
+    saison: "Saison 19",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "La vie est belle",
+    saison: "Saison 19",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "La vie nouvelle génération",
+    saison: "Saison 5",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Les plus belles villes de France",
+    saison: "Saison 5",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Reportage Découverte",
+    saison: "Saison 19",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Petit secret entre voisin",
+    saison: "Saison 14",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Le Big Bêtisier",
+    saison: "Saison 14",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Top Camping Paradis",
+    saison: "Saison 19 et 20",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Top France",
+    saison: "Saison 14",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Top streaming",
+    saison: "Saison 12",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Top détente",
+    saison: "Saison 5",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Le TV168",
+    saison: "Saison 10",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Frenchie Shore",
+    saison: "Saison 2",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Le Night Club",
+    saison: "Saison 2",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "The Unicorn",
+    saison: "Saison 5",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Un air de famille",
+    saison: "Saison 2",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Le Bêtisier de la semaine",
+    saison: "Saison 6",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Samedi l'actu",
+    saison: "Saison 3",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Samedi music",
+    saison: "Saison 3",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Samedi conso",
+    saison: "Saison 3",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Samedi Politique",
+    saison: "Saison 3",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Ici tout commence 19",
+    saison: "Saison 7",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+  {
+    titre: "Les secrets du monde",
+    saison: "Saison 2",
+    date: "10 mai 2026",
+    statut: "renouvele",
+  },
+
   // --- ANNULATIONS / FIN ---
   {
     titre: "Manifest",
@@ -189,6 +462,12 @@ const baseProgrammes = [
     titre: "NCIS: International",
     saison: "Annulée (Après 6 saisons)",
     date: "16 avril 2026",
+    statut: "annule",
+  },
+  {
+    titre: "Grand Reportage",
+    saison: "Annulée (Après 1 saison)",
+    date: "10 mai 2026",
     statut: "annule",
   },
 
@@ -218,7 +497,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const gridAnnules = document.getElementById("grid-annules");
   const gridNouveaux = document.getElementById("grid-nouveaux");
 
-  // Construction des cartes (identique à avant)
+  // Construction des cartes
   baseProgrammes.forEach((prog) => {
     let classCard = "";
     let classSeason = "";

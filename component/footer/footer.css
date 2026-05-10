@@ -239,15 +239,22 @@
   .footer-top {
     flex-direction: column;
     gap: 30px;
+    align-items: center;
   }
 
   .footer-brand {
     width: 100%;
+    align-items: center;
   }
 
   .footer-nav {
     flex-wrap: wrap;
     gap: 30px;
+  }
+
+  .footer-desc {
+    align-items: center;
+    text-align: center;
   }
 
   .footer-col {
@@ -256,6 +263,8 @@
 
   .footer-address-bar p {
     white-space: normal;
+    align-items: center;
+    text-align: center;
   }
 }
 
