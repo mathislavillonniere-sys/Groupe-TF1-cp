@@ -36,6 +36,7 @@ const baseDeDonneesDirect = {
   "2026-05-02": "../../csv/tf1_semaine_2mai.csv",
   "2026-05-10": "../../csv/tf1_semaine_10mai.csv",
   "2026-05-18": "../../csv/tf1_semaine_18mai.csv",
+  "2026-05-25": "../../csv/tf1_semaine_25mai.csv",
 };
 
 function obtenirFichierCsvActuel() {
