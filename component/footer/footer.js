@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         <li><a href="${prefixe}component/direction/direction.html">Notre Direction</a></li>
                         <li><a href="${prefixe}component/filiales/filiales.html">Nos Pôles</a></li>
                         <li><a href="${prefixe}component/chiffres/chiffre.html">Chiffres Clés</a></li>
-                        <li><a href="${prefixe}component/organigramme/organigramme.html">Organigramme</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
