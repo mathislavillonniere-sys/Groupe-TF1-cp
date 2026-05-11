@@ -101,17 +101,20 @@ body {
 }
 
 /* Le menu qui se déroule */
+/* Le menu qui se déroule (Design Modernisé) */
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 100%; /* <-- LA SOLUTION MAGIQUE : Remplacez 85px par 100% */
+  top: calc(
+    100% + 18px
+  ); /* On le descend pour qu'il ne touche plus le bouton rouge */
   left: 0;
   background-color: #ffffff;
-  min-width: 230px; /* Un peu plus large pour respirer */
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Une belle ombre douce pour l'effet flottant */
-  border-radius: 0 0 8px 8px; /* Coins arrondis uniquement en bas */
-  border-top: 3px solid var(--rouge-tf1); /* Le rappel subtil de la marque */
-  padding: 10px 0; /* Espace en haut et en bas */
+  min-width: 230px;
+  box-shadow: 0 15px 40px rgba(0, 21, 43, 0.12); /* Ombre plus douce et premium */
+  border-radius: 12px; /* Arrondi sur les 4 coins */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Petite bordure grise très fine */
+  padding: 10px 0;
   z-index: 1000;
 
   /* Préparation de l'animation d'apparition */
@@ -120,6 +123,21 @@ body {
   transition:
     opacity 0.3s ease,
     transform 0.3s ease;
+}
+
+/* Le pont invisible : empêche le menu de se fermer quand la souris traverse le vide */
+.dropdown::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 20px; /* Comble le vide créé par le +18px au dessus */
+  display: none;
+}
+
+.dropdown:hover::after {
+  display: block;
 }
 /* L'animation quand on survole le bouton principal "Notre Groupe" */
 .dropdown:hover .dropdown-content {

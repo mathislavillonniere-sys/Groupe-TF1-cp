@@ -17,12 +17,23 @@ html {
   padding: 0;
   height: 100%;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: var(
-    --bleu-tf1
-  ); /* Fond bleu marine pour le côté privé/sécurisé */
+  /* On enlève le display:flex ici pour éviter le centrage forcé */
+}
+
+/* On crée un conteneur global qui gère le fond de la page entière */
+.page-wrapper {
+  min-height: 100vh;
+  background: var(--bleu-tf1);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.3s ease;
+}
+
+/* Quand l'admin est connecté, on change la classe du wrapper pour passer en mode plein écran */
+.page-wrapper.is-logged-in {
+  background: var(--gris-fond);
+  display: block; /* On annule le centrage */
 }
 
 .login-container {
@@ -142,4 +153,87 @@ html {
 
 .login-footer a:hover {
   color: var(--bleu-tf1);
+}
+/* =========================================
+   STYLE DU TABLEAU DE BORD (DASHBOARD)
+   ========================================= */
+
+/* La classe magique pour cacher les éléments */
+.hidden {
+  display: none !important;
+}
+
+.dashboard-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--gris-fond);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Barre du haut de l'admin */
+.admin-navbar {
+  background: var(--blanc);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-bottom: 3px solid var(--rouge-tf1);
+}
+
+.admin-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 900;
+  color: var(--bleu-tf1);
+  text-transform: uppercase;
+}
+
+.admin-logo img {
+  width: 40px;
+}
+
+.btn-logout {
+  background: transparent;
+  border: 1px solid var(--texte-leger);
+  color: var(--texte-leger);
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn-logout:hover {
+  background: var(--rouge-tf1);
+  color: white;
+  border-color: var(--rouge-tf1);
+}
+
+/* Contenu de la page */
+.admin-content {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.admin-content h2 {
+  color: var(--bleu-tf1);
+}
+.admin-content p {
+  color: var(--texte-leger);
+  margin-bottom: 30px;
+}
+
+.placeholder-box {
+  background: white;
+  padding: 50px;
+  text-align: center;
+  border-radius: 12px;
+  border: 2px dashed #cbd5e1;
+  color: #94a3b8;
+  font-size: 1.2rem;
 }
