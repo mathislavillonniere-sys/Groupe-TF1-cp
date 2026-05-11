@@ -1,0 +1,145 @@
+/* =========================================
+   STYLE ADMIN : TF1 CAMPING PARADIS
+   ========================================= */
+
+:root {
+  --bleu-tf1: #00152b;
+  --rouge-tf1: #e31e24;
+  --gris-fond: #f1f5f9;
+  --blanc: #ffffff;
+  --texte-sombre: #1e293b;
+  --texte-leger: #64748b;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(
+    --bleu-tf1
+  ); /* Fond bleu marine pour le côté privé/sécurisé */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.login-card {
+  background: var(--blanc);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border-bottom: 5px solid var(--rouge-tf1); /* Rappel de la ligne rouge TF1 */
+}
+
+.logo-area {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.logo-area img {
+  width: 70px;
+  margin-bottom: 15px;
+}
+
+.logo-area h1 {
+  color: var(--bleu-tf1);
+  font-size: 1.4rem;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.logo-area p {
+  color: var(--texte-leger);
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+/* FORMULAIRE */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  color: var(--texte-sombre);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper i {
+  position: absolute;
+  left: 15px;
+  color: var(--texte-leger);
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 12px 12px 45px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-wrapper input:focus {
+  border-color: var(--bleu-tf1);
+  box-shadow: 0 0 0 4px rgba(0, 21, 43, 0.1);
+}
+
+/* BOUTON */
+.btn-login {
+  width: 100%;
+  background: var(--bleu-tf1);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-login:hover {
+  background: var(--rouge-tf1); /* Le bouton devient rouge au survol */
+  transform: translateY(-2px);
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.login-footer a {
+  color: var(--texte-leger);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.login-footer a:hover {
+  color: var(--bleu-tf1);
+}

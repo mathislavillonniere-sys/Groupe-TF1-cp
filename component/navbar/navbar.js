@@ -51,6 +51,11 @@ document.addEventListener("DOMContentLoaded", function () {
               <li><a href="${prefixe}component/pressekit/pressekit.html" class="nav-link">Presse Kit Média</a></li>
             </ul>
           </li>
+          <li class="nav-admin">
+            <a href="${prefixe}serveur/admin.html" class="btn-admin">
+              <i class="fas fa-user-shield"></i> Espace Admin
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
