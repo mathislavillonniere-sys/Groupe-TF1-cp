@@ -3,10 +3,6 @@ const baseDeDonnees = {
     nom: "TF1 Camping Paradis",
     type: "hebdo", // Mode par semaine
     data: {
-      "2026-05-04": {
-        label: "Semaine du 04 Mai au 10 Mai 2026",
-        fichier: "../../csv/tf1_semaine_2mai.csv",
-      },
       "2026-05-11": {
         label: "Semaine du 11 Mai au 17 Mai 2026",
         fichier: "../../csv/tf1_semaine_10mai.csv",
@@ -29,13 +25,9 @@ const baseDeDonnees = {
     nom: "M6 Camping Paradis",
     type: "annuel", // Mode par année
     data: {
-      2025: {
+      2026: {
         label: "Grille Annuelle 2025 - 2026",
         fichier: "../../csv/m6_annuel2025-2026.csv",
-      },
-      2026: {
-        label: "Grille Annuelle 2024 - 2025",
-        fichier: "../../csv/m6_annuel2024-2025.csv",
       },
       2027: {
         label: "Grille Annuelle 2026 - 2027",
