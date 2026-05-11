@@ -1,3 +1,13 @@
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  onSnapshot,
+  doc,
+  deleteDoc,
+  query,
+  orderBy,
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 // NOUVEAU : On importe aussi la fonction signOut pour se déconnecter
 import {
@@ -17,6 +27,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 // Nos éléments HTML
 const loginForm = document.getElementById("login-form");
@@ -60,3 +71,83 @@ btnLogout.addEventListener("click", () => {
       console.error("Erreur lors de la déconnexion", error);
     });
 });
+// ==========================================
+// 3. AJOUTER UNE SÉRIE DANS LA BASE DE DONNÉES
+// ==========================================
+const formAddSerie = document.getElementById("form-add-serie");
+
+// Si le formulaire existe sur la page (pour éviter les erreurs)
+if (formAddSerie) {
+  formAddSerie.addEventListener("submit", async (e) => {
+    e.preventDefault(); // Empêche la page de se recharger
+
+    // On récupère les valeurs tapées par l'admin
+    const titre = document.getElementById("serie-titre").value;
+    const saison = document.getElementById("serie-saison").value;
+    const date = document.getElementById("serie-date").value;
+    const statut = document.getElementById("serie-statut").value;
+
+    try {
+      // On envoie tout ça dans une "collection" (un dossier) nommé "renouvellements"
+      await addDoc(collection(db, "renouvellements"), {
+        titre: titre,
+        saison: saison,
+        date: date,
+        statut: statut,
+        ajouteLe: new Date(), // Ça garde une trace de quand tu l'as ajouté
+      });
+
+      alert("Succès ! La série a été ajoutée à la base de données.");
+      formAddSerie.reset(); // On vide les cases du formulaire
+    } catch (error) {
+      console.error("Erreur lors de l'ajout : ", error);
+      alert("Une erreur est survenue.");
+    }
+  });
+}
+// ==========================================
+// 4. AFFICHER ET SUPPRIMER LES SÉRIES
+// ==========================================
+const listSeriesAdmin = document.getElementById("list-series-admin");
+
+if (listSeriesAdmin) {
+  // On crée une requête triée par date d'ajout (la plus récente en haut)
+  const q = query(
+    collection(db, "renouvellements"),
+    orderBy("ajouteLe", "desc"),
+  );
+
+  // onSnapshot écoute la base en temps réel : si tu ajoutes une série, elle apparaît direct !
+  onSnapshot(q, (snapshot) => {
+    listSeriesAdmin.innerHTML = ""; // On vide la liste avant de la reconstruire
+
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      const id = docSnap.id;
+
+      const row = `
+                <tr>
+                    <td><strong>${data.titre}</strong></td>
+                    <td>${data.saison}</td>
+                    <td><span class="badge badge-${data.statut}">${data.statut}</span></td>
+                    <td>
+                        <button class="btn-delete" data-id="${id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+      listSeriesAdmin.innerHTML += row;
+    });
+
+    // On active les boutons de suppression après avoir créé les lignes
+    document.querySelectorAll(".btn-delete").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        const docId = btn.getAttribute("data-id");
+        if (confirm("Supprimer ce programme définitivement ?")) {
+          await deleteDoc(doc(db, "renouvellements", docId));
+        }
+      });
+    });
+  });
+}

@@ -81,8 +81,76 @@
             séries.
           </p>
 
-          <div class="placeholder-box">
-            <i class="fas fa-tools"></i> En construction...
+          <div class="admin-card">
+            <h3>
+              <i class="fas fa-tv"></i> Ajouter un programme
+              (Renouvellement/Annulation)
+            </h3>
+
+            <form id="form-add-serie" class="admin-form">
+              <div class="form-row">
+                <div class="input-group">
+                  <label for="serie-titre">Titre du programme</label>
+                  <input
+                    type="text"
+                    id="serie-titre"
+                    placeholder="Ex: Koh-Lanta"
+                    required
+                  />
+                </div>
+
+                <div class="input-group">
+                  <label for="serie-saison">Saison / Info</label>
+                  <input
+                    type="text"
+                    id="serie-saison"
+                    placeholder="Ex: Saison 25"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="input-group">
+                  <label for="serie-date">Date d'annonce</label>
+                  <input
+                    type="text"
+                    id="serie-date"
+                    placeholder="Ex: 10 mars 2026"
+                    required
+                  />
+                </div>
+
+                <div class="input-group">
+                  <label for="serie-statut">Statut</label>
+                  <select id="serie-statut" required>
+                    <option value="renouvele">🟢 Renouvelé</option>
+                    <option value="annule">🔴 Annulé / Fin</option>
+                    <option value="nouveau">🔵 Nouveauté</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-submit">
+                Ajouter à la base de données
+              </button>
+            </form>
+          </div>
+          <div class="admin-card mt-30">
+            <h3><i class="fas fa-list"></i> Liste des programmes en base</h3>
+            <div class="admin-table-container">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Programme</th>
+                    <th>Saison</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="list-series-admin"></tbody>
+              </table>
+            </div>
           </div>
         </main>
       </div>
