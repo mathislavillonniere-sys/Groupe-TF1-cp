@@ -22,7 +22,6 @@
             <h1>Accès Administrateur</h1>
             <p>Portail de gestion des contenus</p>
           </div>
-
           <form id="login-form">
             <div class="input-group">
               <label for="email">Identifiant professionnel</label>
@@ -36,7 +35,6 @@
                 />
               </div>
             </div>
-
             <div class="input-group">
               <label for="password">Mot de passe</label>
               <div class="input-wrapper">
@@ -49,12 +47,10 @@
                 />
               </div>
             </div>
-
             <button type="submit" class="btn-login">
               Se connecter <i class="fas fa-arrow-right"></i>
             </button>
           </form>
-
           <div class="login-footer">
             <a href="../index.html"
               ><i class="fas fa-home"></i> Retour au site public</a
@@ -63,95 +59,269 @@
         </div>
       </div>
 
-      <div id="dashboard-view" class="dashboard-container hidden">
-        <nav class="admin-navbar">
-          <div class="admin-logo">
-            <img src="../photo/logo_sombre-removebg-preview.png" alt="Logo" />
-            <span>Espace Admin</span>
+      <div id="dashboard-view" class="dashboard-layout hidden">
+        <aside class="admin-sidebar">
+          <div class="sidebar-header">
+            <img src="../photo/logo_claire-removebg-preview.png" alt="Logo" />
+            <h2>Espace Admin</h2>
           </div>
-          <button id="btn-logout" class="btn-logout">
-            <i class="fas fa-sign-out-alt"></i> Déconnexion
-          </button>
-        </nav>
-
-        <main class="admin-content">
-          <h2>Bienvenue dans ton espace, Mathis ! 👋</h2>
-          <p>
-            C'est ici que nous allons bientôt mettre l'outil pour gérer tes
-            séries.
-          </p>
-
-          <div class="admin-card">
-            <h3>
-              <i class="fas fa-tv"></i> Ajouter un programme
-              (Renouvellement/Annulation)
-            </h3>
-
-            <form id="form-add-serie" class="admin-form">
-              <div class="form-row">
-                <div class="input-group">
-                  <label for="serie-titre">Titre du programme</label>
-                  <input
-                    type="text"
-                    id="serie-titre"
-                    placeholder="Ex: Koh-Lanta"
-                    required
-                  />
-                </div>
-
-                <div class="input-group">
-                  <label for="serie-saison">Saison / Info</label>
-                  <input
-                    type="text"
-                    id="serie-saison"
-                    placeholder="Ex: Saison 25"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="input-group">
-                  <label for="serie-date">Date d'annonce</label>
-                  <input
-                    type="text"
-                    id="serie-date"
-                    placeholder="Ex: 10 mars 2026"
-                    required
-                  />
-                </div>
-
-                <div class="input-group">
-                  <label for="serie-statut">Statut</label>
-                  <select id="serie-statut" required>
-                    <option value="renouvele">🟢 Renouvelé</option>
-                    <option value="annule">🔴 Annulé / Fin</option>
-                    <option value="nouveau">🔵 Nouveauté</option>
-                  </select>
-                </div>
-              </div>
-
-              <button type="submit" class="btn-submit">
-                Ajouter à la base de données
-              </button>
-            </form>
+          <ul class="sidebar-menu">
+            <li class="nav-item active" data-target="section-home">
+              <i class="fas fa-home"></i> Accueil
+            </li>
+            <li class="nav-item" data-target="section-series">
+              <i class="fas fa-tv"></i> Programmes & Séries
+            </li>
+            <li class="nav-item" data-target="section-presse">
+              <i class="fas fa-newspaper"></i> Espace Presse
+            </li>
+          </ul>
+          <div class="sidebar-footer">
+            <button id="btn-logout" class="btn-logout">
+              <i class="fas fa-sign-out-alt"></i> Déconnexion
+            </button>
           </div>
-          <div class="admin-card mt-30">
-            <h3><i class="fas fa-list"></i> Liste des programmes en base</h3>
-            <div class="admin-table-container">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Programme</th>
-                    <th>Saison</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="list-series-admin"></tbody>
-              </table>
+        </aside>
+
+        <main class="admin-main">
+          <section id="section-home" class="content-section active">
+            <div class="section-header">
+              <h2>Bonjour Mathis ! 👋</h2>
+              <p>
+                Bienvenue sur ton tableau de bord. Sélectionne un module dans le
+                menu de gauche.
+              </p>
             </div>
-          </div>
+            <div class="admin-card">
+              <h3 style="border: none; margin: 0">
+                <i class="fas fa-info-circle"></i> État du système :
+                <span style="color: green"
+                  >En ligne et connecté à Firebase</span
+                >
+              </h3>
+            </div>
+          </section>
+
+          <section id="section-series" class="content-section">
+            <div class="section-header">
+              <h2>Gestion des Programmes</h2>
+              <p>Ajoute, modifie ou supprime les annonces de renouvellement.</p>
+            </div>
+
+            <div class="admin-card">
+              <h3><i class="fas fa-plus-circle"></i> Ajouter un programme</h3>
+              <form id="form-add-serie" class="admin-form">
+                <div class="form-row">
+                  <div class="input-group">
+                    <label>Titre du programme</label>
+                    <input
+                      type="text"
+                      id="serie-titre"
+                      placeholder="Ex: Koh-Lanta"
+                      required
+                    />
+                  </div>
+                  <div class="input-group">
+                    <label>Saison / Info</label>
+                    <input
+                      type="text"
+                      id="serie-saison"
+                      placeholder="Ex: Saison 25"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="input-group">
+                    <label>Date d'annonce</label>
+                    <input
+                      type="text"
+                      id="serie-date"
+                      placeholder="Ex: 10 mars 2026"
+                      required
+                    />
+                  </div>
+                  <div class="input-group">
+                    <label>Statut</label>
+                    <select id="serie-statut" required>
+                      <option value="renouvele">🟢 Renouvelé</option>
+                      <option value="annule">🔴 Annulé / Fin</option>
+                      <option value="nouveau">🔵 Nouveauté</option>
+                    </select>
+                  </div>
+                </div>
+                <button type="submit" class="btn-submit">
+                  Ajouter à la base de données
+                </button>
+              </form>
+            </div>
+
+            <div class="admin-card mt-30">
+              <h3><i class="fas fa-list"></i> Liste des programmes en base</h3>
+              <div class="admin-table-container">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Programme</th>
+                      <th>Saison</th>
+                      <th>Statut</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="list-series-admin"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-presse" class="content-section">
+            <div class="section-header">
+              <h2>Communiqués de Presse</h2>
+              <p>
+                Gère tes PDF et actualités. (Les fichiers doivent être placés
+                dans tes dossiers VS Code).
+              </p>
+            </div>
+            <button
+              id="btn-import-presse"
+              style="
+                background: #f59e0b;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+                border: none;
+                margin-bottom: 20px;
+                font-weight: bold;
+                width: 100%;
+              "
+            >
+              <i class="fas fa-magic"></i> Récupérer mes 4 anciennes actualités
+              dans Firebase
+            </button>
+
+            <div class="admin-card">
+              <h3><i class="fas fa-file-pdf"></i> Ajouter un Communiqué</h3>
+              <form id="form-add-presse" class="admin-form">
+                <div class="form-row">
+                  <div class="input-group">
+                    <label>Titre du document</label>
+                    <input
+                      type="text"
+                      id="presse-titre"
+                      placeholder="Ex: Résultats Trimestre 1"
+                      required
+                    />
+                  </div>
+                  <div class="input-group">
+                    <label>Destination du fichier</label>
+                    <select id="presse-categorie" required>
+                      <option value="presse">Espace Presse classique</option>
+                      <option value="pressekit">Presse Kit Média</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="input-group">
+                    <label>Nom exact du fichier PDF</label>
+                    <input
+                      type="text"
+                      id="presse-fichier"
+                      placeholder="Ex: audience_mars.pdf"
+                      required
+                    />
+                    <small style="color: var(--texte-leger); font-size: 0.8rem"
+                      >(Le fichier doit être placé dans le dossier /pdf)</small
+                    >
+                  </div>
+                </div>
+
+                <div
+                  style="
+                    background: #f1f5f9;
+                    padding: 15px;
+                    border-radius: 8px;
+                    margin-bottom: 15px;
+                    margin-top: 15px;
+                  "
+                >
+                  <label
+                    style="
+                      font-weight: bold;
+                      color: var(--bleu-tf1);
+                      cursor: pointer;
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                    "
+                  >
+                    <input
+                      type="checkbox"
+                      id="presse-une"
+                      style="width: auto"
+                    />
+                    Mettre à la Une (Section Actualités de l'accueil)
+                  </label>
+                  <div id="une-options" style="display: none; margin-top: 15px">
+                    <div class="form-row">
+                      <div class="input-group">
+                        <label>Badge de catégorie</label>
+                        <select id="presse-badge">
+                          <option value="strategie">STRATÉGIE</option>
+                          <option value="programmes">PROGRAMMES</option>
+                          <option value="rse">ENGAGEMENT</option>
+                        </select>
+                      </div>
+                      <div class="input-group">
+                        <label>Nom exact de la photo</label>
+                        <input
+                          type="text"
+                          id="presse-image"
+                          placeholder="Ex: photo_audience.jpg"
+                        />
+                        <small
+                          style="color: var(--texte-leger); font-size: 0.8rem"
+                          >(Dans le dossier /photo)</small
+                        >
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="input-group" style="flex: 1">
+                        <label>Brève description (Pour l'accueil)</label>
+                        <textarea
+                          id="presse-desc"
+                          rows="3"
+                          placeholder="Résumé pour attirer l'oeil..."
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn-submit">
+                  Publier le communiqué
+                </button>
+              </form>
+            </div>
+
+            <div class="admin-card mt-30">
+              <h3>
+                <i class="fas fa-list"></i> Liste des communiqués en ligne
+              </h3>
+              <div class="admin-table-container">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Titre</th>
+                      <th>Catégorie</th>
+                      <th>À la Une</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="list-presse-admin"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
         </main>
       </div>
     </div>

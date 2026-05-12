@@ -17,10 +17,11 @@ html {
   padding: 0;
   height: 100%;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  /* On enlève le display:flex ici pour éviter le centrage forcé */
 }
 
-/* On crée un conteneur global qui gère le fond de la page entière */
+/* =========================================
+   PAGE DE CONNEXION
+   ========================================= */
 .page-wrapper {
   min-height: 100vh;
   background: var(--bleu-tf1);
@@ -30,10 +31,9 @@ html {
   transition: background 0.3s ease;
 }
 
-/* Quand l'admin est connecté, on change la classe du wrapper pour passer en mode plein écran */
 .page-wrapper.is-logged-in {
   background: var(--gris-fond);
-  display: block; /* On annule le centrage */
+  display: block;
 }
 
 .login-container {
@@ -41,25 +41,21 @@ html {
   max-width: 400px;
   padding: 20px;
 }
-
 .login-card {
   background: var(--blanc);
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  border-bottom: 5px solid var(--rouge-tf1); /* Rappel de la ligne rouge TF1 */
+  border-bottom: 5px solid var(--rouge-tf1);
 }
-
 .logo-area {
   text-align: center;
   margin-bottom: 35px;
 }
-
 .logo-area img {
   width: 70px;
   margin-bottom: 15px;
 }
-
 .logo-area h1 {
   color: var(--bleu-tf1);
   font-size: 1.4rem;
@@ -67,18 +63,15 @@ html {
   text-transform: uppercase;
   font-weight: 900;
 }
-
 .logo-area p {
   color: var(--texte-leger);
   font-size: 0.85rem;
   margin-top: 5px;
 }
 
-/* FORMULAIRE */
 .input-group {
   margin-bottom: 20px;
 }
-
 .input-group label {
   display: block;
   color: var(--texte-sombre);
@@ -87,19 +80,16 @@ html {
   margin-bottom: 8px;
   text-transform: uppercase;
 }
-
 .input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
-
 .input-wrapper i {
   position: absolute;
   left: 15px;
   color: var(--texte-leger);
 }
-
 .input-wrapper input {
   width: 100%;
   padding: 12px 12px 12px 45px;
@@ -109,13 +99,11 @@ html {
   outline: none;
   transition: all 0.3s ease;
 }
-
 .input-wrapper input:focus {
   border-color: var(--bleu-tf1);
   box-shadow: 0 0 0 4px rgba(0, 21, 43, 0.1);
 }
 
-/* BOUTON */
 .btn-login {
   width: 100%;
   background: var(--bleu-tf1);
@@ -133,9 +121,8 @@ html {
   transition: all 0.3s ease;
   margin-top: 10px;
 }
-
 .btn-login:hover {
-  background: var(--rouge-tf1); /* Le bouton devient rouge au survol */
+  background: var(--rouge-tf1);
   transform: translateY(-2px);
 }
 
@@ -143,101 +130,147 @@ html {
   text-align: center;
   margin-top: 25px;
 }
-
 .login-footer a {
   color: var(--texte-leger);
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 600;
 }
-
 .login-footer a:hover {
   color: var(--bleu-tf1);
 }
-/* =========================================
-   STYLE DU TABLEAU DE BORD (DASHBOARD)
-   ========================================= */
 
-/* La classe magique pour cacher les éléments */
 .hidden {
   display: none !important;
 }
 
-.dashboard-container {
+/* =========================================
+   NOUVEAU TABLEAU DE BORD (LAYOUT SIDEBAR)
+   ========================================= */
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
   width: 100%;
-  min-height: 100vh;
-  background-color: var(--gris-fond);
+  overflow: hidden;
+}
+
+/* SIDEBAR (Menu de gauche) */
+.admin-sidebar {
+  width: 280px;
+  background: var(--bleu-tf1);
+  color: white;
   display: flex;
   flex-direction: column;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 
-/* Barre du haut de l'admin */
-.admin-navbar {
-  background: var(--blanc);
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  border-bottom: 3px solid var(--rouge-tf1);
+.sidebar-header {
+  padding: 30px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.sidebar-header img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
 }
 
-.admin-logo {
+.sidebar-menu {
+  flex: 1;
+  padding: 20px 0;
+  list-style: none;
+  margin: 0;
+}
+
+.nav-item {
+  padding: 15px 25px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 15px;
-  font-weight: 900;
-  color: var(--bleu-tf1);
-  text-transform: uppercase;
+  font-weight: 600;
+  color: #94a3b8;
+  transition: 0.3s;
+  border-left: 4px solid transparent;
+}
+.nav-item:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+}
+.nav-item.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border-left-color: var(--rouge-tf1);
 }
 
-.admin-logo img {
-  width: 40px;
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .btn-logout {
+  width: 100%;
   background: transparent;
-  border: 1px solid var(--texte-leger);
-  color: var(--texte-leger);
-  padding: 8px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 10px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
   transition: 0.2s;
 }
-
 .btn-logout:hover {
   background: var(--rouge-tf1);
-  color: white;
   border-color: var(--rouge-tf1);
 }
 
-/* Contenu de la page */
-.admin-content {
+/* CONTENU PRINCIPAL (À droite) */
+.admin-main {
+  flex: 1;
+  background: var(--gris-fond);
+  overflow-y: auto;
   padding: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
 }
 
-.admin-content h2 {
-  color: var(--bleu-tf1);
+/* Gestion des sections (onglets) */
+.content-section {
+  display: none;
+  animation: fadeIn 0.4s ease;
 }
-.admin-content p {
-  color: var(--texte-leger);
+.content-section.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-header {
   margin-bottom: 30px;
 }
-
-.placeholder-box {
-  background: white;
-  padding: 50px;
-  text-align: center;
-  border-radius: 12px;
-  border: 2px dashed #cbd5e1;
-  color: #94a3b8;
-  font-size: 1.2rem;
+.section-header h2 {
+  margin: 0;
+  color: var(--bleu-tf1);
+  font-size: 2rem;
 }
-/* Style du formulaire Admin */
+.section-header p {
+  color: var(--texte-leger);
+  margin-top: 5px;
+}
+
+/* CARTES ET FORMULAIRES */
 .admin-card {
   background: white;
   padding: 30px;
@@ -261,12 +294,15 @@ html {
   flex: 1;
 }
 .admin-form input,
-.admin-form select {
+.admin-form select,
+.admin-form textarea {
   width: 100%;
   padding: 12px;
   border: 2px solid #e2e8f0;
   border-radius: 8px;
   font-size: 1rem;
+  box-sizing: border-box;
+  font-family: inherit;
 }
 .btn-submit {
   background: var(--bleu-tf1);
@@ -278,10 +314,13 @@ html {
   font-weight: bold;
   width: 100%;
   margin-top: 10px;
+  transition: 0.3s;
 }
 .btn-submit:hover {
   background: var(--rouge-tf1);
 }
+
+/* TABLEAUX */
 .mt-30 {
   margin-top: 30px;
 }
@@ -317,7 +356,8 @@ html {
   background: #ef4444;
   color: white;
 }
-/* Styles pour les badges de statut */
+
+/* BADGES */
 .badge {
   padding: 4px 8px;
   border-radius: 4px;
