@@ -377,3 +377,17 @@ html {
   background: #dbeafe;
   color: #1e40af;
 }
+.btn-edit {
+  background: #dbeafe;
+  color: #1e40af;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-right: 5px;
+}
+.btn-edit:hover {
+  background: #1e40af;
+  color: white;
+}

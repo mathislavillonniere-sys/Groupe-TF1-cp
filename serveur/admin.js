@@ -5,6 +5,7 @@ import {
   onSnapshot,
   doc,
   deleteDoc,
+  updateDoc,
   query,
   orderBy,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -28,297 +29,191 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// ==========================================
-// 1. GESTION DE LA CONNEXION & DECONNEXION
-// ==========================================
-const loginForm = document.getElementById("login-form");
-const loginContainer = document.getElementById("login-container");
-const dashboardView = document.getElementById("dashboard-view");
-const btnLogout = document.getElementById("btn-logout");
+let isEditMode = false;
+let editDocId = null;
 
-loginForm.addEventListener("submit", (e) => {
+// CONNEXION
+document.getElementById("login-form").addEventListener("submit", (e) => {
   e.preventDefault();
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  signInWithEmailAndPassword(auth, email, password)
+  signInWithEmailAndPassword(
+    auth,
+    document.getElementById("email").value,
+    document.getElementById("password").value,
+  )
     .then(() => {
       document.getElementById("page-wrapper").classList.add("is-logged-in");
-      loginContainer.classList.add("hidden");
-      dashboardView.classList.remove("hidden");
+      document.getElementById("login-container").classList.add("hidden");
+      document.getElementById("dashboard-view").classList.remove("hidden");
     })
-    .catch((error) => {
-      alert("Erreur : Identifiant ou mot de passe incorrect.");
-      console.error(error.message);
-    });
+    .catch(() => alert("Identifiant ou mot de passe incorrect."));
 });
-
-btnLogout.addEventListener("click", () => {
-  signOut(auth).then(() => window.location.reload());
-});
-
-// ==========================================
-// 2. NAVIGATION DANS LA SIDEBAR (ONGLETS)
-// ==========================================
-const navItems = document.querySelectorAll(".nav-item");
-const contentSections = document.querySelectorAll(".content-section");
-
-navItems.forEach((item) => {
-  item.addEventListener("click", () => {
-    // Enlève la classe 'active' de tous les boutons et de toutes les pages
-    navItems.forEach((nav) => nav.classList.remove("active"));
-    contentSections.forEach((sec) => sec.classList.remove("active"));
-
-    // Ajoute 'active' au bouton cliqué et à la page correspondante
-    item.classList.add("active");
-    const targetId = item.getAttribute("data-target");
-    document.getElementById(targetId).classList.add("active");
-  });
-});
-
-// ==========================================
-// 3. MODULE : PROGRAMMES & SÉRIES
-// ==========================================
-const formAddSerie = document.getElementById("form-add-serie");
-const listSeriesAdmin = document.getElementById("list-series-admin");
-
-if (formAddSerie) {
-  formAddSerie.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    try {
-      await addDoc(collection(db, "renouvellements"), {
-        titre: document.getElementById("serie-titre").value,
-        saison: document.getElementById("serie-saison").value,
-        date: document.getElementById("serie-date").value,
-        statut: document.getElementById("serie-statut").value,
-        ajouteLe: new Date(),
-      });
-      alert("Succès ! La série a été ajoutée.");
-      formAddSerie.reset();
-    } catch (error) {
-      alert("Une erreur est survenue.");
-    }
-  });
-}
-
-if (listSeriesAdmin) {
-  const qSeries = query(
-    collection(db, "renouvellements"),
-    orderBy("ajouteLe", "desc"),
+document
+  .getElementById("btn-logout")
+  .addEventListener("click", () =>
+    signOut(auth).then(() => window.location.reload()),
   );
-  onSnapshot(qSeries, (snapshot) => {
-    listSeriesAdmin.innerHTML = "";
-    snapshot.forEach((docSnap) => {
-      const data = docSnap.data();
-      listSeriesAdmin.innerHTML += `
-        <tr>
-            <td><strong>${data.titre}</strong></td>
-            <td>${data.saison}</td>
-            <td><span class="badge badge-${data.statut}">${data.statut}</span></td>
-            <td><button class="btn-delete" data-id="${docSnap.id}" data-type="serie"><i class="fas fa-trash"></i></button></td>
-        </tr>`;
-    });
-  });
-}
 
-// ==========================================
-// 4. MODULE : ESPACE PRESSE (PLAN B)
-// ==========================================
+// NAVIGATION
+document.querySelectorAll(".nav-item").forEach((item) => {
+  item.addEventListener("click", () => {
+    document
+      .querySelectorAll(".nav-item, .content-section")
+      .forEach((el) => el.classList.remove("active"));
+    item.classList.add("active");
+    document
+      .getElementById(item.getAttribute("data-target"))
+      .classList.add("active");
+  });
+});
+
+// SÉRIES
+onSnapshot(
+  query(collection(db, "renouvellements"), orderBy("ajouteLe", "desc")),
+  (snapshot) => {
+    document.getElementById("list-series-admin").innerHTML = "";
+    snapshot.forEach((docSnap) => {
+      const d = docSnap.data();
+      document.getElementById("list-series-admin").innerHTML +=
+        `<tr><td><strong>${d.titre}</strong></td><td>${d.saison}</td><td><span class="badge badge-${d.statut}">${d.statut}</span></td><td><button class="btn-delete" data-id="${docSnap.id}" data-type="serie"><i class="fas fa-trash"></i></button></td></tr>`;
+    });
+  },
+);
+
+// FORMULAIRE PRESSE
 const formAddPresse = document.getElementById("form-add-presse");
 const checkboxUne = document.getElementById("presse-une");
 const uneOptions = document.getElementById("une-options");
-const listPresseAdmin = document.getElementById("list-presse-admin");
+const btnSubmitPresse = document.querySelector("#form-add-presse .btn-submit");
 
-// Afficher les options "À la Une"
 if (checkboxUne) {
-  checkboxUne.addEventListener("change", () => {
-    uneOptions.style.display = checkboxUne.checked ? "block" : "none";
-    document.getElementById("presse-image").required = checkboxUne.checked;
-  });
+  checkboxUne.addEventListener(
+    "change",
+    () => (uneOptions.style.display = checkboxUne.checked ? "block" : "none"),
+  );
 }
 
 if (formAddPresse) {
   formAddPresse.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    // On récupère la date programmée ou on met "maintenant"
+    const datePubInput = document.getElementById("presse-date-pub").value;
+    const datePublication = datePubInput ? new Date(datePubInput) : new Date();
+
+    const donnees = {
+      titre: document.getElementById("presse-titre").value,
+      categorie: document.getElementById("presse-categorie").value,
+      nom_pdf: document.getElementById("presse-fichier").value,
+      a_la_une: checkboxUne.checked,
+      badge: checkboxUne.checked
+        ? document.getElementById("presse-badge").value
+        : "",
+      ordre: checkboxUne.checked
+        ? parseInt(document.getElementById("presse-ordre").value) || 99
+        : 99,
+      nom_image: checkboxUne.checked
+        ? document.getElementById("presse-image").value
+        : "",
+      description: checkboxUne.checked
+        ? document.getElementById("presse-desc").value
+        : "",
+      dateAjout: datePublication, // C'est ici que la programmation se joue !
+    };
+
     try {
-      await addDoc(collection(db, "communiques"), {
-        titre: document.getElementById("presse-titre").value,
-        categorie: document.getElementById("presse-categorie").value,
-        nom_pdf: document.getElementById("presse-fichier").value,
-        a_la_une: checkboxUne.checked,
-        badge: document.getElementById("presse-badge").value, // NOUVEAU : On sauvegarde le badge !
-        nom_image: document.getElementById("presse-image").value,
-        description: document.getElementById("presse-desc").value,
-        dateAjout: new Date(),
-      });
-      alert("Succès ! Le communiqué a été ajouté.");
+      if (isEditMode) {
+        await updateDoc(doc(db, "communiques", editDocId), donnees);
+        alert("Mis à jour !");
+        isEditMode = false;
+        editDocId = null;
+        btnSubmitPresse.innerText = "Publier le communiqué";
+      } else {
+        await addDoc(collection(db, "communiques"), donnees);
+        alert("Ajouté !");
+      }
       formAddPresse.reset();
       uneOptions.style.display = "none";
     } catch (error) {
-      alert("Une erreur s'est produite.");
+      alert("Erreur !");
     }
   });
 }
 
-if (listPresseAdmin) {
-  const qPresse = query(
-    collection(db, "communiques"),
-    orderBy("dateAjout", "desc"),
-  );
-  onSnapshot(qPresse, (snapshot) => {
-    listPresseAdmin.innerHTML = "";
+// TABLEAU PRESSE (AVEC INDICATEUR DE PROGRAMMATION)
+onSnapshot(
+  query(collection(db, "communiques"), orderBy("dateAjout", "desc")),
+  (snapshot) => {
+    const list = document.getElementById("list-presse-admin");
+    if (!list) return;
+    list.innerHTML = "";
     snapshot.forEach((docSnap) => {
-      const data = docSnap.data();
-      const badgeUne = data.a_la_une
-        ? '<span class="badge badge-renouvele">Oui</span>'
-        : '<span class="badge badge-annule">Non</span>';
-      listPresseAdmin.innerHTML += `
-                <tr>
-                    <td><strong>${data.titre}</strong><br><small style="color:gray;">PDF: ${data.nom_pdf}</small></td>
-                    <td><span class="badge badge-nouveau">${data.categorie}</span></td>
-                    <td>${badgeUne}</td>
-                    <td><button class="btn-delete" data-id="${docSnap.id}" data-type="presse"><i class="fas fa-trash"></i></button></td>
-                </tr>`;
+      const d = docSnap.data();
+      const dateObj = d.dateAjout ? d.dateAjout.toDate() : new Date();
+      const isScheduled = dateObj > new Date();
+
+      // Petit badge visuel pour toi dans l'admin
+      const statusLabel = isScheduled
+        ? `<br><span style="color: #f59e0b; font-size: 0.8em;"><i class="fas fa-clock"></i> Programmé (${dateObj.toLocaleString()})</span>`
+        : `<br><span style="color: #16a34a; font-size: 0.8em;"><i class="fas fa-check-circle"></i> En ligne</span>`;
+
+      list.innerHTML += `
+      <tr>
+          <td><strong>${d.titre}</strong> ${statusLabel}</td>
+          <td><span class="badge badge-nouveau">${d.categorie}</span></td>
+          <td>${d.a_la_une ? "OUI" : "NON"}</td>
+          <td>
+              <button class="btn-edit" data-id="${docSnap.id}"><i class="fas fa-edit"></i></button>
+              <button class="btn-delete" data-id="${docSnap.id}" data-type="presse"><i class="fas fa-trash"></i></button>
+          </td>
+      </tr>`;
     });
-  });
-}
+  },
+);
 
-// ==========================================
-// 5. GESTION COMMUNE DES SUPPRESSIONS
-// ==========================================
-// Comme on a plusieurs tableaux, on gère les clics sur toutes les poubelles ici
+// CLICS SUPPRIMER / MODIFIER
 document.addEventListener("click", async (e) => {
-  // Si on clique sur le bouton poubelle ou l'icône à l'intérieur
-  const btn = e.target.closest(".btn-delete");
-  if (btn) {
-    const id = btn.getAttribute("data-id");
-    const type = btn.getAttribute("data-type"); // "serie" ou "presse"
-    const collectionName = type === "serie" ? "renouvellements" : "communiques";
+  const btnDel = e.target.closest(".btn-delete");
+  const btnEdit = e.target.closest(".btn-edit");
 
-    if (confirm("Veux-tu vraiment supprimer cet élément ?")) {
-      await deleteDoc(doc(db, collectionName, id));
+  if (btnDel) {
+    if (confirm("Supprimer ?")) {
+      const col =
+        btnDel.getAttribute("data-type") === "serie"
+          ? "renouvellements"
+          : "communiques";
+      await deleteDoc(doc(db, col, btnDel.getAttribute("data-id")));
     }
   }
-});
-// ==========================================
-// 6. SCRIPT DE MIGRATION GLOBAL (LE BON !)
-// ==========================================
-const btnImportPresse = document.getElementById("btn-import-presse");
 
-if (btnImportPresse) {
-  btnImportPresse.addEventListener("click", async () => {
-    if (
-      confirm(
-        "Réimporter les actualités et les documents presse dans les bons dossiers ?",
-      )
-    ) {
-      btnImportPresse.innerHTML =
-        "<i class='fas fa-spinner fa-spin'></i> Importation...";
-      btnImportPresse.disabled = true;
-
-      try {
-        // 1. On remplit l'Accueil (actualites)
-        const actusAccueil = [
-          {
-            titre: "Bilan du 1er trimestre 2026",
-            badge: "strategie",
-            nom_image: "finance-illustration.jpg",
-            nom_pdf: "resultat-t1-2026-groupetf1cp.pdf",
-            description:
-              "Découvrez les chiffres du 1er trimestre 2026, du groupe TF1 Camping Paradis",
-            dateAjout: new Date(),
-          },
-          {
-            titre: "Grilles des programmes 2026 - 2027",
-            badge: "programmes",
-            nom_image: "873f44e_7572-1ibc6z7.eeqd.avif",
-            nom_pdf: "",
-            description:
-              "Le groupe annoncera sa grille des programmes pour la saison 2026-2027, le 15 mai, lors d'une conférence de presse.",
-            dateAjout: new Date(),
-          },
-          {
-            titre: "Renouvellement des programmes",
-            badge: "programmes",
-            nom_image: "imagesériecommuniqué.avif",
-            nom_pdf: "CPK_renouvellement.pdf",
-            description:
-              "Le groupe TF1 Camping Paradis annonce les renouvellements de ses programmes pour la saison 2026-2027, avec des nouveautés à découvrir.",
-            dateAjout: new Date(),
-          },
-          {
-            titre: "Soutien à la création française",
-            badge: "rse",
-            nom_image: "DIY-clap-de-cinema-1.jpg",
-            nom_pdf: "cdp_3mai2026.pdf",
-            description:
-              "Le groupe renforce ses partenariats avec les producteurs locaux pour mettre en avant nos talents, ainsi que les protégés de l'arrivée de l'intelligence artificielle.",
-            dateAjout: new Date(),
-          },
-        ];
-        for (const a of actusAccueil)
-          await addDoc(collection(db, "actualites"), a);
-
-        // 2. On remplit la Presse Classique (presse_documents)
-        const presseClassique = [
-          {
-            titre:
-              "Résultats du Trimestre 1 2026 du groupe TF1 Camping Paradis",
-            categorie: "presse",
-            date_texte: "5 mai 2026",
-            nom_pdf: "resultat-t1-2026-groupetf1cp.pdf",
-            dateAjout: new Date(),
-          },
-          {
-            titre:
-              "Le groupe TF1 Camping Paradis renforce son soutien à la création française",
-            categorie: "presse",
-            date_texte: "3 mai 2026",
-            nom_pdf: "cdp_3mai2026.pdf",
-            dateAjout: new Date(),
-          },
-          {
-            titre:
-              "Résultats Financiers 1er Semestre 2025 : Une croissance record pour le pôle Télévision.",
-            categorie: "presse",
-            date_texte: "26 Juillet 2025",
-            nom_pdf:
-              "Communique de presse résulat s1 2025 et nouveau enjeux.pdf",
-            dateAjout: new Date(),
-          },
-        ];
-        for (const p of presseClassique)
-          await addDoc(collection(db, "presse_documents"), p);
-
-        // 3. On remplit la Presse Kit (presse_documents)
-        const presseKit = [
-          {
-            titre:
-              "TF1 Camping Paradis annonce les renouvellements de ses programmes.",
-            categorie: "pressekit",
-            date_texte: "10 mai 2026",
-            nom_pdf: "CPK_renouvellement.pdf",
-            dateAjout: new Date(),
-          },
-          {
-            titre: "TF1 Camping Paradis annonce l’arrivé de NCIS : New York",
-            categorie: "pressekit",
-            date_texte: "15 avril 2026",
-            nom_pdf: "CPK_NCISNewyork.pdf",
-            dateAjout: new Date(),
-          },
-        ];
-        for (const k of presseKit)
-          await addDoc(collection(db, "presse_documents"), k);
-
-        alert(
-          "✅ MAGIE RÉUSSIE ! Tous les tiroirs sont remplis correctement !",
-        );
-        btnImportPresse.style.display = "none";
-      } catch (error) {
-        console.error(error);
-        alert("Erreur lors de l'importation.");
+  if (btnEdit) {
+    const id = btnEdit.getAttribute("data-id");
+    isEditMode = true;
+    editDocId = id;
+    onSnapshot(doc(db, "communiques", id), (snap) => {
+      const d = snap.data();
+      if (d) {
+        document.getElementById("presse-titre").value = d.titre;
+        document.getElementById("presse-categorie").value = d.categorie;
+        document.getElementById("presse-fichier").value = d.nom_pdf;
+        checkboxUne.checked = d.a_la_une;
+        uneOptions.style.display = d.a_la_une ? "block" : "none";
+        if (d.a_la_une) {
+          document.getElementById("presse-badge").value = d.badge || "";
+          document.getElementById("presse-ordre").value = d.ordre || "";
+          document.getElementById("presse-image").value = d.nom_image || "";
+          document.getElementById("presse-desc").value = d.description || "";
+        }
+        // Gestion de l'affichage de la date dans le champ
+        if (d.dateAjout) {
+          const date = d.dateAjout.toDate();
+          date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+          document.getElementById("presse-date-pub").value = date
+            .toISOString()
+            .slice(0, 16);
+        }
+        btnSubmitPresse.innerText = "Enregistrer les modifications";
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
-    }
-  });
-}
+    });
+  }
+});

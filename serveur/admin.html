@@ -182,24 +182,6 @@
                 dans tes dossiers VS Code).
               </p>
             </div>
-            <button
-              id="btn-import-presse"
-              style="
-                background: #f59e0b;
-                color: white;
-                padding: 12px 20px;
-                border-radius: 8px;
-                cursor: pointer;
-                border: none;
-                margin-bottom: 20px;
-                font-weight: bold;
-                width: 100%;
-              "
-            >
-              <i class="fas fa-magic"></i> Récupérer mes 4 anciennes actualités
-              dans Firebase
-            </button>
-
             <div class="admin-card">
               <h3><i class="fas fa-file-pdf"></i> Ajouter un Communiqué</h3>
               <form id="form-add-presse" class="admin-form">
@@ -221,7 +203,19 @@
                     </select>
                   </div>
                 </div>
+
                 <div class="form-row">
+                  <div class="input-group">
+                    <label>Date et heure de publication automatique</label>
+                    <input
+                      type="datetime-local"
+                      id="presse-date-pub"
+                      style="padding: 10px"
+                    />
+                    <small style="color: var(--texte-leger); font-size: 0.8rem"
+                      >Laisse vide pour publier immédiatement</small
+                    >
+                  </div>
                   <div class="input-group">
                     <label>Nom exact du fichier PDF</label>
                     <input
@@ -230,9 +224,6 @@
                       placeholder="Ex: audience_mars.pdf"
                       required
                     />
-                    <small style="color: var(--texte-leger); font-size: 0.8rem"
-                      >(Le fichier doit être placé dans le dossier /pdf)</small
-                    >
                   </div>
                 </div>
 
@@ -273,16 +264,22 @@
                         </select>
                       </div>
                       <div class="input-group">
+                        <label>Ordre d'affichage</label>
+                        <input
+                          type="number"
+                          id="presse-ordre"
+                          min="1"
+                          max="10"
+                          placeholder="1 = Premier"
+                        />
+                      </div>
+                      <div class="input-group">
                         <label>Nom exact de la photo</label>
                         <input
                           type="text"
                           id="presse-image"
                           placeholder="Ex: photo_audience.jpg"
                         />
-                        <small
-                          style="color: var(--texte-leger); font-size: 0.8rem"
-                          >(Dans le dossier /photo)</small
-                        >
                       </div>
                     </div>
                     <div class="form-row">
