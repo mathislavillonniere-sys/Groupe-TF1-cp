@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const estDansSousDossier = window.location.pathname.includes("/component/");
-  const prefixe = estDansSousDossier ? "../../" : "./";
-  const currentYear = new Date().getFullYear();
+    const estDansSousDossier = window.location.pathname.includes("/component/");
+    const prefixe = estDansSousDossier ? "../../" : "./";
+    const currentYear = new Date().getFullYear();
 
-  const footerHTML = `
+    const footerHTML = `
      <footer class="corporate-footer">
 
         <div class="footer-top">
@@ -74,46 +74,46 @@ document.addEventListener("DOMContentLoaded", function () {
     </button>
   `;
 
-  document.body.insertAdjacentHTML("beforeend", footerHTML);
+    document.body.insertAdjacentHTML("beforeend", footerHTML);
 
-  const backToTopBtn = document.getElementById("back-to-top");
-  if (backToTopBtn) {
-    window.onscroll = function () {
-      if (
-        document.body.scrollTop > 300 ||
-        document.documentElement.scrollTop > 300
-      ) {
-        backToTopBtn.style.display = "flex";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    };
-    backToTopBtn.onclick = function () {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-  }
-  // =========================================
-  // POP-UP COOKIES RGPD & RÉGLAGES AVANCÉS
-  // =========================================
-
-  function initialiserBandeauCookies() {
-    // 1. On vérifie la mémoire
-    try {
-      if (localStorage.getItem("tf1cp_cookies")) return;
-    } catch (e) {
-      console.warn("Navigation privée : mémoire bloquée.");
+    const backToTopBtn = document.getElementById("back-to-top");
+    if (backToTopBtn) {
+        window.onscroll = function () {
+            if (
+                document.body.scrollTop > 300 ||
+                document.documentElement.scrollTop > 300
+            ) {
+                backToTopBtn.style.display = "flex";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        };
+        backToTopBtn.onclick = function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        };
     }
+    // =========================================
+    // POP-UP COOKIES RGPD & RÉGLAGES AVANCÉS
+    // =========================================
 
-    // 2. Création de l'Overlay (fond noir)
-    const overlay = document.createElement("div");
-    overlay.className = "cookie-overlay";
+    function initialiserBandeauCookies() {
+        // 1. On vérifie la mémoire
+        try {
+            if (localStorage.getItem("tf1cp_cookies")) return;
+        } catch (e) {
+            console.warn("Navigation privée : mémoire bloquée.");
+        }
 
-    // 3. Création du Pop-up
-    const popup = document.createElement("div");
-    popup.className = "cookie-popup";
+        // 2. Création de l'Overlay (fond noir)
+        const overlay = document.createElement("div");
+        overlay.className = "cookie-overlay";
 
-    // Code HTML injecté
-    popup.innerHTML = `
+        // 3. Création du Pop-up
+        const popup = document.createElement("div");
+        popup.className = "cookie-popup";
+
+        // Code HTML injecté
+        popup.innerHTML = `
       <div class="cookie-header">
         <h3><i class="fas fa-shield-alt" style="color: #e31e24;"></i> Vos choix de cookies</h3>
       </div>
@@ -153,64 +153,64 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     `;
 
-    document.body.appendChild(overlay);
-    document.body.appendChild(popup);
+        document.body.appendChild(overlay);
+        document.body.appendChild(popup);
 
-    // 4. Animation d'apparition
-    setTimeout(() => {
-      overlay.classList.add("show");
-      popup.classList.add("show");
-    }, 50);
+        // 4. Animation d'apparition
+        setTimeout(() => {
+            overlay.classList.add("show");
+            popup.classList.add("show");
+        }, 50);
 
-    // 5. Récupération des boutons
-    const btnParam = document.getElementById("btn-param-cookies");
-    const btnAccepter = document.getElementById("btn-accepter-cookies");
-    const btnRefuser = document.getElementById("btn-refuser-cookies");
-    const btnSave = document.getElementById("btn-save-cookies");
-    const viewSettings = document.getElementById("cookie-settings-view");
-    const toggleAnalytics = document.getElementById("toggle-analytics");
+        // 5. Récupération des boutons
+        const btnParam = document.getElementById("btn-param-cookies");
+        const btnAccepter = document.getElementById("btn-accepter-cookies");
+        const btnRefuser = document.getElementById("btn-refuser-cookies");
+        const btnSave = document.getElementById("btn-save-cookies");
+        const viewSettings = document.getElementById("cookie-settings-view");
+        const toggleAnalytics = document.getElementById("toggle-analytics");
 
-    // Action : Cliquer sur "Personnaliser"
-    btnParam.addEventListener("click", () => {
-      viewSettings.style.display = "block"; // Affiche les toggles
-      btnParam.style.display = "none"; // Cache "Personnaliser"
-      btnAccepter.style.display = "none"; // Cache "Tout Accepter"
-      btnRefuser.style.display = "none"; // Cache "Tout Refuser"
-      btnSave.style.display = "block"; // Affiche "Enregistrer"
-    });
+        // Action : Cliquer sur "Personnaliser"
+        btnParam.addEventListener("click", () => {
+            viewSettings.style.display = "block"; // Affiche les toggles
+            btnParam.style.display = "none"; // Cache "Personnaliser"
+            btnAccepter.style.display = "none"; // Cache "Tout Accepter"
+            btnRefuser.style.display = "none"; // Cache "Tout Refuser"
+            btnSave.style.display = "block"; // Affiche "Enregistrer"
+        });
 
-    // Fonction commune de fermeture et sauvegarde
-    const fermerPopup = (preferences) => {
-      try {
-        // Sauvegarde un VRAI objet de réglages (ex: {essentiel: true, analytics: false})
-        localStorage.setItem("tf1cp_cookies", JSON.stringify(preferences));
-      } catch (e) {}
+        // Fonction commune de fermeture et sauvegarde
+        const fermerPopup = (preferences) => {
+            try {
+                // Sauvegarde un VRAI objet de réglages (ex: {essentiel: true, analytics: false})
+                localStorage.setItem("tf1cp_cookies", JSON.stringify(preferences));
+            } catch (e) { }
 
-      overlay.classList.remove("show");
-      popup.classList.remove("show");
+            overlay.classList.remove("show");
+            popup.classList.remove("show");
 
-      setTimeout(() => {
-        overlay.remove();
-        popup.remove();
-      }, 400); // Attend la fin de l'animation pour supprimer du code
-    };
+            setTimeout(() => {
+                overlay.remove();
+                popup.remove();
+            }, 400); // Attend la fin de l'animation pour supprimer du code
+        };
 
-    // Boutons d'action
-    btnAccepter.addEventListener("click", () =>
-      fermerPopup({ essentiel: true, analytics: true }),
-    );
-    btnRefuser.addEventListener("click", () =>
-      fermerPopup({ essentiel: true, analytics: false }),
-    );
-    btnSave.addEventListener("click", () => {
-      fermerPopup({ essentiel: true, analytics: toggleAnalytics.checked });
-    });
-  }
+        // Boutons d'action
+        btnAccepter.addEventListener("click", () =>
+            fermerPopup({ essentiel: true, analytics: true }),
+        );
+        btnRefuser.addEventListener("click", () =>
+            fermerPopup({ essentiel: true, analytics: false }),
+        );
+        btnSave.addEventListener("click", () => {
+            fermerPopup({ essentiel: true, analytics: toggleAnalytics.checked });
+        });
+    }
 
-  // Lancement automatique
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initialiserBandeauCookies);
-  } else {
-    initialiserBandeauCookies();
-  }
+    // Lancement automatique
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initialiserBandeauCookies);
+    } else {
+        initialiserBandeauCookies();
+    }
 });
