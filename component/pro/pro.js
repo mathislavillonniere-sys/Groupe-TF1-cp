@@ -31,7 +31,7 @@ const baseDeDonnees = {
       },
       2027: {
         label: "Grille Annuelle 2026 - 2027",
-        fichier: "../csv/m6_annuel2026-2027.csv",
+        // fichier: "../../csv/m6_annuel2026-2027.csv",
       },
     },
   },
