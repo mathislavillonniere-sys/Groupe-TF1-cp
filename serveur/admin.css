@@ -391,3 +391,113 @@ html {
   background: #1e40af;
   color: white;
 }
+/* ==========================================
+   VERSION MOBILE (SMARTPHONES & TABLETTES)
+   ========================================== */
+@media (max-width: 768px) {
+  /* 1. On transforme l'écran divisé en écran empilé (haut/bas) */
+  .dashboard-layout {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  /* 2. Le menu de gauche devient un menu d'en-tête */
+  .admin-sidebar {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+
+  .sidebar-header {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .sidebar-header img {
+    width: 45px;
+    margin-bottom: 0;
+  }
+
+  .sidebar-header h2 {
+    font-size: 1.2rem;
+  }
+
+  /* 3. Les boutons du menu glissent horizontalement (façon application mobile) */
+  .sidebar-menu {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch; /* Glissement fluide sur iPhone */
+    scrollbar-width: none; /* Cache la barre de défilement */
+  }
+
+  .sidebar-menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-item {
+    padding: 12px 20px;
+    border-left: none; /* On enlève la bordure gauche */
+    border-bottom: 4px solid transparent; /* On la met en bas */
+    font-size: 0.9rem;
+  }
+
+  .nav-item.active {
+    border-left-color: transparent;
+    border-bottom-color: var(--rouge-tf1); /* Souligné en rouge quand actif */
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .sidebar-footer {
+    padding: 10px 15px;
+  }
+
+  .btn-logout {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  /* 4. Le contenu principal prend toute la largeur */
+  .admin-main {
+    padding: 20px 15px;
+  }
+
+  .section-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .admin-card {
+    padding: 20px 15px;
+  }
+
+  /* 5. Les formulaires : les champs s'empilent au lieu d'être côte à côte */
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  /* 6. Les tableaux de données : on réduit un peu le texte et on empêche la casse */
+  .admin-table th,
+  .admin-table td {
+    font-size: 0.85rem;
+    padding: 10px 8px;
+    white-space: nowrap;
+  }
+
+  /* 7. La carte de la page de connexion s'adapte aux petits écrans */
+  .login-card {
+    padding: 30px 20px;
+  }
+
+  .logo-area h1 {
+    font-size: 1.2rem;
+  }
+}
