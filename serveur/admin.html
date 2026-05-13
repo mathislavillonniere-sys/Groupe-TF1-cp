@@ -69,6 +69,9 @@
             <li class="nav-item active" data-target="section-home">
               <i class="fas fa-home"></i> Accueil
             </li>
+            <li class="nav-item" data-target="stats-view">
+              <i class="fas fa-chart-line"></i> Statistiques
+            </li>
             <li class="nav-item" data-target="section-series">
               <i class="fas fa-tv"></i> Programmes & Séries
             </li>
@@ -88,17 +91,118 @@
             <div class="section-header">
               <h2>Bonjour Mathis ! 👋</h2>
               <p>
-                Bienvenue sur ton tableau de bord. Sélectionne un module dans le
-                menu de gauche.
+                Content de vous revoir. Voici ce que vous pouvez faire
+                aujourd'hui :
               </p>
             </div>
-            <div class="admin-card">
-              <h3 style="border: none; margin: 0">
-                <i class="fas fa-info-circle"></i> État du système :
-                <span style="color: green"
-                  >En ligne et connecté à Firebase</span
-                >
+
+            <div class="quick-actions-grid">
+              <div
+                class="action-card"
+                onclick="
+                  document
+                    .querySelector('[data-target=\'section-presse\']')
+                    .click()
+                "
+              >
+                <i class="fas fa-file-upload"></i>
+                <span>Publier un communiqué</span>
+              </div>
+              <div
+                class="action-card"
+                onclick="
+                  document
+                    .querySelector('[data-target=\'section-series\']')
+                    .click()
+                "
+              >
+                <i class="fas fa-plus-circle"></i>
+                <span>Ajouter une série</span>
+              </div>
+              <div
+                class="action-card"
+                onclick="window.open('../index.html', '_blank')"
+              >
+                <i class="fas fa-external-link-alt"></i>
+                <span>Voir le site public</span>
+              </div>
+            </div>
+
+            <div class="admin-card mt-30">
+              <h3>
+                <i class="fas fa-bell"></i> Dernières actualités du système
               </h3>
+              <p style="color: var(--texte-leger); font-size: 0.9rem">
+                - Le système est connecté à <strong>Firebase</strong>.<br />
+                - La programmation des communiqués est active.<br />
+                - Le pop-up cookies est opérationnel sur le site public.
+              </p>
+            </div>
+          </section>
+
+          <section id="stats-view" class="content-section">
+            <div class="section-header">
+              <h2>Vue d'ensemble</h2>
+              <p>Performances et suivi de vos contenus en temps réel.</p>
+            </div>
+
+            <div class="kpi-grid">
+              <div class="kpi-card">
+                <div
+                  class="kpi-icon"
+                  style="background: #e0f2fe; color: #0284c7"
+                >
+                  <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3>Total Communiqués</h3>
+                  <p id="stat-total-presse">0</p>
+                  <span class="kpi-trend positive"
+                    ><i class="fas fa-arrow-up"></i> En ligne</span
+                  >
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div
+                  class="kpi-icon"
+                  style="background: #fef3c7; color: #d97706"
+                >
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3>En attente (Programmés)</h3>
+                  <p id="stat-programmes">0</p>
+                  <span class="kpi-trend neutral">Sous embargo</span>
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div
+                  class="kpi-icon"
+                  style="background: #dcfce7; color: #16a34a"
+                >
+                  <i class="fas fa-tv"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3>Séries Actives</h3>
+                  <p id="stat-series-actives">0</p>
+                  <span class="kpi-trend positive"
+                    ><i class="fas fa-check"></i> En production</span
+                  >
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div
+                  class="kpi-icon"
+                  style="background: #f3e8ff; color: #7e22ce"
+                >
+                  <i class="fas fa-star"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3>Articles à la Une</h3>
+                  <p id="stat-alaune">0</p>
+                  <span class="kpi-trend positive">Visibles sur l'accueil</span>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -107,7 +211,6 @@
               <h2>Gestion des Programmes</h2>
               <p>Ajoute, modifie ou supprime les annonces de renouvellement.</p>
             </div>
-
             <div class="admin-card">
               <h3><i class="fas fa-plus-circle"></i> Ajouter un programme</h3>
               <form id="form-add-serie" class="admin-form">
@@ -206,7 +309,7 @@
 
                 <div class="form-row">
                   <div class="input-group">
-                    <label>Date et heure de publication automatique</label>
+                    <label>Date et heure de publication</label>
                     <input
                       type="datetime-local"
                       id="presse-date-pub"

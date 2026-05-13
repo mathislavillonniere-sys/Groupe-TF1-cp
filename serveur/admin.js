@@ -14,6 +14,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -32,28 +33,37 @@ const db = getFirestore(app);
 let isEditMode = false;
 let editDocId = null;
 
-// CONNEXION
+// ==========================================
+// CONNEXION ET SÉCURITÉ
+// ==========================================
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("page-wrapper").classList.add("is-logged-in");
+    document.getElementById("login-container").classList.add("hidden");
+    document.getElementById("dashboard-view").classList.remove("hidden");
+  } else {
+    document.getElementById("page-wrapper").classList.remove("is-logged-in");
+    document.getElementById("login-container").classList.remove("hidden");
+    document.getElementById("dashboard-view").classList.add("hidden");
+  }
+});
+
 document.getElementById("login-form").addEventListener("submit", (e) => {
   e.preventDefault();
   signInWithEmailAndPassword(
     auth,
     document.getElementById("email").value,
     document.getElementById("password").value,
-  )
-    .then(() => {
-      document.getElementById("page-wrapper").classList.add("is-logged-in");
-      document.getElementById("login-container").classList.add("hidden");
-      document.getElementById("dashboard-view").classList.remove("hidden");
-    })
-    .catch(() => alert("Identifiant ou mot de passe incorrect."));
+  ).catch(() => alert("Identifiant ou mot de passe incorrect."));
 });
+
 document
   .getElementById("btn-logout")
-  .addEventListener("click", () =>
-    signOut(auth).then(() => window.location.reload()),
-  );
+  .addEventListener("click", () => signOut(auth));
 
-// NAVIGATION
+// ==========================================
+// NAVIGATION (ONGLETS)
+// ==========================================
 document.querySelectorAll(".nav-item").forEach((item) => {
   item.addEventListener("click", () => {
     document
@@ -66,53 +76,87 @@ document.querySelectorAll(".nav-item").forEach((item) => {
   });
 });
 
-// SÉRIES
-onSnapshot(
-  query(collection(db, "renouvellements"), orderBy("ajouteLe", "desc")),
-  (snapshot) => {
-    document.getElementById("list-series-admin").innerHTML = "";
-    snapshot.forEach((docSnap) => {
-      const d = docSnap.data();
-      document.getElementById("list-series-admin").innerHTML +=
-        `<tr><td><strong>${d.titre}</strong></td><td>${d.saison}</td><td><span class="badge badge-${d.statut}">${d.statut}</span></td><td><button class="btn-delete" data-id="${docSnap.id}" data-type="serie"><i class="fas fa-trash"></i></button></td></tr>`;
-    });
-  },
-);
-// FORMULAIRE AJOUT SÉRIE
-const formAddSerie = document.getElementById("form-add-serie");
+// ==========================================
+// GESTION DES STATISTIQUES (DASHBOARD)
+// ==========================================
+// 1. Stats Presse et Programmation
+onSnapshot(collection(db, "communiques"), (snapshot) => {
+  let totalPresse = 0;
+  let totalProgrammes = 0;
+  let totalALaUne = 0;
+  const maintenant = new Date();
 
+  snapshot.forEach((docSnap) => {
+    totalPresse++;
+    const d = docSnap.data();
+
+    if (d.a_la_une === true) totalALaUne++;
+    if (d.dateAjout && typeof d.dateAjout.toDate === "function") {
+      if (d.dateAjout.toDate() > maintenant) totalProgrammes++;
+    }
+  });
+
+  const statPresseEl = document.getElementById("stat-total-presse");
+  const statProgEl = document.getElementById("stat-programmes");
+  const statALaUneEl = document.getElementById("stat-alaune");
+
+  if (statPresseEl) statPresseEl.innerText = totalPresse;
+  if (statProgEl) statProgEl.innerText = totalProgrammes;
+  if (statALaUneEl) statALaUneEl.innerText = totalALaUne;
+});
+
+// 2. Stats Séries Actives
+onSnapshot(collection(db, "renouvellements"), (snapshot) => {
+  let seriesActives = 0;
+  snapshot.forEach((docSnap) => {
+    const d = docSnap.data();
+    if (d.statut === "renouvele" || d.statut === "nouveau") {
+      seriesActives++;
+    }
+  });
+  const statSeriesEl = document.getElementById("stat-series-actives");
+  if (statSeriesEl) statSeriesEl.innerText = seriesActives;
+});
+
+// ==========================================
+// SÉRIES : AJOUT ET AFFICHAGE
+// ==========================================
+const formAddSerie = document.getElementById("form-add-serie");
 if (formAddSerie) {
   formAddSerie.addEventListener("submit", async (e) => {
     e.preventDefault();
-
-    const titre = document.getElementById("serie-titre").value.trim();
-    const saison = document.getElementById("serie-saison").value.trim();
-    const date = document.getElementById("serie-date").value.trim();
-    const statut = document.getElementById("serie-statut").value;
-
-    if (!titre || !saison || !date || !statut) {
-      alert("Merci de remplir tous les champs.");
-      return;
-    }
-
     try {
       await addDoc(collection(db, "renouvellements"), {
-        titre,
-        saison,
-        date,
-        statut,
+        titre: document.getElementById("serie-titre").value.trim(),
+        saison: document.getElementById("serie-saison").value.trim(),
+        date: document.getElementById("serie-date").value.trim(),
+        statut: document.getElementById("serie-statut").value,
         ajouteLe: new Date(),
       });
       alert("Programme ajouté avec succès !");
       formAddSerie.reset();
     } catch (error) {
-      console.error("Erreur Firebase :", error);
-      alert("Erreur lors de l'ajout. Vérifie la console.");
+      alert("Erreur lors de l'ajout.");
     }
   });
 }
 
-// FORMULAIRE PRESSE
+onSnapshot(
+  query(collection(db, "renouvellements"), orderBy("ajouteLe", "desc")),
+  (snapshot) => {
+    const list = document.getElementById("list-series-admin");
+    if (!list) return;
+    list.innerHTML = "";
+    snapshot.forEach((docSnap) => {
+      const d = docSnap.data();
+      list.innerHTML += `<tr><td><strong>${d.titre}</strong></td><td>${d.saison}</td><td><span class="badge badge-${d.statut}">${d.statut}</span></td><td><button class="btn-delete" data-id="${docSnap.id}" data-type="serie"><i class="fas fa-trash"></i></button></td></tr>`;
+    });
+  },
+);
+
+// ==========================================
+// PRESSE : AJOUT ET AFFICHAGE
+// ==========================================
 const formAddPresse = document.getElementById("form-add-presse");
 const checkboxUne = document.getElementById("presse-une");
 const uneOptions = document.getElementById("une-options");
@@ -128,8 +172,6 @@ if (checkboxUne) {
 if (formAddPresse) {
   formAddPresse.addEventListener("submit", async (e) => {
     e.preventDefault();
-
-    // On récupère la date programmée ou on met "maintenant"
     const datePubInput = document.getElementById("presse-date-pub").value;
     const datePublication = datePubInput ? new Date(datePubInput) : new Date();
 
@@ -150,7 +192,7 @@ if (formAddPresse) {
       description: checkboxUne.checked
         ? document.getElementById("presse-desc").value
         : "",
-      dateAjout: datePublication, // C'est ici que la programmation se joue !
+      dateAjout: datePublication,
     };
 
     try {
@@ -172,7 +214,6 @@ if (formAddPresse) {
   });
 }
 
-// TABLEAU PRESSE (AVEC INDICATEUR DE PROGRAMMATION)
 onSnapshot(
   query(collection(db, "communiques"), orderBy("dateAjout", "desc")),
   (snapshot) => {
@@ -183,10 +224,8 @@ onSnapshot(
       const d = docSnap.data();
       const dateObj = d.dateAjout ? d.dateAjout.toDate() : new Date();
       const isScheduled = dateObj > new Date();
-
-      // Petit badge visuel pour toi dans l'admin
       const statusLabel = isScheduled
-        ? `<br><span style="color: #f59e0b; font-size: 0.8em;"><i class="fas fa-clock"></i> Programmé (${dateObj.toLocaleString()})</span>`
+        ? `<br><span style="color: #f59e0b; font-size: 0.8em;"><i class="fas fa-clock"></i> Programmé</span>`
         : `<br><span style="color: #16a34a; font-size: 0.8em;"><i class="fas fa-check-circle"></i> En ligne</span>`;
 
       list.innerHTML += `
@@ -203,13 +242,15 @@ onSnapshot(
   },
 );
 
-// CLICS SUPPRIMER / MODIFIER
+// ==========================================
+// CLICS (SUPPRIMER / MODIFIER)
+// ==========================================
 document.addEventListener("click", async (e) => {
   const btnDel = e.target.closest(".btn-delete");
   const btnEdit = e.target.closest(".btn-edit");
 
   if (btnDel) {
-    if (confirm("Supprimer ?")) {
+    if (confirm("Voulez-vous vraiment supprimer cet élément ?")) {
       const col =
         btnDel.getAttribute("data-type") === "serie"
           ? "renouvellements"
@@ -230,13 +271,14 @@ document.addEventListener("click", async (e) => {
         document.getElementById("presse-fichier").value = d.nom_pdf;
         checkboxUne.checked = d.a_la_une;
         uneOptions.style.display = d.a_la_une ? "block" : "none";
+
         if (d.a_la_une) {
           document.getElementById("presse-badge").value = d.badge || "";
           document.getElementById("presse-ordre").value = d.ordre || "";
           document.getElementById("presse-image").value = d.nom_image || "";
           document.getElementById("presse-desc").value = d.description || "";
         }
-        // Gestion de l'affichage de la date dans le champ
+
         if (d.dateAjout) {
           const date = d.dateAjout.toDate();
           date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
@@ -245,6 +287,7 @@ document.addEventListener("click", async (e) => {
             .slice(0, 16);
         }
         btnSubmitPresse.innerText = "Enregistrer les modifications";
+        document.querySelector("[data-target='section-presse']").click();
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     });
