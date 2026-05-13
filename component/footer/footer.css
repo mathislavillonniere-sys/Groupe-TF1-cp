@@ -289,3 +289,200 @@
     height: 44px;
   }
 }
+/* =========================================
+   POP-UP COOKIES RGPD (MODAL CENTRAL)
+   ========================================= */
+
+/* Le fond sombre flouté qui bloque l'écran */
+.cookie-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 21, 43, 0.6); /* Bleu TF1 transparent */
+  backdrop-filter: blur(4px); /* Floute le site derrière */
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* La carte blanche centrale */
+.cookie-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%); /* Décalé pour l'animation */
+  width: 92%;
+  max-width: 500px;
+  background: #ffffff;
+  color: #0f172a;
+  z-index: 9999;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effet de léger rebond */
+}
+
+/* Classes pour activer l'affichage */
+.cookie-overlay.show,
+.cookie-popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+.cookie-popup.show {
+  transform: translate(-50%, -50%);
+}
+
+.cookie-header h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #00152b;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cookie-body p {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.cookie-body a {
+  color: #e31e24;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/* === VUE DES RÉGLAGES === */
+.cookie-settings {
+  display: none; /* Caché jusqu'à ce qu'on clique sur Personnaliser */
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+.cookie-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.cookie-option div strong {
+  display: block;
+  color: #00152b;
+  font-size: 0.95rem;
+}
+.cookie-option div span {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* Les boutons glissants (Toggle Switch type iPhone) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e1;
+  transition: 0.3s;
+  border-radius: 34px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+input:checked + .slider {
+  background-color: #10b981; /* Vert validé */
+}
+input:disabled + .slider {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* === BOUTONS D'ACTION === */
+.cookie-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn-cookie {
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  font-family: inherit;
+}
+
+.btn-param {
+  background: #f1f5f9;
+  color: #475569;
+  width: 100%;
+  margin-bottom: 5px;
+}
+.btn-param:hover {
+  background: #e2e8f0;
+}
+
+.btn-refuser {
+  background: #fff1f2;
+  color: #e31e24;
+  flex: 1;
+}
+.btn-refuser:hover {
+  background: #ffe4e6;
+}
+
+.btn-accepter {
+  background: #00152b;
+  color: white;
+  flex: 1;
+}
+.btn-accepter:hover {
+  background: #00254a;
+}
+
+.btn-save {
+  background: #e31e24;
+  color: white;
+  width: 100%;
+  display: none;
+}
+.btn-save:hover {
+  background: #c11218;
+}

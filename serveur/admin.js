@@ -78,6 +78,39 @@ onSnapshot(
     });
   },
 );
+// FORMULAIRE AJOUT SÉRIE
+const formAddSerie = document.getElementById("form-add-serie");
+
+if (formAddSerie) {
+  formAddSerie.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const titre = document.getElementById("serie-titre").value.trim();
+    const saison = document.getElementById("serie-saison").value.trim();
+    const date = document.getElementById("serie-date").value.trim();
+    const statut = document.getElementById("serie-statut").value;
+
+    if (!titre || !saison || !date || !statut) {
+      alert("Merci de remplir tous les champs.");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "renouvellements"), {
+        titre,
+        saison,
+        date,
+        statut,
+        ajouteLe: new Date(),
+      });
+      alert("Programme ajouté avec succès !");
+      formAddSerie.reset();
+    } catch (error) {
+      console.error("Erreur Firebase :", error);
+      alert("Erreur lors de l'ajout. Vérifie la console.");
+    }
+  });
+}
 
 // FORMULAIRE PRESSE
 const formAddPresse = document.getElementById("form-add-presse");

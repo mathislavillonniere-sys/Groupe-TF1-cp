@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p>&copy; ${currentYear} Groupe TF1 Camping Paradis — Tous droits réservés.</p>
                 <ul class="legal-links">
                     <li><a href="${prefixe}component/mentionlegal/mention.html">Mentions Légales</a></li>
-                    <li><a href="#">Confidentialité</a></li>
+                    <li><a href="${prefixe}component/confidentialite/confidentialite.html">Confidentialité</a></li>
                 </ul>
             </div>
         </div>
@@ -91,5 +91,126 @@ document.addEventListener("DOMContentLoaded", function () {
     backToTopBtn.onclick = function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
+  }
+  // =========================================
+  // POP-UP COOKIES RGPD & RÉGLAGES AVANCÉS
+  // =========================================
+
+  function initialiserBandeauCookies() {
+    // 1. On vérifie la mémoire
+    try {
+      if (localStorage.getItem("tf1cp_cookies")) return;
+    } catch (e) {
+      console.warn("Navigation privée : mémoire bloquée.");
+    }
+
+    // 2. Création de l'Overlay (fond noir)
+    const overlay = document.createElement("div");
+    overlay.className = "cookie-overlay";
+
+    // 3. Création du Pop-up
+    const popup = document.createElement("div");
+    popup.className = "cookie-popup";
+
+    // Code HTML injecté
+    popup.innerHTML = `
+      <div class="cookie-header">
+        <h3><i class="fas fa-shield-alt" style="color: #e31e24;"></i> Vos choix de cookies</h3>
+      </div>
+      
+      <div class="cookie-body" id="cookie-main-view">
+        <p>Le Groupe TF1 Camping Paradis utilise des cookies pour assurer le bon fonctionnement de la plateforme, réaliser des statistiques d'audience et vous proposer des contenus adaptés. <a href="./component/confidentialite/confidentialite.html">En savoir plus</a>.</p>
+      </div>
+
+      <div class="cookie-settings" id="cookie-settings-view">
+        <div class="cookie-option">
+          <div>
+            <strong>Cookies strictement nécessaires</strong>
+            <span>Indispensables pour naviguer sur le site.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked disabled>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="cookie-option">
+          <div>
+            <strong>Mesure d'audience (Analytics)</strong>
+            <span>Nous aide à analyser la fréquentation du site.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggle-analytics" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="cookie-buttons">
+        <button id="btn-param-cookies" class="btn-cookie btn-param">Personnaliser mes choix</button>
+        <button id="btn-refuser-cookies" class="btn-cookie btn-refuser">Tout refuser</button>
+        <button id="btn-accepter-cookies" class="btn-cookie btn-accepter">Tout accepter</button>
+        <button id="btn-save-cookies" class="btn-cookie btn-save">Enregistrer mes préférences</button>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+    document.body.appendChild(popup);
+
+    // 4. Animation d'apparition
+    setTimeout(() => {
+      overlay.classList.add("show");
+      popup.classList.add("show");
+    }, 50);
+
+    // 5. Récupération des boutons
+    const btnParam = document.getElementById("btn-param-cookies");
+    const btnAccepter = document.getElementById("btn-accepter-cookies");
+    const btnRefuser = document.getElementById("btn-refuser-cookies");
+    const btnSave = document.getElementById("btn-save-cookies");
+    const viewSettings = document.getElementById("cookie-settings-view");
+    const toggleAnalytics = document.getElementById("toggle-analytics");
+
+    // Action : Cliquer sur "Personnaliser"
+    btnParam.addEventListener("click", () => {
+      viewSettings.style.display = "block"; // Affiche les toggles
+      btnParam.style.display = "none"; // Cache "Personnaliser"
+      btnAccepter.style.display = "none"; // Cache "Tout Accepter"
+      btnRefuser.style.display = "none"; // Cache "Tout Refuser"
+      btnSave.style.display = "block"; // Affiche "Enregistrer"
+    });
+
+    // Fonction commune de fermeture et sauvegarde
+    const fermerPopup = (preferences) => {
+      try {
+        // Sauvegarde un VRAI objet de réglages (ex: {essentiel: true, analytics: false})
+        localStorage.setItem("tf1cp_cookies", JSON.stringify(preferences));
+      } catch (e) {}
+
+      overlay.classList.remove("show");
+      popup.classList.remove("show");
+
+      setTimeout(() => {
+        overlay.remove();
+        popup.remove();
+      }, 400); // Attend la fin de l'animation pour supprimer du code
+    };
+
+    // Boutons d'action
+    btnAccepter.addEventListener("click", () =>
+      fermerPopup({ essentiel: true, analytics: true }),
+    );
+    btnRefuser.addEventListener("click", () =>
+      fermerPopup({ essentiel: true, analytics: false }),
+    );
+    btnSave.addEventListener("click", () => {
+      fermerPopup({ essentiel: true, analytics: toggleAnalytics.checked });
+    });
+  }
+
+  // Lancement automatique
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initialiserBandeauCookies);
+  } else {
+    initialiserBandeauCookies();
   }
 });

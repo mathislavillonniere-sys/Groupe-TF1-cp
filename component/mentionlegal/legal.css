@@ -1,121 +1,194 @@
-/* css/legal.css - Version Institutionnelle */
+/* ============================================================
+   css/legal.css - Version Corporate Premium "TF1 CP"
+   (S'applique à toutes les pages juridiques du site)
+   ============================================================ */
 
-/* On définit des variables spécifiques pour le confort de lecture */
 :root {
-  --bg-legal: #f8fafc;
-  --text-main: #1e293b;
+  --bg-legal: #f1f5f9;
+  --text-main: #0f172a;
   --text-muted: #475569;
   --border-soft: #e2e8f0;
-  --accent-legal: #003366; /* Bleu très profond pour le côté officiel */
+  --accent-legal: #00152b; /* Ton bleu corporate */
+  --rouge-tf1: #e31e24;
+  --blanc: #ffffff;
 }
 
 body {
   background-color: var(--bg-legal);
   color: var(--text-main);
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  line-height: 1.6;
 }
 
-/* Bannière simplifiée et élégante */
+/* --- Bannière Hero Épurée --- */
 .hero-legal {
-  background-color: var(--accent-legal);
+  background: linear-gradient(135deg, var(--accent-legal) 0%, #00254a 100%);
   color: white;
   text-align: center;
-  padding: 100px 20px;
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("../img/bg-texture.png"); /* Texture légère si dispo */
+  padding: 120px 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-legal h1 {
   margin: 0;
-  font-size: 2.5em;
-  font-weight: 300; /* Plus fin pour plus d'élégance */
-  letter-spacing: 2px;
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-transform: none;
 }
 
-/* Conteneur de lecture optimal */
+/* --- Conteneur de lecture style "Document Officiel" --- */
 .legal-container {
-  max-width: 900px;
-  margin: -40px auto 80px; /* Chevauche légèrement la bannière */
-  padding: 60px 80px;
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  max-width: 96%; /* <-- La magie est ici : on prend presque tout l'écran */
+  margin: -60px auto 100px; /* Conserve le chevauchement sur la bannière */
+  padding: 60px 5%; /* Le texte respire mieux sur les côtés */
+  background: var(--blanc);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--border-soft);
+  position: relative;
+  z-index: 2;
 }
 
-/* Informations de mise à jour */
+/* Date de mise à jour */
 .last-updated {
-  font-size: 0.85em;
+  display: inline-block;
+  font-size: 0.85rem;
   color: var(--text-muted);
-  font-style: italic;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   margin-bottom: 40px;
-  display: block;
-  border-bottom: 1px solid var(--border-soft);
-  padding-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--rouge-tf1);
 }
 
-/* Titres de sections */
+/* --- Titres de sections --- */
 .legal-container h2 {
-  color: var(--bleu-corporate);
-  font-size: 1.6em;
-  margin-top: 50px;
-  margin-bottom: 20px;
+  color: var(--accent-legal);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 60px;
+  margin-bottom: 25px;
   display: flex;
   align-items: center;
+  letter-spacing: -0.5px;
 }
 
-/* Petit liseré rouge institutionnel devant le titre */
+/* Liseré bleu devant les titres */
 .legal-container h2::before {
   content: "";
   display: inline-block;
-  width: 4px;
-  height: 24px;
-  background-color: var(--rouge-tf1);
-  margin-right: 15px;
+  width: 6px;
+  height: 28px;
+  background-color: var(--accent-legal);
+  margin-right: 18px;
+  border-radius: 2px;
 }
 
 .legal-container h3 {
-  color: var(--accent-legal);
-  font-size: 1.2em;
-  margin-top: 30px;
+  color: var(--text-main);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 35px;
 }
 
-/* Paragraphes et listes */
+/* --- Paragraphes et Listes --- */
 .legal-container p {
-  line-height: 1.8;
-  margin-bottom: 20px;
-  text-align: justify; /* Pour l'aspect "document officiel" */
+  margin-bottom: 25px;
+  text-align: left;
   color: var(--text-muted);
+  font-size: 1.05rem;
 }
 
 .legal-container ul {
-  padding-left: 20px;
-  margin-bottom: 25px;
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 30px;
 }
 
 .legal-container li {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   color: var(--text-muted);
-  line-height: 1.6;
+  padding-left: 25px;
+  position: relative;
 }
 
-/* Bloc d'alerte ou note importante */
+.legal-container li::before {
+  content: "\f054"; /* Icône flèche FontAwesome */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 0.7rem;
+  color: var(--rouge-tf1);
+  position: absolute;
+  left: 0;
+  top: 6px;
+}
+
+/* Liens à l'intérieur du texte */
+.legal-container a {
+  color: var(--accent-legal);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-soft);
+  transition: all 0.2s ease;
+}
+
+.legal-container a:hover {
+  color: var(--rouge-tf1);
+  border-bottom-color: var(--rouge-tf1);
+}
+
+/* --- Bloc d'alerte / Note (ex: Intro RGPD) --- */
 .legal-note {
-  background-color: #f1f5f9;
-  border-left: 4px solid var(--bleu-corporate);
-  padding: 20px;
-  margin: 30px 0;
-  font-size: 0.9em;
+  background-color: #f8fafc;
+  border-left: 4px solid var(--accent-legal);
+  padding: 30px;
+  margin: 40px 0;
+  font-size: 0.95rem;
   color: var(--text-main);
+  border-radius: 0 8px 8px 0;
+  line-height: 1.7;
 }
 
-/* Adaptabilité mobile */
+/* --- Adaptabilité Mobile --- */
 @media (max-width: 768px) {
   .legal-container {
     margin: 20px;
     padding: 40px 25px;
   }
   .hero-legal {
-    padding: 60px 20px;
+    padding: 80px 20px;
+  }
+  .hero-legal h1 {
+    font-size: 2rem;
+  }
+}
+
+/* --- Style pour l'impression (si l'utilisateur imprime la page) --- */
+@media print {
+  body {
+    background: white;
+  }
+  .hero-legal,
+  .navbar,
+  .footer {
+    display: none;
+  }
+  .legal-container {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    max-width: 100%;
   }
 }
