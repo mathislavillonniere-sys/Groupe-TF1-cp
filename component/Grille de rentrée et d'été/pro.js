@@ -3,17 +3,17 @@ const baseDeDonnees = {
     nom: "TF1 Camping Paradis",
     type: "hebdo", // Mode par semaine
     data: {
-      "2026-04-25": {
-        label: "Programme de mi-saison 2025-2026",
-        fichier: "../../csv/tf1_annuel2025-2026misaison.csv",
+      "2026-04-24": {
+        label: "Programme d'automne 2026-2027",
+        fichier: "../../csv/tf1_annuel2026-2027automne.csv",
       },
       "2026-04-30": {
         label: "Programme été 2026",
         fichier: "../../csv/tf1_été2026.csv",
       },
-      "2025-10-20": {
-        label: "Programme Noël 2025",
-        fichier: "../../csv/tf1_noel2025.csv",
+      "2026-04-25": {
+        label: "Programme de mi-saison 2025-2026",
+        fichier: "../../csv/tf1_annuel2025-2026misaison.csv",
       },
     },
   },
