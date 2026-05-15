@@ -50,11 +50,33 @@ onAuthStateChanged(auth, (user) => {
 
 document.getElementById("login-form").addEventListener("submit", (e) => {
   e.preventDefault();
+
+  const errorBox = document.getElementById("login-error");
+  const btnSubmit = document.querySelector(".btn-login");
+
+  // 1. On recache l'erreur au cas où elle était affichée, et on met le bouton en attente
+  errorBox.classList.add("hidden");
+  btnSubmit.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Connexion...`;
+
   signInWithEmailAndPassword(
     auth,
     document.getElementById("email").value,
     document.getElementById("password").value,
-  ).catch(() => alert("Identifiant ou mot de passe incorrect."));
+  )
+    .then(() => {
+      // Si ça marche, on remet le bouton normal (Firebase gère le changement de page)
+      btnSubmit.innerHTML = `Se connecter <i class="fas fa-arrow-right"></i>`;
+    })
+    .catch(() => {
+      // 2. Si ça échoue, on affiche la belle boîte d'erreur rouge !
+      errorBox.classList.remove("hidden");
+      btnSubmit.innerHTML = `Se connecter <i class="fas fa-arrow-right"></i>`;
+
+      // Petite astuce pour relancer l'animation de "tremblement" si on se trompe plusieurs fois de suite
+      errorBox.style.animation = "none";
+      errorBox.offsetHeight; /* force la mise à jour du navigateur */
+      errorBox.style.animation = null;
+    });
 });
 
 document

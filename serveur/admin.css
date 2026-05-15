@@ -817,3 +817,42 @@ html {
   color: var(--texte-sombre);
   font-size: 0.95rem;
 }
+/* =========================================
+   MESSAGE D'ERREUR DE CONNEXION
+   ========================================= */
+.login-error {
+  background-color: #fee2e2; /* Fond rouge très clair */
+  color: #dc2626; /* Texte rouge vif */
+  padding: 12px 15px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #fca5a5;
+  animation: shake 0.4s ease-in-out; /* La petite secousse */
+}
+
+/* On s'assure que la classe hidden fonctionne bien sur cette boîte */
+.login-error.hidden {
+  display: none !important;
+}
+
+/* L'animation de tremblement */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}
