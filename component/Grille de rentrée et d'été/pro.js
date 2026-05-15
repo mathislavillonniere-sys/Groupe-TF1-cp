@@ -17,6 +17,36 @@ const baseDeDonnees = {
       },
     },
   },
+  m6: {
+    nom: "M6 Camping Paradis",
+    type: "annuel", // Mode par année
+    data: {
+      2026: {
+        label: "Grille été 2026",
+        fichier: "../../csv/m6_ete2026.csv",
+      },
+    },
+  },
+  tfx: {
+    nom: "TFX Camping Paradis",
+    type: "Grille Annuelle 2025 - 2026",
+    data: {
+      2026: {
+        label: "Grille été 2026",
+        fichier: "../../csv/tfx_ete2026.csv",
+      },
+    },
+  },
+  tmc: {
+    nom: "TMC Camping Paradis",
+    type: "Grille Annuelle 2025 - 2026",
+    data: {
+      2026: {
+        label: "Grille été 2026",
+        fichier: "../../csv/tmc_ete2026.csv",
+      },
+    },
+  },
 };
 
 // Variables globales pour retenir où l'utilisateur se trouve
