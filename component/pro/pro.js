@@ -31,7 +31,7 @@ const baseDeDonnees = {
       },
       2027: {
         label: "Grille Annuelle 2026 - 2027",
-        // fichier: "../../csv/m6_annuel2026-2027.csv",
+        fichier: "../../csv/m6_annuel2026-2027.csv",
       },
     },
   },
@@ -45,7 +45,7 @@ const baseDeDonnees = {
       },
       2027: {
         label: "Grille Annuelle 2026 - 2027",
-        // fichier: "../../csv/tfx_annuel2026-2027.csv",
+        fichier: "../../csv/tfx_annuel2026-2027.csv",
       },
     },
   },
@@ -59,7 +59,7 @@ const baseDeDonnees = {
       },
       2027: {
         label: "Grille Annuelle 2026 - 2027",
-        // fichier: "../../csv/lci_annuel2026-2027.csv",
+        fichier: "../../csv/lci_annuel2026-2027.csv",
       },
     },
   },
@@ -73,7 +73,7 @@ const baseDeDonnees = {
       },
       2027: {
         label: "Grille Annuelle 2026 - 2027",
-        // fichier: "../../csv/tmc_annuel2026-2027.csv",
+        fichier: "../../csv/tmc_annuel2026-2027.csv",
       },
     },
   },
@@ -83,7 +83,28 @@ const baseDeDonnees = {
 // Variables globales pour retenir où l'utilisateur se trouve
 let chaineActuelle = "tf1";
 let periodesDisponibles = Object.keys(baseDeDonnees[chaineActuelle].data);
-let indexActuel = 0;
+
+// 🧠 NOUVEAU : Fonction magique pour trouver automatiquement la semaine en cours
+function calculerIndexSemaineActuelle() {
+  const aujourdHui = new Date(); // Récupère la date du jour
+  let index = 0;
+
+  for (let i = 0; i < periodesDisponibles.length; i++) {
+    // Transforme le texte (ex: "2026-05-11") en vraie Date informatique
+    const dateSemaine = new Date(periodesDisponibles[i]);
+
+    // Si on a dépassé ou atteint cette semaine, on la retient
+    if (aujourdHui >= dateSemaine) {
+      index = i;
+    } else {
+      break; // Dès qu'on tombe sur une semaine future, on s'arrête !
+    }
+  }
+  return index;
+}
+
+// Au lieu de démarrer à 0, on démarre directement sur la bonne semaine !
+let indexActuel = calculerIndexSemaineActuelle();
 
 // --- 2. GESTION DU MENU DÉROULANT SUR-MESURE ---
 document.addEventListener("DOMContentLoaded", function () {
@@ -102,7 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function () {
       itemsList.classList.add("select-hide");
     });
-
     // Quand on choisit une nouvelle chaîne
     options.forEach((option) => {
       option.addEventListener("click", function () {
@@ -111,7 +131,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // On réinitialise les données pour la nouvelle chaîne
         periodesDisponibles = Object.keys(baseDeDonnees[chaineActuelle].data);
-        indexActuel = 0;
+
+        // 🧠 MODIFICATION ICI : On reste sur la bonne date même en changeant de chaîne
+        indexActuel = calculerIndexSemaineActuelle();
+
         chargerGrille();
       });
     });
@@ -290,12 +313,25 @@ function genererGrillesParTrancheHoraire(csvBrut) {
     const conteneur = document.getElementById(containerId);
     if (!conteneur) return;
 
+    // Détection du jour actuel
+    const today = new Date();
+    let jourSemaine = today.getDay();
+    let indexJourActuel = jourSemaine === 0 ? 6 : jourSemaine - 1;
+
+    // 🚨 LA CORRECTION EST ICI : On vérifie si la semaine affichée à l'écran est bien la semaine actuelle
+    const isCurrentWeek = indexActuel === calculerIndexSemaineActuelle();
+
     for (let j = 0; j < 7; j++) {
       const colHeure = j * 2;
       const colTitre = j * 2 + 1;
 
       const jourDiv = document.createElement("div");
       jourDiv.className = "colonne-jour";
+
+      // 🚨 On allume la colonne SEULEMENT si c'est le bon jour ET la bonne semaine !
+      if (isCurrentWeek && j === indexJourActuel) {
+        jourDiv.classList.add("colonne-aujourdhui");
+      }
 
       const titreJour = document.createElement("div");
       titreJour.className = "titre-jour";
@@ -306,9 +342,14 @@ function genererGrillesParTrancheHoraire(csvBrut) {
         if (row[colHeure] && row[colTitre] && row[colTitre].trim() !== "") {
           const progDiv = document.createElement("div");
           progDiv.className = "programme-item";
+
+          // On sauvegarde l'heure dans la case pour l'aiguille
+          progDiv.dataset.heure = row[colHeure].trim();
+
           progDiv.innerHTML = `
                         <div class="heure-prog">${row[colHeure].trim()}</div>
                         <div class="titre-prog">${row[colTitre].trim().replace(/^"|"$/g, "")}</div>
+                        <div class="progress-container"><div class="progress-bar"></div></div>
                     `;
           jourDiv.appendChild(progDiv);
         }
@@ -316,12 +357,12 @@ function genererGrillesParTrancheHoraire(csvBrut) {
       conteneur.appendChild(jourDiv);
     }
   }
-
   // On lance la construction des 4 grilles
   construireBloc("grille-soir", lignesSoir);
   construireBloc("grille-nuit", lignesNuit);
   construireBloc("grille-matin", lignesMatin);
   construireBloc("grille-apres-midi", lignesApresMidi);
+  setTimeout(actualiserDirect, 100); // Lance l'aiguille
 }
 
 // --- 6. OUTIL DE LECTURE DES VIRGULES DU CSV ---
@@ -343,3 +384,62 @@ function parseCSVLine(text) {
   result.push(cur);
   return result;
 }
+// --- 7. LE MOTEUR DU DIRECT ET DE L'AIGUILLE ---
+function actualiserDirect() {
+  const casesAujourdhui = document.querySelectorAll(
+    ".colonne-aujourdhui .programme-item",
+  );
+  if (casesAujourdhui.length === 0) return;
+
+  const maintenant = new Date();
+  let minutesActuelles = maintenant.getHours() * 60 + maintenant.getMinutes();
+  if (maintenant.getHours() < 6) minutesActuelles += 24 * 60; // Gère la nuit (ex: 2h du mat)
+
+  // Nettoyage avant calcul
+  document.querySelectorAll(".programme-item.en-direct").forEach((el) => {
+    el.classList.remove("en-direct");
+    if (el.querySelector(".progress-bar"))
+      el.querySelector(".progress-bar").style.height = "0%";
+  });
+
+  // Tri de toutes les émissions de la journée par heure d'apparition
+  let emissions = Array.from(casesAujourdhui)
+    .map((el) => {
+      const timeStr = el.dataset.heure.toUpperCase().split("H");
+      let h = parseInt(timeStr[0]) || 0;
+      let m = parseInt(timeStr[1]) || 0;
+      let totalMinutes = h * 60 + m;
+      if (h < 6) totalMinutes += 24 * 60;
+      return { element: el, debut: totalMinutes };
+    })
+    .sort((a, b) => a.debut - b.debut); // Trie chronologiquement
+
+  // Recherche du programme en cours
+  for (let i = 0; i < emissions.length; i++) {
+    const progActuel = emissions[i];
+    // L'émission de fin est la suivante (ou 6h du mat le lendemain s'il n'y a plus rien)
+    const progSuivant = emissions[i + 1]
+      ? emissions[i + 1].debut
+      : 24 * 60 + 6 * 60;
+
+    if (
+      minutesActuelles >= progActuel.debut &&
+      minutesActuelles < progSuivant
+    ) {
+      progActuel.element.classList.add("en-direct");
+
+      // Calcul mathématique de l'avancée de l'aiguille
+      const dureeTotale = progSuivant - progActuel.debut;
+      const dureeEcoulee = minutesActuelles - progActuel.debut;
+      let pourcentage = (dureeEcoulee / dureeTotale) * 100;
+
+      const barre = progActuel.element.querySelector(".progress-bar");
+      if (barre) barre.style.height = pourcentage + "%";
+
+      break; // Trouvé ! On arrête la recherche.
+    }
+  }
+}
+
+// Actualise l'aiguille toutes les 60 secondes pour qu'elle avance en direct !
+setInterval(actualiserDirect, 60000);
