@@ -1,0 +1,607 @@
+/* =========================================
+   THEME.CSS — Mode sombre automatique
+   S'active uniquement si l'appareil est en mode sombre
+   Généré à partir des classes réelles de chaque page
+   ========================================= */
+
+@media (prefers-color-scheme: dark) {
+
+  /* ── VARIABLES ── */
+  :root {
+    --bg-page:         #0a0f1e;
+    --bg-surface:      #0f172a;
+    --bg-card:         #1e293b;
+    --texte-principal: #e2e8f0;
+    --texte-gris:      #94a3b8;
+    --bordure:         #1e293b;
+    --bordure-forte:   #334155;
+
+    /* Alias présents dans tes CSS existants */
+    --fond-gris:    #0a0f1e;
+    --texte-noir:   #e2e8f0;
+    --gris-fond:    #0a0f1e;
+    --bg-legal:     #0a0f1e;
+    --text-main:    #e2e8f0;
+    --text-muted:   #94a3b8;
+    --border-soft:  #1e293b;
+  }
+
+  /* ── TRANSITIONS FLUIDES ── */
+  *, *::before, *::after {
+    transition: background-color 0.25s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* ════════════════════════════════════════
+     GLOBAL — toutes les pages
+     ════════════════════════════════════════ */
+
+  body {
+    background-color: var(--bg-page) !important;
+    color: var(--texte-principal) !important;
+  }
+
+  /* Titres */
+  h1, h2, h3, h4, h5, h6,
+  .section-title {
+    color: var(--texte-principal) !important;
+  }
+
+  p, li {
+    color: var(--texte-gris) !important;
+  }
+
+  /* Menu déroulant navbar */
+  .dropdown-content {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5) !important;
+  }
+  .dropdown-content li a {
+    color: var(--texte-principal) !important;
+    border-bottom-color: var(--bordure) !important;
+  }
+  .dropdown-content li a:hover {
+    background-color: var(--bg-card) !important;
+    color: var(--texte-principal) !important;
+  }
+
+  /* ════════════════════════════════════════
+     INDEX.HTML
+     ════════════════════════════════════════ */
+
+  /* Sections fond gris */
+  .section-home,
+  .section-full-grey,
+  .poles-preview-section,
+  .newsroom-section {
+    background-color: var(--bg-page) !important;
+  }
+
+  /* Section "Ce soir sur nos chaînes" */
+  .ce-soir-section {
+    background-color: var(--bg-page) !important;
+  }
+  .ce-soir-date {
+    color: var(--texte-gris) !important;
+  }
+
+  /* Cartes chaînes "Ce soir" (générées par JS) */
+  .ce-soir-grid .channel-item,
+  .channel-item {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+
+  /* Section stats premium (fond bleu foncé → on garde, déjà sombre) */
+  /* .premium-stats-section : fond --bleu-corporate, pas besoin de changer */
+  .stat-glass-card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  .stat-glass-card .stat-label {
+    color: #94a3b8 !important;
+  }
+
+  /* Section "Nos Chaînes Principales" */
+  .chaines-flex {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+  .chaines-flex .channel-item,
+  .hover-logo {
+    background-color: var(--bg-surface) !important;
+  }
+  .chaines-flex a,
+  .chaines-flex span {
+    color: var(--texte-gris) !important;
+  }
+
+  /* Section "Nos Pôles d'activités" */
+  .pole-card-preview {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    color: var(--texte-gris) !important;
+  }
+  .pole-icon-preview {
+    background-color: var(--bg-card) !important;
+  }
+
+  /* Bouton "Découvrir tous nos pôles" (fond bleu foncé → déjà ok) */
+
+  /* Section Actualités / Newsroom */
+  .newsroom-section {
+    background-color: var(--bg-page) !important;
+  }
+  .carousel-track-news > div,
+  .carousel-container-news > div {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+  /* Boutons flèches carousel news */
+  .prev-btn-news,
+  .next-btn-news {
+    background-color: var(--bg-card) !important;
+    color: var(--texte-principal) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+
+  /* Citation parallax (fond bleu foncé → déjà ok) */
+  /* .parallax-quote : on laisse tel quel */
+
+  /* ════════════════════════════════════════
+     HISTOIRE.HTML
+     ════════════════════════════════════════ */
+
+  .histoire-section {
+    background-color: var(--bg-page) !important;
+  }
+  .timeline::before {
+    background: var(--bordure-forte) !important;
+  }
+  .timeline-content {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    border-top-color: #334155 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
+  }
+  .timeline-content h3 {
+    color: var(--texte-principal) !important;
+  }
+  .timeline-content p {
+    color: var(--texte-gris) !important;
+  }
+  .timeline-date {
+    color: var(--rouge-tf1) !important;
+  }
+
+  /* ════════════════════════════════════════
+     DIRECTION.HTML
+     ════════════════════════════════════════ */
+
+  .governance-section {
+    background-color: var(--bg-page) !important;
+  }
+  .ceo-card {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
+  }
+  .ceo-image-container {
+    background-color: var(--bg-card) !important;
+  }
+  .ceo-quote blockquote {
+    background-color: var(--bg-card) !important;
+    border-left-color: var(--rouge-tf1) !important;
+    color: var(--texte-principal) !important;
+  }
+  .leader-card,
+  .board-card {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+  .leader-card:hover,
+  .board-card:hover {
+    border-color: var(--rouge-tf1) !important;
+    background-color: var(--bg-card) !important;
+  }
+  .leader-name {
+    color: var(--texte-principal) !important;
+  }
+  .leader-desc {
+    color: var(--texte-gris) !important;
+  }
+
+  /* ════════════════════════════════════════
+     CHIFFRES.HTML
+     ════════════════════════════════════════ */
+
+  .stats-section {
+    background-color: var(--bg-page) !important;
+  }
+  .stat-clean-card {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4) !important;
+  }
+  .stat-number {
+    color: var(--texte-principal) !important;
+  }
+  .stat-label {
+    color: var(--texte-gris) !important;
+  }
+  .vision-section {
+    background-color: var(--bg-surface) !important;
+  }
+  .editorial-item {
+    background-color: var(--bg-card) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+  .editorial-content h3 {
+    color: var(--texte-principal) !important;
+  }
+  .editorial-content p {
+    color: var(--texte-gris) !important;
+  }
+  .engagement-section {
+    background-color: var(--bg-page) !important;
+  }
+  /* .engagement-card : fond --bleu-corporate → déjà sombre, on garde */
+
+  /* ════════════════════════════════════════
+     FILIALES.HTML + DETAIL.HTML
+     ════════════════════════════════════════ */
+
+  .page-content {
+    background-color: var(--bg-page) !important;
+  }
+  .filter-bar {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+  .filter-pill {
+    background-color: transparent !important;
+    border-color: var(--bordure-forte) !important;
+    color: var(--texte-gris) !important;
+  }
+  .filter-pill:hover {
+    background-color: var(--bg-card) !important;
+    color: var(--texte-principal) !important;
+  }
+  .filter-pill.active {
+    background-color: #00152b !important;
+    color: #ffffff !important;
+    border-color: #00152b !important;
+  }
+  .tl-card {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+  }
+  .tl-title {
+    color: var(--texte-principal) !important;
+  }
+  .tl-date,
+  .tl-desc,
+  .dir-role {
+    color: var(--texte-gris) !important;
+  }
+  .dir-name {
+    color: var(--texte-principal) !important;
+  }
+  .tl-director {
+    border-bottom-color: var(--bordure) !important;
+  }
+  .metric-box {
+    background-color: var(--bg-card) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+  .m-lab {
+    color: var(--texte-gris) !important;
+  }
+  .tl-filiales {
+    background-color: var(--bg-card) !important;
+  }
+  .filiale-chip {
+    background-color: var(--bg-card) !important;
+    border-color: var(--bordure-forte) !important;
+    color: var(--texte-gris) !important;
+  }
+  .tl-line {
+    background: var(--bordure-forte) !important;
+  }
+  .tl-node {
+    background-color: var(--bg-surface) !important;
+  }
+  /* Bouton retour (detail.html) */
+  .btn-retour {
+    color: var(--texte-gris) !important;
+  }
+  .section-titre {
+    color: var(--texte-gris) !important;
+    border-bottom-color: var(--bordure-forte) !important;
+  }
+
+  /* ════════════════════════════════════════
+     CHAINES.HTML
+     ════════════════════════════════════════ */
+
+  .section-container {
+    background-color: var(--bg-page) !important;
+  }
+  .tab-btn {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    color: var(--texte-gris) !important;
+  }
+  .tab-btn.active {
+    background-color: #00152b !important;
+    color: #ffffff !important;
+    border-color: #00152b !important;
+  }
+  .channel-details-container {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important;
+  }
+  /* Barre EN DIRECT (fond noir → déjà ok) */
+  .channel-content {
+    background-color: var(--bg-surface) !important;
+  }
+  .info-box {
+    background-color: var(--bg-card) !important;
+    border-bottom-color: var(--bordure-forte) !important;
+  }
+  .info-box span,
+  .info-box p {
+    color: var(--texte-gris) !important;
+  }
+  .channel-description {
+    color: var(--texte-gris) !important;
+  }
+  .media-section h3 {
+    color: var(--texte-principal) !important;
+  }
+  .poster-card span {
+    color: var(--texte-principal) !important;
+  }
+  .description-viewer {
+    background-color: var(--bg-card) !important;
+  }
+  .description-viewer h4 {
+    color: var(--texte-principal) !important;
+  }
+  .description-viewer p {
+    color: var(--texte-gris) !important;
+  }
+  /* Ancien design chaînes (M6, TFX...) */
+  .channel-detail {
+    background-color: var(--bg-surface) !important;
+  }
+  .channel-subtitle {
+    color: var(--texte-principal) !important;
+  }
+  .channel-desc {
+    color: var(--texte-gris) !important;
+  }
+  .detail-info p {
+    background-color: var(--bg-card) !important;
+    color: var(--texte-principal) !important;
+  }
+
+  /* ════════════════════════════════════════
+     PRO.HTML (Grille TV)
+     ════════════════════════════════════════ */
+
+  .semaine-selector-container {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4) !important;
+  }
+  .semaine-info .dates {
+    color: var(--texte-principal) !important;
+  }
+  .semaine-info .label {
+    color: var(--texte-gris) !important;
+  }
+  .nav-btn {
+    background-color: var(--bg-card) !important;
+    color: var(--texte-principal) !important;
+  }
+  .channel-selector {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+  .channel-selector label {
+    color: var(--texte-gris) !important;
+  }
+  .select-selected {
+    color: var(--texte-principal) !important;
+  }
+  .select-items {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+  .select-items div {
+    color: var(--texte-principal) !important;
+    border-bottom-color: var(--bordure) !important;
+  }
+  .select-items div:hover {
+    background-color: var(--bg-card) !important;
+  }
+  .grille-container {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+  .colonne-jour {
+    border-right-color: var(--bordure-forte) !important;
+  }
+  .colonne-jour:nth-child(odd) {
+    background-color: var(--bg-surface) !important;
+  }
+  .colonne-jour:nth-child(even) {
+    background-color: #162032 !important;
+  }
+  .titre-jour {
+    background-color: inherit !important;
+    border-bottom-color: var(--bordure-forte) !important;
+    color: var(--texte-principal) !important;
+  }
+  .programme-item {
+    border-bottom-color: var(--bordure) !important;
+  }
+  .programme-item:hover {
+    background-color: var(--bg-card) !important;
+  }
+  .heure-prog {
+    color: var(--texte-principal) !important;
+  }
+  .titre-prog {
+    color: var(--texte-gris) !important;
+  }
+  /* Titre catégorie (fond --bleu-corporate → déjà ok) */
+  .page-title {
+    color: var(--texte-principal) !important;
+  }
+
+  /* ════════════════════════════════════════
+     RENOUVELLEMENT.HTML
+     ════════════════════════════════════════ */
+
+  .filter-bar {
+    background-color: var(--bg-page) !important;
+  }
+  #search-input {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    color: var(--texte-principal) !important;
+  }
+  #search-input::placeholder {
+    color: var(--texte-gris) !important;
+  }
+  .filter-btn {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    color: var(--texte-gris) !important;
+  }
+  .filter-btn.active,
+  .filter-btn:hover {
+    background-color: #00152b !important;
+    color: white !important;
+    border-color: #00152b !important;
+  }
+  .filter-btn.filter-renouvele.active {
+    background-color: #10b981 !important;
+    border-color: #10b981 !important;
+  }
+  .filter-btn.filter-annule.active {
+    background-color: var(--rouge-tf1) !important;
+    border-color: var(--rouge-tf1) !important;
+  }
+  .filter-btn.filter-nouveau.active {
+    background-color: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+  }
+  .program-card {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4) !important;
+  }
+  .program-card:hover {
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5) !important;
+  }
+  .show-title {
+    color: var(--texte-principal) !important;
+  }
+  .show-date {
+    color: var(--texte-gris) !important;
+    border-top-color: var(--bordure) !important;
+  }
+  /* Pastilles saisons — on garde leurs couleurs vives (elles sont lisibles) */
+
+  /* ════════════════════════════════════════
+     PRESSE.HTML + PRESSEKIT.HTML
+     ════════════════════════════════════════ */
+
+  .presse-list {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+  }
+  .presse-item {
+    border-bottom-color: var(--bordure-forte) !important;
+  }
+  .presse-item strong {
+    color: var(--texte-principal) !important;
+  }
+  .presse-item p,
+  .presse-item span {
+    color: var(--texte-gris) !important;
+  }
+
+  /* ════════════════════════════════════════
+     MENTIONS LÉGALES + CONFIDENTIALITÉ
+     ════════════════════════════════════════ */
+
+  .legal-container {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--bordure-forte) !important;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.4) !important;
+    color: var(--texte-principal) !important;
+  }
+  .legal-container h2,
+  .legal-container h3 {
+    color: var(--texte-principal) !important;
+  }
+  .legal-container p,
+  .legal-container li {
+    color: var(--texte-gris) !important;
+  }
+  .legal-container h2::before {
+    background-color: #334155 !important;
+  }
+  .legal-note {
+    background-color: var(--bg-card) !important;
+    border-left-color: #334155 !important;
+    color: var(--texte-principal) !important;
+  }
+  .last-updated {
+    color: var(--texte-gris) !important;
+  }
+  .legal-container a {
+    color: #60a5fa !important;
+  }
+
+  /* ════════════════════════════════════════
+     FOOTER (toutes les pages)
+     ════════════════════════════════════════ */
+
+  .footer-bottom {
+    background-color: #04080f !important;
+    border-top-color: var(--bordure) !important;
+  }
+  /* .corporate-footer : fond --bleu-corporate → déjà sombre, on garde */
+
+  /* ════════════════════════════════════════
+     COOKIE POPUP (injecté par footer.js)
+     ════════════════════════════════════════ */
+
+  .cookie-popup {
+    background-color: var(--bg-surface) !important;
+    color: var(--texte-principal) !important;
+  }
+  .cookie-header h3,
+  .cookie-option div strong {
+    color: var(--texte-principal) !important;
+  }
+  .cookie-body p,
+  .cookie-option div span {
+    color: var(--texte-gris) !important;
+  }
+  .btn-param {
+    background-color: var(--bg-card) !important;
+    color: var(--texte-gris) !important;
+  }
+  .btn-refuser {
+    background-color: #1a0a0a !important;
+  }
+
+}
