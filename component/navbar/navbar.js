@@ -7,13 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Si on est dans un sous-dossier, on recule (../../), sinon on reste à la racine (./)
   const prefixe = estDansSousDossier ? "../../" : "./";
 
-  // ── INJECTION AUTOMATIQUE DU THÈME SOMBRE ──
-  // Injecté ici une seule fois → s'applique sur toutes les pages automatiquement
-  const linkTheme = document.createElement("link");
-  linkTheme.rel = "stylesheet";
-  linkTheme.href = prefixe + "css/theme.css";
-  document.head.prepend(linkTheme);
-
   const navbarHTML = `
     <nav class="navbar">
       <div class="nav-container">
