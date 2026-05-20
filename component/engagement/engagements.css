@@ -1,0 +1,293 @@
+/* =========================================
+   DIRECTION ARTISTIQUE : DIGITAL APP / ECOSYSTEM PREMIUM
+   ========================================= */
+
+:root {
+  --corporate-blue: #00152b;
+  --corporate-red: #e31e24;
+  --bg-workspace: #f8fafc; /* Gris très clair type interface web moderne */
+  --bg-card: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-subtle: rgba(0, 21, 43, 0.06);
+  --font-family: Arial, sans-serif;
+  --radius-modern: 14px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background-color: var(--bg-workspace);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- HERO BANNER CORPORATE --- */
+.hero-banner {
+  background-image:
+    linear-gradient(rgba(0, 21, 43, 0.8), rgba(0, 21, 43, 0.8)),
+    url("../../photo/image-hero-chiffres.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 90px 20px;
+  text-align: center;
+  color: white;
+  border-bottom: 3px solid var(--corporate-red);
+}
+.hero-banner h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 10px 0;
+}
+.hero-banner p {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+/* --- CONTAINER MAIN --- */
+.main-container {
+  max-width: 1300px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.rse-dashboard {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+/* --- MENU LATÉRAL (Sélecteur d'Écosystème) --- */
+.rse-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: sticky;
+  top: 40px;
+}
+
+.rse-nav-item {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-modern);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: var(--text-muted);
+  font-weight: 700;
+  position: relative;
+}
+
+.rse-nav-item:hover {
+  background: rgba(0, 21, 43, 0.02);
+  color: var(--text-main);
+}
+
+.rse-nav-item.active {
+  background: var(--bg-card);
+  color: var(--text-main);
+  box-shadow: 0 4px 15px rgba(0, 21, 43, 0.03);
+}
+
+/* Éléments internes des boutons */
+.rse-nav-num {
+  font-size: 0.95rem;
+  margin-right: 15px;
+  opacity: 0.5;
+}
+.rse-nav-name {
+  font-size: 1.1rem;
+}
+.rse-nav-arrow {
+  margin-left: auto;
+  font-size: 0.85rem;
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: all 0.25s ease;
+  color: var(--pillar-color);
+}
+.rse-nav-item.active .rse-nav-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Petite barre d'accentuation sur le côté gauche */
+.rse-nav-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 25%;
+  bottom: 25%;
+  width: 4px;
+  background-color: var(--pillar-color);
+  border-radius: 0 4px 4px 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.rse-nav-item.active::before {
+  opacity: 1;
+}
+
+/* --- PANNEAU DE CONTENU CENTRAL (Style Application Premium) --- */
+.rse-main-panel {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 45px;
+  box-shadow: 0 4px 25px rgba(0, 21, 43, 0.02);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.panel-header {
+  margin-bottom: 25px;
+}
+.panel-sur-titre {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 10px;
+}
+.panel-titre {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--corporate-blue);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.panel-accroche {
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--text-main);
+  line-height: 1.6;
+  margin: 0 0 25px 0;
+  padding-left: 15px;
+  border-left: 3px solid #e2e8f0;
+}
+
+.panel-corps {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin: 0 0 40px 0;
+}
+
+.panel-section-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--corporate-blue);
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* --- GRILLE DES ACTIONS (Style Épuré Connecté) --- */
+.actions-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 45px;
+}
+.action-tag {
+  background-color: var(--bg-workspace);
+  padding: 16px 20px;
+  border-radius: var(--radius-modern);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--corporate-blue);
+  border: 1px solid rgba(0, 21, 43, 0.02);
+}
+.action-tag i {
+  font-size: 1.1rem;
+}
+
+/* --- GRILLE DES DEUX/TROIS GROS CHIFFRES --- */
+.metrics-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.metric-card {
+  background: var(--bg-workspace);
+  padding: 25px 20px;
+  border-radius: var(--radius-modern);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+.metric-value {
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.metric-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 968px) {
+  .rse-dashboard {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .rse-sidebar {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  .rse-nav-item {
+    min-width: 160px;
+    justify-content: center;
+    padding: 15px;
+  }
+  .rse-nav-arrow {
+    display: none;
+  }
+  .rse-nav-item::before {
+    top: auto;
+    bottom: 0;
+    left: 25%;
+    right: 25%;
+    height: 3px;
+    width: auto;
+    border-radius: 4px 4px 0 0;
+  }
+  .rse-main-panel {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 650px) {
+  .actions-grid-modern,
+  .metrics-grid-modern {
+    grid-template-columns: 1fr;
+  }
+  .panel-titre {
+    font-size: 1.7rem;
+  }
+  .metric-value {
+    font-size: 2.2rem;
+  }
+}

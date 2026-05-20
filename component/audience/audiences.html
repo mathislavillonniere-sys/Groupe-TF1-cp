@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audiences & Performances - Groupe TF1 Camping Paradis</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../navbar/menu.css" />
+    <link rel="stylesheet" href="audiences.css" />
+    <link rel="stylesheet" href="../footer/footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <script src="../navbar/navbar.js"></script>
+
+    <header class="hero-banner">
+      <div class="hero-content">
+        <h1>Audiences & Performances</h1>
+        <p>Saison 2025-2026 - Source Médiamétrie / Médiamat</p>
+      </div>
+    </header>
+
+    <div class="kpi-banner">
+      <div class="kpi-item">
+        <i class="fas fa-crown"></i> n°1 Groupe audiovisuel
+      </div>
+      <div class="kpi-item">
+        <i class="fas fa-chart-pie"></i> 22,5% PDA TF1 CP 4+
+      </div>
+      <div class="kpi-item">
+        <i class="fas fa-play-circle"></i> 41M Streamers/mois
+      </div>
+      <div class="kpi-item">
+        <i class="fas fa-tv"></i> 60M Téléspectateurs/mois
+      </div>
+    </div>
+
+    <div class="main-container">
+      <div class="dashboard-modern">
+        <aside class="sidebar-channels" id="channels-list"></aside>
+
+        <main class="bento-container" id="bento-content"></main>
+      </div>
+    </div>
+
+    <div class="disclaimer-audiences">
+      <p>
+        Observations : En raison des audiences cumulées, les totaux ne sont pas
+        égaux à 100%, les audiences peuvent être de plusieurs pays ou régions.
+      </p>
+    </div>
+
+    <script src="../footer/footer.js"></script>
+
+    <script>
+      /* Données minimalistes (sans emojis) */
+      const channelsData = [
+        {
+          id: "tf1",
+          name: "TF1 CP",
+          color: "#00152b",
+          accent: "#3b82f6",
+          pda: "64,5%",
+          ciblePrinc: "Individus 4+",
+          cibleComm: "FRDA <50 ans",
+          rang: "n°1",
+          rangDesc: "+10,3 pts vs concurrent principal",
+          programs: [
+            {
+              title: "La Ballade des Enfoirés",
+              genre: "Divertissement",
+              score: "7,9",
+              unit: "M",
+              trend: "+12%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-users", l: "Famille 4+" },
+                { i: "fa-clock", l: "Ven. 21h10" },
+                { i: "fa-trophy", l: "n°1 saison" },
+              ],
+            },
+            {
+              title: "6 Nations - PDG/France",
+              genre: "Sport",
+              score: "7,3",
+              unit: "M",
+              trend: "Record",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-bullseye", l: "25-49 ans" },
+                { i: "fa-clock", l: "Sam. 16h00" },
+                { i: "fa-trophy", l: "n°1 sport" },
+              ],
+            },
+            {
+              title: "Le Diplôme",
+              genre: "Fiction",
+              score: "5,0",
+              unit: "M",
+              trend: "Stable",
+              trendClass: "trend-stable",
+              details: [
+                { i: "fa-bullseye", l: "FRDA <50" },
+                { i: "fa-clock", l: "Jeu. 21h10" },
+                { i: "fa-layer-group", l: "6 épisodes" },
+              ],
+            },
+            {
+              title: "CSI: Camping Paradis",
+              genre: "Série policière",
+              score: "4,2",
+              unit: "M",
+              trend: "+8%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-bullseye", l: "35-59 ans" },
+                { i: "fa-clock", l: "Lun. 21h10" },
+                { i: "fa-star", l: "Saison 11" },
+              ],
+            },
+          ],
+        },
+        {
+          id: "m6",
+          name: "M6 CP",
+          color: "#E31E24",
+          accent: "#f87171",
+          pda: "20,04%",
+          ciblePrinc: "Individus 4+",
+          cibleComm: "FRDA <50 ans",
+          rang: "n°2",
+          rangDesc: "+3,2 pts vs concurrent direct",
+          programs: [
+            {
+              title: "Pékin Express",
+              genre: "Aventure",
+              score: "3,8",
+              unit: "M",
+              trend: "+5%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-bullseye", l: "15-34 ans" },
+                { i: "fa-clock", l: "Mar. 21h10" },
+                { i: "fa-trophy", l: "n°1 M6" },
+              ],
+            },
+            {
+              title: "Fire Country",
+              genre: "Série action",
+              score: "2,9",
+              unit: "M",
+              trend: "+15%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-bullseye", l: "25-49 ans" },
+                { i: "fa-clock", l: "Mer. 21h10" },
+                { i: "fa-layer-group", l: "Saison 3" },
+              ],
+            },
+            {
+              title: "Zone Interdite",
+              genre: "Magazine",
+              score: "2,1",
+              unit: "M",
+              trend: "Stable",
+              trendClass: "trend-stable",
+              details: [
+                { i: "fa-users", l: "35+ ans" },
+                { i: "fa-clock", l: "Dim. 21h05" },
+                { i: "fa-calendar", l: "Hebdo" },
+              ],
+            },
+            {
+              title: "Bonjour! M6 CP",
+              genre: "Matinale",
+              score: "1,4",
+              unit: "M",
+              trend: "+22%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-bullseye", l: "FRDA <50" },
+                { i: "fa-clock", l: "Lun-Ven 07h00" },
+                { i: "fa-calendar", l: "Quotidien" },
+              ],
+            },
+          ],
+        },
+        {
+          id: "lci",
+          name: "LCI CP",
+          color: "#854F0B",
+          accent: "#fbbf24",
+          pda: "15,7%",
+          ciblePrinc: "CSP+ 35-64",
+          cibleComm: "Décideurs",
+          rang: "n°1",
+          rangDesc: "Record historique mars 2026",
+          programs: [
+            {
+              title: "Le JT de 20h",
+              genre: "Information",
+              score: "0,8",
+              unit: "M",
+              trend: "+18%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-briefcase", l: "CSP+ 35+" },
+                { i: "fa-clock", l: "20h00" },
+                { i: "fa-trophy", l: "n°1 info" },
+              ],
+            },
+            {
+              title: "Bonjour & Vous",
+              genre: "Matinale",
+              score: "0,6",
+              unit: "M",
+              trend: "+100%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-briefcase", l: "CSP+ actifs" },
+                { i: "fa-clock", l: "06h00" },
+                { i: "fa-trophy", l: "n°1 matinale" },
+              ],
+            },
+            {
+              title: "Grand Débat",
+              genre: "Politique",
+              score: "0,5",
+              unit: "M",
+              trend: "+25%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-briefcase", l: "Décideurs" },
+                { i: "fa-clock", l: "Dim. 11h00" },
+                { i: "fa-trophy", l: "n°1 débat" },
+              ],
+            },
+          ],
+        },
+        {
+          id: "tfx",
+          name: "TFX CP",
+          color: "#185FA5",
+          accent: "#60a5fa",
+          pda: "13,8%",
+          ciblePrinc: "15-34 ans",
+          cibleComm: "Femmes <50 ans",
+          rang: "n°3",
+          rangDesc: "Leader TNT jeunes 15-34",
+          programs: [
+            {
+              title: "My Cats",
+              genre: "Comédie",
+              score: "1,8",
+              unit: "M",
+              trend: "+30%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-bullseye", l: "15-25 ans" },
+                { i: "fa-clock", l: "Lun. 21h10" },
+                { i: "fa-trophy", l: "n°1 TNT 15-34" },
+              ],
+            },
+            {
+              title: "Alerte: Unité Disparue",
+              genre: "Policier",
+              score: "1,5",
+              unit: "M",
+              trend: "+10%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-bullseye", l: "25-49 ans" },
+                { i: "fa-clock", l: "Mar. 21h10" },
+                { i: "fa-trophy", l: "n°2 TFX" },
+              ],
+            },
+            {
+              title: "4 Mariages 1 Lune de Miel",
+              genre: "Téléréalité",
+              score: "1,2",
+              unit: "M",
+              trend: "Stable",
+              trendClass: "trend-stable",
+              details: [
+                { i: "fa-bullseye", l: "FRDA <50" },
+                { i: "fa-clock", l: "Ven. 18h30" },
+                { i: "fa-trophy", l: "n°1 access" },
+              ],
+            },
+          ],
+        },
+        {
+          id: "tmc",
+          name: "TMC CP",
+          color: "#0F6E56",
+          accent: "#34d399",
+          pda: "9,8%",
+          ciblePrinc: "25-49 ans",
+          cibleComm: "FRDA <50 ans",
+          rang: "n°4",
+          rangDesc: "+1,2 pts sur un an",
+          programs: [
+            {
+              title: "Quotidien CP",
+              genre: "Magazine",
+              score: "1,6",
+              unit: "M",
+              trend: "+3%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-bullseye", l: "25-34 ans" },
+                { i: "fa-clock", l: "19h30" },
+                { i: "fa-trophy", l: "n°1 access" },
+              ],
+            },
+            {
+              title: "Burger Quiz CP",
+              genre: "Jeu télévisé",
+              score: "1,2",
+              unit: "M",
+              trend: "+8%",
+              trendClass: "trend-up",
+              details: [
+                { i: "fa-bullseye", l: "18-34 ans" },
+                { i: "fa-clock", l: "Mar. 21h10" },
+                { i: "fa-trophy", l: "n°1 jeu TNT" },
+              ],
+            },
+            {
+              title: "Les Simpson",
+              genre: "Animation",
+              score: "0,9",
+              unit: "M",
+              trend: "Stable",
+              trendClass: "trend-stable",
+              details: [
+                { i: "fa-bullseye", l: "15-34 ans" },
+                { i: "fa-clock", l: "18h00" },
+                { i: "fa-trophy", l: "n°1 animation" },
+              ],
+            },
+          ],
+        },
+      ];
+
+      // Utilitaire de couleur
+      const hexToRgba = (hex, alpha) => {
+        let c;
+        if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+          c = hex.substring(1).split("");
+          if (c.length == 3) {
+            c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+          }
+          c = "0x" + c.join("");
+          return (
+            "rgba(" +
+            [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") +
+            "," +
+            alpha +
+            ")"
+          );
+        }
+        return `rgba(0,0,0,${alpha})`;
+      };
+
+      const renderApp = () => {
+        const sidebar = document.getElementById("channels-list");
+        const bento = document.getElementById("bento-content");
+
+        const updateDashboard = (channel) => {
+          bento.style.opacity = 0;
+          bento.style.transform = "translateY(10px)";
+
+          setTimeout(() => {
+            let programsHtml = channel.programs
+              .map(
+                (p) => `
+              <div class="bento-program-card">
+                <div class="prog-top">
+                  <div>
+                    <h4 class="prog-title">${p.title}</h4>
+                    <span class="prog-genre">${p.genre}</span>
+                  </div>
+                  <div class="prog-trend-badge ${p.trendClass}">
+                    ${p.trendClass === "trend-up" ? '<i class="fas fa-arrow-trend-up"></i>' : '<i class="fas fa-minus"></i>'} ${p.trend}
+                  </div>
+                </div>
+                <div class="prog-score-block" style="color: ${channel.color}">
+                  ${p.score}<span class="unit">${p.unit}</span>
+                </div>
+                <div class="prog-tags">
+                  ${p.details.map((d) => `<span class="tag"><i class="fas ${d.i}"></i> ${d.l}</span>`).join("")}
+                </div>
+              </div>
+            `,
+              )
+              .join("");
+
+            bento.innerHTML = `
+              <div class="bento-top-row">
+                <div class="bento-card highlight-card" style="--card-accent: ${channel.color}; --card-bg: ${hexToRgba(channel.color, 0.03)};">
+                  <span class="bento-label">Part d'audience globale</span>
+                  <strong class="bento-value grand-valeur">${channel.pda}</strong>
+                </div>
+                <div class="bento-card">
+                  <span class="bento-label">Rang National</span>
+                  <strong class="bento-value" style="color: ${channel.color}">${channel.rang}</strong>
+                  <span class="bento-subtext"><i>${channel.rangDesc}</i></span>
+                </div>
+                <div class="bento-card">
+                  <span class="bento-label">Cible Principale</span>
+                  <strong class="bento-value text-dark">${channel.ciblePrinc}</strong>
+                  <div class="divider"></div>
+                  <span class="bento-label">Cible Commerciale</span>
+                  <strong class="bento-value text-dark small-val">${channel.cibleComm}</strong>
+                </div>
+              </div>
+
+              <div class="bento-card full-width">
+                <h3 class="section-subtitle">Programmes Leaders</h3>
+                <div class="programs-grid-modern">
+                  ${programsHtml}
+                </div>
+              </div>
+            `;
+
+            bento.style.opacity = 1;
+            bento.style.transform = "translateY(0)";
+          }, 150);
+        };
+
+        // Rendu de la liste latérale
+        channelsData.forEach((ch, idx) => {
+          const btn = document.createElement("button");
+          btn.className = `channel-nav-item ${idx === 0 ? "active" : ""}`;
+
+          // CALCUL ABSOLU : Le pourcentage de la PDA est le pourcentage de la barre.
+          // On utilise Math.min(..., 100) juste par sécurité pour éviter qu'une barre dépasse 100% visuellement.
+          const pdaValue = parseFloat(ch.pda.replace(",", "."));
+          const widthPercent = Math.min(pdaValue, 100);
+
+          btn.innerHTML = `
+            <div class="nav-content">
+              <div class="nav-info">
+                <span class="nav-name">${ch.name}</span>
+                <span class="nav-badge" style="background-color: ${ch.color}">${ch.rang}</span>
+              </div>
+              <span class="nav-pda">${ch.pda}</span>
+            </div>
+            <div class="nav-progress-track">
+              <div class="nav-progress-fill" style="width: ${widthPercent}%; background-color: ${ch.color}"></div>
+            </div>
+            <div class="nav-active-indicator" style="background-color: ${ch.color}"></div>
+          `;
+
+          btn.addEventListener("click", () => {
+            document
+              .querySelectorAll(".channel-nav-item")
+              .forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            updateDashboard(ch);
+          });
+
+          sidebar.appendChild(btn);
+        });
+
+        // Initialisation de la première chaîne
+        updateDashboard(channelsData[0]);
+      };
+
+      document.addEventListener("DOMContentLoaded", renderApp);
+    </script>
+  </body>
+</html>

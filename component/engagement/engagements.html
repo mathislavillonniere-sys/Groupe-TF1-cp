@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Engagements & Valeurs - Groupe TF1 Camping Paradis</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../navbar/menu.css" />
+    <link rel="stylesheet" href="engagements.css" />
+    <link rel="stylesheet" href="../footer/footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <script src="../navbar/navbar.js"></script>
+
+    <header class="hero-banner">
+      <div class="hero-content">
+        <h1>Nos Engagements RSE</h1>
+        <p>Bâtir un avenir audiovisuel durable et solidaire</p>
+      </div>
+    </header>
+
+    <div class="main-container">
+      <div class="rse-dashboard">
+        <aside class="rse-sidebar" id="rse-selector"></aside>
+
+        <main class="rse-main-panel" id="rse-panel"></main>
+      </div>
+    </div>
+
+    <script src="../footer/footer.js"></script>
+
+    <script>
+      /* Base de données RSE nettoyée et structurée */
+      const rseData = [
+        {
+          id: "environnement",
+          num: "01",
+          theme: "Environnement",
+          surtitre: "Engagement RSE Planète",
+          titre: "Vers la neutralité carbone d'ici 2030",
+          accroche:
+            "Un groupe qui pèse 206 milliards d'euros se doit d'assumer ses responsabilités environnementales. TF1 Camping Paradis s'y engage pleinement.",
+          corps:
+            "Depuis 2022, le Groupe a engagé une transformation profonde de ses infrastructures, de ses mobilités et de son mix énergétique. L'objectif est clair : zéro émission nette à l'horizon 2030, avec en parallèle le lancement d'un grand pôle Énergie renouvelable.",
+          color: "#22c55e",
+          metrics: [
+            { val: "2030", label: "Neutralité carbone" },
+            { val: "-40%", label: "Émissions CO₂ visées" },
+            { val: "100%", label: "Bâtiments à rénover" },
+          ],
+          actions: [
+            "Transition énergétique des bâtiments",
+            "Mobilités durables via la RACP",
+            "Investissement bas carbone",
+            "Pôle Énergie renouvelable 2030",
+          ],
+        },
+        {
+          id: "solidarite",
+          num: "02",
+          theme: "Solidarité",
+          surtitre: "Engagement Social Société",
+          titre: "La solidarité au cœur de chaque antenne",
+          accroche:
+            "Chaque année, plus de 120 associations bénéficient de la puissance des antennes du groupe. Une mission que TF1 Camping Paradis assume avec fierté.",
+          corps:
+            "Du Sidaction au Téléthon, le Groupe mobilise ses équipes, ses animateurs et ses écrans pour les grandes causes. Mise à disposition d'espaces publicitaires, reversement de gains, partage de savoir-faire - la solidarité est un engagement structurel, pas une opération de communication.",
+          color: "#3b82f6",
+          metrics: [
+            { val: "120+", label: "Associations soutenues" },
+            { val: "55%", label: "Femmes au CA" },
+            { val: "32 000", label: "Collaborateurs" },
+          ],
+          actions: [
+            "Sidaction, Téléthon, Resto du Cœur",
+            "Espaces pub gratuits aux asso.",
+            "Gouvernance paritaire exemplaire",
+            "Programme diversité & inclusion",
+          ],
+        },
+        {
+          id: "culture",
+          num: "03",
+          theme: "Culture",
+          surtitre: "Engagement Culturel Création",
+          titre: "Défendre et financer la création française",
+          accroche:
+            "Dans un marché dominé par les plateformes américaines, TF1 Camping Paradis choisit d'investir massivement dans la fiction et les formats 100% français.",
+          corps:
+            "Studios Paradis produit chaque année plus de 50 projets, des séries aux documentaires. En 2026, le Groupe franchit une étape historique avec la distribution de 4 films en salles, dont le biopic de Jean Moulin sélectionné à Cannes une première pour un groupe de télévision.",
+          color: "#f59e0b",
+          metrics: [
+            { val: "50+", label: "Productions / an" },
+            { val: "4", label: "Films en salles 2026" },
+            { val: "3", label: "Partenaires US" },
+          ],
+          actions: [
+            "Studios Paradis: fictions françaises",
+            "Co-productions CBS, ABC, Netflix",
+            "4 films en salles en 2026",
+            "Soutien auteurs émergents",
+          ],
+        },
+      ];
+
+      // Utilitaire de couleur ultra-légère pour les fonds actifs
+      const hexToRgba = (hex, alpha) => {
+        let c;
+        if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+          c = hex.substring(1).split("");
+          if (c.length == 3) {
+            c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+          }
+          c = "0x" + c.join("");
+          return (
+            "rgba(" +
+            [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") +
+            "," +
+            alpha +
+            ")"
+          );
+        }
+        return `rgba(0,0,0,${alpha})`;
+      };
+
+      const renderApp = () => {
+        const selectorContainer = document.getElementById("rse-selector");
+        const panelContainer = document.getElementById("rse-panel");
+
+        const updatePanel = (pillar) => {
+          // Micro-animation de fondu
+          panelContainer.style.opacity = 0;
+          panelContainer.style.transform = "translateY(10px)";
+
+          setTimeout(() => {
+            // Génération des actions sous forme de puces modernes (tags)
+            const actionsHtml = pillar.actions
+              .map(
+                (act) => `
+              <div class="action-tag">
+                <i class="fas fa-check-circle" style="color: ${pillar.color}"></i>
+                <span>${act}</span>
+              </div>
+            `,
+              )
+              .join("");
+
+            // Génération des grosses cartes de données métriques
+            const metricsHtml = pillar.metrics
+              .map(
+                (met) => `
+              <div class="metric-card">
+                <span class="metric-value" style="color: ${pillar.color}">${met.val}</span>
+                <span class="metric-label">${met.label}</span>
+              </div>
+            `,
+              )
+              .join("");
+
+            panelContainer.innerHTML = `
+              <div class="panel-header">
+                <span class="panel-sur-titre" style="color: ${pillar.color}">${pillar.surtitre}</span>
+                <h2 class="panel-titre">${pillar.titre}</h2>
+              </div>
+
+              <p class="panel-accroche">"${pillar.accroche}"</p>
+              
+              <p class="panel-corps">${pillar.corps}</p>
+
+              <div class="panel-section-title">Feuille de route & Actions</div>
+              <div class="actions-grid-modern">
+                ${actionsHtml}
+              </div>
+
+              <div class="panel-section-title">Indicateurs clés</div>
+              <div class="metrics-grid-modern">
+                ${metricsHtml}
+              </div>
+            `;
+
+            panelContainer.style.opacity = 1;
+            panelContainer.style.transform = "translateY(0)";
+          }, 150);
+        };
+
+        // Génération des boutons de la barre latérale
+        rseData.forEach((pillar, idx) => {
+          const btn = document.createElement("button");
+          btn.className = `rse-nav-item ${idx === 0 ? "active" : ""}`;
+          btn.style.setProperty("--pillar-color", pillar.color);
+          btn.style.setProperty("--pillar-bg", hexToRgba(pillar.color, 0.04));
+
+          btn.innerHTML = `
+            <span class="rse-nav-num">${pillar.num}</span>
+            <span class="rse-nav-name">${pillar.theme}</span>
+            <i class="fas fa-chevron-right rse-nav-arrow"></i>
+          `;
+
+          btn.addEventListener("click", () => {
+            document
+              .querySelectorAll(".rse-nav-item")
+              .forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            updatePanel(pillar);
+          });
+
+          selectorContainer.appendChild(btn);
+        });
+
+        // Initier avec le premier pilier (Environnement)
+        updatePanel(rseData[0]);
+      };
+
+      document.addEventListener("DOMContentLoaded", renderApp);
+    </script>
+  </body>
+</html>

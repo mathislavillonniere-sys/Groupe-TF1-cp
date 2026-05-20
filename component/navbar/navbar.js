@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <li><a href="${prefixe}component/direction/direction.html" class="nav-link">Notre Direction</a></li>
               <li><a href="${prefixe}component/filiales/filiales.html" class="nav-link">Nos Pôles</a></li>
               <li><a href="${prefixe}component/chiffres/chiffre.html" class="nav-link">Chiffres Clés</a></li>
+              <li><a href="${prefixe}component/engagement/engagements.html" class="nav-link">Nos Engagements</a></li>
             </ul>
           </li>
           <li class="dropdown">
@@ -42,7 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <ul class="dropdown-content">
               <li><a href="${prefixe}component/renouvellement/renouvellement.html" class="nav-link">Renouvellement 2026-2027</a></li>
               <li><a href="${prefixe}component/Grille de rentrée et d'été/pro.html" class="nav-link">Grille saisonnière</a></li>
-            </ul>
+              <li><a href="${prefixe}component/audience/audiences.html" class="nav-link">Nos audiences</a></li>
+              </ul>
           </li>
           <li class="dropdown">
             <a href="#">Presse ▾</a>
