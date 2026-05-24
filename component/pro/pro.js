@@ -3,10 +3,6 @@ const baseDeDonnees = {
     nom: "TF1 Camping Paradis",
     type: "hebdo", // Mode par semaine
     data: {
-      "2026-05-11": {
-        label: "Semaine du 11 Mai au 17 Mai 2026",
-        fichier: "../../csv/tf1_semaine_10mai.csv",
-      },
       "2026-05-18": {
         label: "Semaine du 18 Mai au 24 Mai 2026",
         fichier: "../../csv/tf1_semaine_18mai.csv",
@@ -18,6 +14,14 @@ const baseDeDonnees = {
       "2026-06-01": {
         label: "Semaine du 1er au 7 Juin 2026",
         fichier: "../../csv/tf1_semaine_1juin.csv",
+      },
+      "2026-06-08": {
+        label: "Semaine du 8 au 14 Juin 2026",
+        fichier: "../../csv/tf1_semaine_8juin.csv",
+      },
+      "2026-06-15": {
+        label: "Semaine du 15 au 21 Juin 2026",
+        fichier: "../../csv/tf1_semaine_15juin.csv",
       },
     },
   },
@@ -78,6 +82,16 @@ const baseDeDonnees = {
     },
   },
   // Ajoutez TMC et TFX sur le même modèle que M6
+  family: {
+    nom: "Family Camping Paradis",
+    type: "annuel", // ou "hebdo" si tu préfères fonctionner par semaine comme TF1
+    data: {
+      2027: {
+        label: "Grille Annuelle 2026 - 2027",
+        fichier: "../../csv/family_annuel2026-2027.csv",
+      },
+    },
+  },
 };
 
 // Variables globales pour retenir où l'utilisateur se trouve
@@ -183,7 +197,9 @@ function chargerGrille() {
 
   // C. Masquer/Afficher les blocs selon la chaîne (Prime Time uniquement pour TFX/TMC/M6)
   const sections = document.querySelectorAll(".categorie-section");
-  const estChaineReduite = ["tfx", "tmc", "m6"].includes(chaineActuelle);
+  const estChaineReduite = ["tfx", "tmc", "m6", "family"].includes(
+    chaineActuelle,
+  );
 
   sections.forEach((section) => {
     const titre = section
