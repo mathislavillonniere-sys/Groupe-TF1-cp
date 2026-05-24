@@ -305,7 +305,7 @@ function genererGrillesParTrancheHoraire(csvBrut) {
             (heure === 23 && minutes < 26)
           ) {
             trancheHoraire = "soir";
-          } else if ((heure === 23 && minutes >= 26) || heure <= 6) {
+          } else if ((heure === 23 && minutes >= 26) || heure <= 5) {
             trancheHoraire = "nuit";
           } else if (heure >= 6 && heure < 13) {
             trancheHoraire = "matin";
