@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <li class="dropdown">
             <a href="#">Nos Programmes ▾</a>
             <ul class="dropdown-content">
+              <li><a href="${prefixe}component/programme/programme.html" class="nav-link">Programmes</a></li>
               <li><a href="${prefixe}component/renouvellement/renouvellement.html" class="nav-link">Renouvellement 2026-2027</a></li>
               <li><a href="${prefixe}component/Grille de rentrée et d'été/pro.html" class="nav-link">Grille saisonnière</a></li>
               <li><a href="${prefixe}component/audience/audiences.html" class="nav-link">Nos audiences</a></li>

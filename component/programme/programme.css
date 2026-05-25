@@ -1,0 +1,282 @@
+/* ============================================================
+   programmes.css - Design type "Plateforme VOD"
+   ============================================================ */
+
+.page-vod {
+  background-color: #f4f7f6; /* Ton nouveau fond gris clair */
+  color: #00152b; /* <-- On remplace 'white' par le bleu très foncé */
+}
+
+/* ── 1. LA MOSAÏQUE (BENTO GRID) ── */
+.bento-featured {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 250px 250px;
+  gap: 20px;
+  padding: 40px 5%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.bento-item {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+  color: white;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.bento-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.bento-large {
+  grid-row: 1 / 3; /* Prend les deux lignes de hauteur */
+  padding: 50px;
+}
+
+.bento-small {
+  padding: 30px;
+}
+
+.bento-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 21, 43, 0.9) 0%,
+    rgba(0, 21, 43, 0.2) 60%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+
+.bento-content {
+  position: relative;
+  z-index: 2;
+}
+
+.bento-item h2 {
+  margin: 10px 0 5px 0;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.bento-large h2 {
+  font-size: 3.5rem;
+}
+.bento-small h2 {
+  font-size: 1.5rem;
+}
+
+.bento-item p {
+  margin: 0;
+  color: #cbd5e1;
+}
+
+.bento-large p {
+  font-size: 1.2rem;
+}
+.bento-small p {
+  font-size: 0.9rem;
+}
+
+/* Badges */
+.badge {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.badge-red {
+  background: var(--rouge-tf1, #e31e24);
+}
+.badge-blue {
+  background: #3b82f6;
+}
+.badge-live {
+  background: transparent;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+}
+.badge-live .dot {
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ── 2. LES LIGNES HORIZONTALES (SWIMLANES) ── */
+.vod-catalogue {
+  padding: 0 0 60px 0;
+}
+
+.vod-row {
+  margin-bottom: 40px;
+}
+
+.row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 5%;
+  margin-bottom: 15px;
+}
+
+.row-header h3 {
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.btn-voir-tout {
+  background: transparent;
+  border: none;
+  color: #7b889b;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.btn-voir-tout:hover {
+  color: var(--rouge-tf1, #e31e24); /* <-- On remplace 'white' par le rouge */
+}
+
+.row-wrapper {
+  position: relative;
+}
+
+.row-container {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 10px 5%; /* Padding latéral pour aligner avec le titre */
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Cache la scrollbar sur Firefox */
+}
+
+.row-container::-webkit-scrollbar {
+  display: none; /* Cache la scrollbar sur Chrome/Safari */
+}
+
+/* Cartes (Affiches 16:9) */
+.vod-card {
+  flex: 0 0 300px; /* Largeur fixe pour faire le carrousel */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.vod-card:hover {
+  transform: scale(1.05); /* Effet de zoom Netflix */
+  z-index: 5;
+}
+
+.card-img {
+  width: 100%;
+  height: 170px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #1e293b;
+  transition: border-color 0.3s;
+}
+
+.vod-card:hover .card-img {
+  border-color: #64748b;
+}
+
+.card-info h4 {
+  margin: 0 0 3px 0;
+  font-size: 1.1rem;
+  color: #00152b; /* <-- On remplace 'white' par le bleu très foncé pour qu'on puisse lire les titres */
+}
+
+.genre {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Flèches de navigation flottantes */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-80%); /* Centré sur l'image, pas sur le texte */
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 80px;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition:
+    opacity 0.3s,
+    background 0.3s;
+}
+
+.row-wrapper:hover .scroll-btn {
+  opacity: 1;
+}
+.scroll-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  color: var(--rouge-tf1, #e31e24);
+}
+
+.scroll-left {
+  left: 0;
+  border-radius: 0 8px 8px 0;
+}
+.scroll-right {
+  right: 0;
+  border-radius: 8px 0 0 8px;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .bento-featured {
+    grid-template-columns: 1fr;
+    grid-template-rows: 400px 200px 200px;
+    padding: 20px 5%;
+  }
+  .bento-large {
+    grid-row: 1 / 2;
+  }
+  .vod-card {
+    flex: 0 0 240px;
+  }
+  .card-img {
+    height: 135px;
+  }
+  .scroll-btn {
+    display: none;
+  } /* On cache les flèches sur mobile (tactile) */
+}

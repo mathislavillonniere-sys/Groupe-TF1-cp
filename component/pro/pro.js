@@ -3,10 +3,6 @@ const baseDeDonnees = {
     nom: "TF1 Camping Paradis",
     type: "hebdo", // Mode par semaine
     data: {
-      "2026-05-18": {
-        label: "Semaine du 18 Mai au 24 Mai 2026",
-        fichier: "../../csv/tf1_semaine_18mai.csv",
-      },
       "2026-05-25": {
         label: "Semaine du 25 Mai au 31 Mai 2026",
         fichier: "../../csv/tf1_semaine_25mai.csv",
