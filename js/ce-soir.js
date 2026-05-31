@@ -24,22 +24,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     {
       id: "tf1",
       logo: "./photo/logo-TF1.jpg",
-      fichierCSV: "./csv/tf1_annuel2025-2026misaison.csv",
+      fichierCSV: "./csv/tf1_été2026.csv",
     },
     {
       id: "m6",
       logo: "./photo/logo-M6-removebg-preview.png",
-      fichierCSV: "./csv/m6_annuel2025-2026.csv",
+      fichierCSV: "./csv/m6_ete2026.csv",
     },
     {
       id: "tfx",
       logo: "./photo/logo-TFX.jpg",
-      fichierCSV: "./csv/tfx_annuel2025-2026.csv",
+      fichierCSV: "./csv/tfx_ete2026.csv",
     },
     {
       id: "tmc",
       logo: "./photo/logo-TMC.jpg",
-      fichierCSV: "./csv/tmc_annuel2025-2026.csv",
+      fichierCSV: "./csv/tmc_ete2026.csv",
     },
     {
       id: "lci",

@@ -26,8 +26,8 @@ const baseDeDonnees = {
     type: "annuel", // Mode par année
     data: {
       2026: {
-        label: "Grille Annuelle 2025 - 2026",
-        fichier: "../../csv/m6_annuel2025-2026.csv",
+        label: "Grille été 2026",
+        fichier: "../../csv/m6_ete2026.csv",
       },
       2027: {
         label: "Grille Annuelle 2026 - 2027",
@@ -40,8 +40,8 @@ const baseDeDonnees = {
     type: "Grille Annuelle 2025 - 2026",
     data: {
       2026: {
-        label: "Grille Annuelle 2025 - 2026",
-        fichier: "../../csv/tfx_annuel2025-2026.csv",
+        label: "Grille été 2026",
+        fichier: "../../csv/tfx_ete2026.csv",
       },
       2027: {
         label: "Grille Annuelle 2026 - 2027",
@@ -68,8 +68,8 @@ const baseDeDonnees = {
     type: "Grille Annuelle 2025 - 2026",
     data: {
       2026: {
-        label: "Grille Annuelle 2025 - 2026",
-        fichier: "../../csv/tmc_annuel2025-2026.csv",
+        label: "Grille été 2026",
+        fichier: "../../csv/tmc_ete2026.csv",
       },
       2027: {
         label: "Grille Annuelle 2026 - 2027",
