@@ -15,10 +15,6 @@ const baseDeDonnees = {
         label: "Programme Mi-été 2026",
         fichier: "../../csv/tf1_miété2026.csv",
       },
-      "2026-04-26": {
-        label: "Programme de mi-saison 2025-2026",
-        fichier: "../../csv/tf1_annuel2025-2026misaison.csv",
-      },
     },
   },
   m6: {
