@@ -33,14 +33,18 @@ if ("serviceWorker" in navigator) {
 // Attente du chargement complet du DOM pour lier le bouton
 document.addEventListener("DOMContentLoaded", () => {
   const btnNotif = document.getElementById("btn-notifications");
-
   if (btnNotif) {
-    console.log("Bouton de notification détecté dans la page.");
+    console.log("Bouton de notification détecté immédiatement dans la page.");
     btnNotif.addEventListener("click", DemanderPermissionEtToken);
   } else {
-    console.error(
-      "Le bouton 'btn-notifications' est introuvable dans le HTML.",
-    );
+    // Si le bouton n'est pas encore là, on utilise un intervalle rapide pour le chasser
+    const verifBouton = setInterval(() => {
+      const btnSecours = document.getElementById("btn-notifications");
+      if (btnSecours) {
+        btnSecours.addEventListener("click", DemanderPermissionEtToken);
+        clearInterval(verifBouton);
+      }
+    }, 100);
   }
 });
 
