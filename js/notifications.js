@@ -49,56 +49,65 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function DemanderPermissionEtToken() {
-  alert("Étape 1 : Clic détecté ! Demande de permission lancée...");
+  alert("Étape 1 : Clic détecté ! Vérification du statut actuel...");
+
+  // 1. Si la permission est déjà accordée, on saute directement à la suite
+  if (window.Notification && Notification.permission === "granted") {
+    alert("Statut : Déjà accordé ! Passage direct à l'étape 3.");
+    continuerProcessus();
+    return;
+  }
+
+  if (window.Notification && Notification.permission === "denied") {
+    alert(
+      "Attention : L'iPhone indique que vous avez bloqué les notifications pour cette app dans vos Réglages iPhone.",
+    );
+    return;
+  }
 
   try {
-    // Fonction de secours pour obtenir la permission de manière compatible iOS
-    let permission;
+    alert("Lancement de la demande native Apple...");
 
-    try {
-      // On teste d'abord la méthode moderne
-      permission = await Notification.requestPermission();
-    } catch (e) {
-      // Si l'await plante (vieux comportement iOS), on utilise le callback
-      permission = await new Promise((resolve) => {
-        Notification.requestPermission((res) => {
-          resolve(res);
-        });
-      });
-    }
+    // Syntaxe pure iOS (Callback classique)
+    Notification.requestPermission(function (permission) {
+      alert("Étape 2 : Réponse reçue de l'iPhone = " + permission);
 
-    alert("Étape 2 : Réponse de l'iPhone = " + permission);
-
-    if (permission === "granted") {
-      alert(
-        "Étape 3 : Permission accordée ! Récupération du Service Worker...",
-      );
-      const registration = await navigator.serviceWorker.ready;
-
-      alert("Étape 4 : Service Worker prêt ! Génération du Token Firebase...");
-      const token = await getToken(messaging, {
-        vapidKey:
-          "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
-        serviceWorkerRegistration: registration,
-      });
-
-      if (token) {
-        alert("Étape 5 : Token généré ! Enregistrement dans Firestore...");
-        await addDoc(collection(db, "tokens_notifications"), {
-          token: token,
-          dateAbonnement: new Date(),
-          appareil: "iPhone",
-        });
-        alert("Abonnement réussi !");
+      if (permission === "granted") {
+        continuerProcessus();
       } else {
-        alert("Erreur : Le token généré est vide.");
+        alert("Permission refusée par l'utilisateur ou le système.");
       }
-    } else {
-      alert(
-        "La permission a été refusée ou est bloquée globalement dans les réglages de votre iPhone.",
-      );
-    }
+    });
   } catch (error) {
-    alert("Erreur système pendant le processus : " + error.message);
+    alert("Erreur lors de la demande : " + error.message);
+  }
+}
+
+// Sous-fonction pour la suite (Étapes 3, 4, 5) pour ne pas surcharger iOS
+async function continuerProcessus() {
+  try {
+    alert("Étape 3 : Récupération du Service Worker...");
+    const registration = await navigator.serviceWorker.ready;
+
+    alert("Étape 4 : Génération du Token Firebase...");
+    const token = await getToken(messaging, {
+      vapidKey:
+        "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
+      serviceWorkerRegistration: registration,
+    });
+
+    if (token) {
+      alert("Étape 5 : Token généré ! Sauvegarde Firestore...");
+      await addDoc(collection(db, "tokens_notifications"), {
+        token: token,
+        dateAbonnement: new Date(),
+        appareil: "iPhone",
+      });
+      alert("Félicitations ! Abonnement réussi.");
+    } else {
+      alert("Le token retourné est vide.");
+    }
+  } catch (err) {
+    alert("Erreur lors de la génération du token : " + err.message);
   }
 }
