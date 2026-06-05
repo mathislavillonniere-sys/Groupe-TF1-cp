@@ -22,62 +22,60 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const messaging = getMessaging(app);
 
-// 1. Enregistrement du Service Worker dès le chargement de la page
-window.addEventListener("load", () => {
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker
-      .register("/firebase-messaging-sw.js")
-      .then((reg) =>
-        console.log("Service Worker enregistré avec succès !", reg.scope),
-      )
-      .catch((err) =>
-        console.error("Échec de l'enregistrement du Service Worker :", err),
-      );
-  }
+// Enregistrement du Service Worker immédiatement
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/firebase-messaging-sw.js")
+    .then((reg) => console.log("SW Enregistré avec succès !"))
+    .catch((err) => console.error("Erreur d'enregistrement du SW :", err));
+}
 
-  // Écoute du clic sur le bouton
+// Attente du chargement complet du DOM pour lier le bouton
+document.addEventListener("DOMContentLoaded", () => {
   const btnNotif = document.getElementById("btn-notifications");
+
   if (btnNotif) {
+    console.log("Bouton de notification détecté dans la page.");
     btnNotif.addEventListener("click", DemanderPermissionEtToken);
+  } else {
+    console.error(
+      "Le bouton 'btn-notifications' est introuvable dans le HTML.",
+    );
   }
 });
 
-// 2. Fonction déclenchée par le clic (Action directe exigée par iOS)
 async function DemanderPermissionEtToken() {
-  alert("Étape 1 : Clic détecté ! Tentative de demande de permission...");
+  alert("Étape 1 : Clic détecté ! Demande de permission lancée...");
 
   try {
     const permission = await Notification.requestPermission();
-    alert("Étape 2 : Réponse d'iOS à la permission : " + permission);
+    alert("Étape 2 : Réponse de l'iPhone = " + permission);
 
     if (permission === "granted") {
-      alert("Étape 3 : Permission accordée, récupération du Service Worker...");
       const registration = await navigator.serviceWorker.ready;
 
-      alert("Étape 4 : Service Worker prêt, génération du Token Firebase...");
+      // REMPLACEZ BIEN PAR VOTRE CLÉ CLOUD MESSAGING GENERÉE SUR FIREBASE
       const token = await getToken(messaging, {
-        vapidKey: "VOTRE_CLE_VAPID_PUBLIQUE_ICI",
+        vapidKey:
+          "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
         serviceWorkerRegistration: registration,
       });
 
       if (token) {
-        alert("Étape 5 : Token généré ! Enregistrement dans la base...");
+        alert("Étape 3 : Token généré ! Enregistrement...");
         await addDoc(collection(db, "tokens_notifications"), {
           token: token,
           dateAbonnement: new Date(),
           appareil: "iPhone",
         });
-        alert("Succès total ! Enregistré.");
+        alert("Abonnement réussi !");
       } else {
-        alert("Erreur : Le token retourné est vide.");
+        alert("Le token généré est vide.");
       }
     } else {
-      alert(
-        "iOS a refusé la permission ou elle est déjà bloquée dans vos réglages iPhone.",
-      );
+      alert("La permission a été refusée ou bloquée par l'iPhone.");
     }
   } catch (error) {
-    alert("Une erreur est survenue : " + error.message);
-    console.error(error);
+    alert("Erreur système : " + error.message);
   }
 }
