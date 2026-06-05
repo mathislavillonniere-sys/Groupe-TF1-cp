@@ -22,41 +22,43 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const messaging = getMessaging(app);
 
-// Demande d'autorisation et récupération du Token
 async function activerNotifications() {
   try {
-    const permission = await Notification.requestPermission();
-    if (permission === "granted") {
-      console.log("Permission accordée !");
+    // 1. On force l'enregistrement du Service Worker pour iOS
+    if ("serviceWorker" in navigator) {
+      const registration = await navigator.serviceWorker.register(
+        "/firebase-messaging-sw.js",
+      );
+      console.log("Service Worker enregistré !");
 
-      // /!\ ATTENTION : Il vous faudra générer votre clé VAPID sur Firebase (voir Étape 4)
-      const token = await getToken(messaging, {
-        vapidKey: "V3t5ahSu3-ojIU4VNi6i22K3MgrXtU1kJTMIQogxSTs",
-      });
+      // 2. On demande la permission
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        console.log("Permission accordée !");
 
-      if (token) {
-        console.log("Token de l'appareil :", token);
-        // On sauvegarde le token dans Firestore pour savoir à qui envoyer les notifications
-        await addDoc(collection(db, "tokens_notifications"), {
-          token: token,
-          dateAbonnement: new Date(),
+        // 3. On récupère le Token en lui passant le service worker enregistré
+        const token = await getToken(messaging, {
+          vapidKey:
+            "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
+          serviceWorkerRegistration: registration,
         });
+
+        if (token) {
+          console.log("Token généré :", token);
+          await addDoc(collection(db, "tokens_notifications"), {
+            token: token,
+            dateAbonnement: new Date(),
+          });
+        }
       }
-    } else {
-      console.log("Permission refusée.");
     }
   } catch (error) {
-    console.error("Erreur lors de l'activation des notifications :", error);
+    console.error("Erreur notifications :", error);
   }
 }
 
-// On lance la demande dès que la page est chargée (ou liez cette fonction à un bouton)
+// On lance la détection
 window.addEventListener("load", () => {
-  // Optionnel : ne demander que si l'application est installée sur l'écran d'accueil
-  if (
-    window.matchMedia("(display-mode: standalone)").matches ||
-    window.navigator.standalone
-  ) {
-    activerNotifications();
-  }
+  // On l'exécute directement pour tester, même si on est sur navigateur
+  activerNotifications();
 });
