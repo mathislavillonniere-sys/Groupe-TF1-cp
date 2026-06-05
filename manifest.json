@@ -2,8 +2,20 @@
   "name": "Groupe TF1 Camping Paradis",
   "short_name": "TF1 CP",
   "display": "standalone",
-  "start_url": "/",
+  "start_url": "./index.html",
   "scope": "/",
   "background_color": "#00152b",
-  "theme_color": "#00152b"
+  "theme_color": "#00152b",
+  "icons": [
+    {
+      "src": "./photo/logo_claire-removebg-preview.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./photo/logo_claire-removebg-preview.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
