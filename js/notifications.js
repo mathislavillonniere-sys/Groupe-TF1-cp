@@ -22,43 +22,65 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const messaging = getMessaging(app);
 
-async function activerNotifications() {
-  try {
-    // 1. On force l'enregistrement du Service Worker pour iOS
-    if ("serviceWorker" in navigator) {
-      const registration = await navigator.serviceWorker.register(
-        "/firebase-messaging-sw.js",
+// 1. Enregistrement du Service Worker dès le chargement de la page
+window.addEventListener("load", () => {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/firebase-messaging-sw.js")
+      .then((reg) =>
+        console.log("Service Worker enregistré avec succès !", reg.scope),
+      )
+      .catch((err) =>
+        console.error("Échec de l'enregistrement du Service Worker :", err),
       );
-      console.log("Service Worker enregistré !");
+  }
 
-      // 2. On demande la permission
-      const permission = await Notification.requestPermission();
-      if (permission === "granted") {
-        console.log("Permission accordée !");
+  // Écoute du clic sur le bouton
+  const btnNotif = document.getElementById("btn-notifications");
+  if (btnNotif) {
+    btnNotif.addEventListener("click", DemanderPermissionEtToken);
+  }
+});
 
-        // 3. On récupère le Token en lui passant le service worker enregistré
-        const token = await getToken(messaging, {
-          vapidKey:
-            "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
-          serviceWorkerRegistration: registration,
+// 2. Fonction déclenchée par le clic (Action directe exigée par iOS)
+async function DemanderPermissionEtToken() {
+  console.log("Clic détecté : Demande de permission immédiate...");
+
+  try {
+    // Cette ligne doit s'exécuter en premier sans aucun 'await' avant elle
+    const permission = await Notification.requestPermission();
+
+    if (permission === "granted") {
+      console.log("Permission accordée par l'utilisateur !");
+
+      // La permission est là, on récupère le Service Worker qui est déjà prêt
+      const registration = await navigator.serviceWorker.ready;
+
+      // Récupération du Token Firebase
+      const token = await getToken(messaging, {
+        vapidKey:
+          "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0", // Mettez votre clé générée ici
+        serviceWorkerRegistration: registration,
+      });
+
+      if (token) {
+        console.log("Token généré avec succès :", token);
+
+        // Sauvegarde dans Firestore
+        await addDoc(collection(db, "tokens_notifications"), {
+          token: token,
+          dateAbonnement: new Date(),
+          appareil: navigator.userAgent.includes("iPhone") ? "iPhone" : "Autre",
         });
 
-        if (token) {
-          console.log("Token généré :", token);
-          await addDoc(collection(db, "tokens_notifications"), {
-            token: token,
-            dateAbonnement: new Date(),
-          });
-        }
+        alert("Félicitations ! Vous êtes abonné aux notifications.");
       }
+    } else {
+      alert(
+        "La permission a été refusée. Modifiez les réglages de votre iPhone si nécessaire.",
+      );
     }
   } catch (error) {
-    console.error("Erreur notifications :", error);
+    console.error("Erreur lors du processus :", error);
   }
 }
-
-// On lance la détection
-window.addEventListener("load", () => {
-  // On l'exécute directement pour tester, même si on est sur navigateur
-  activerNotifications();
-});
