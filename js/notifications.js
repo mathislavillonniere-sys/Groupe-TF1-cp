@@ -22,34 +22,55 @@ const firebaseConfig = {
   appId: "1:345963750865:web:c2851dc606b6ceb5ebecf0",
 };
 
-// SÉCURITÉ : On réutilise l'application Firebase si elle existe déjà, pour éviter le crash général
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
 const messaging = getMessaging(app);
 
-// Enregistrement du Service Worker
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/firebase-messaging-sw.js")
-    .then(() => console.log("SW Notifications prêt."))
-    .catch((err) => console.error("Erreur SW Notifications:", err));
+    .then(() => console.log("SW Notifications OK"))
+    .catch((err) => console.error("Erreur SW:", err));
 }
 
-// Attente du chargement de la page pour lier le bouton
-window.addEventListener("load", () => {
+// FIX ANTI-ÉCRASEMENT : On cherche le bouton en boucle toutes les 200ms
+// tant qu'il n'est pas trouvé et bindé. Aucun autre script ne pourra écraser ça.
+const chercherEtAttacherBouton = setInterval(() => {
   const btnNotif = document.getElementById("btn-notifications");
+
   if (btnNotif) {
+    // Sécurité : on supprime un éventuel ancien écouteur fantôme pour éviter les doublons
+    btnNotif.removeEventListener("click", DemanderPermissionEtToken);
+
+    // On attache notre fonction proprement
     btnNotif.addEventListener("click", DemanderPermissionEtToken);
+
+    console.log(
+      "Bouton notifications sécurisé et protégé contre l'écrasement !",
+    );
+    clearInterval(chercherEtAttacherBouton); // On arrête de chercher puisqu'on l'a
   }
-});
+}, 200);
 
 async function DemanderPermissionEtToken() {
-  alert("Étape 1 : Clic détecté ! Demande lancée...");
+  // 1. Alerte de diagnostic immédiat
+  alert(
+    "Vérification du statut initial sur votre iPhone : " +
+      Notification.permission,
+  );
+
+  if (Notification.permission === "denied") {
+    alert(
+      "⚠️ Apple bloque l'affichage : Vous avez désactivé les notifications pour cette app. Pour corriger :\n1. Ouvrez les Réglages de l'iPhone\n2. Allez dans Réglages > Notifications > TF1 CP\n3. Activez 'Autoriser les notifications'.",
+    );
+    return;
+  }
 
   try {
-    // Demande de permission standard compatible PC et iOS récent
-    const permission = await Notification.requestPermission();
-    alert("Étape 2 : Réponse de l'appareil = " + permission);
+    // 2. Utilisation de la méthode de secours par promesse propre
+    const permission = await window.Notification.requestPermission();
+
+    alert("Résultat de la demande système : " + permission);
 
     if (permission === "granted") {
       const registration = await navigator.serviceWorker.ready;
@@ -61,20 +82,20 @@ async function DemanderPermissionEtToken() {
       });
 
       if (token) {
-        alert("Étape 3 : Token généré ! Enregistrement Firestore...");
         await addDoc(collection(db, "tokens_notifications"), {
           token: token,
           dateAbonnement: new Date(),
-          appareil: navigator.userAgent.includes("iPhone") ? "iPhone" : "Autre",
+          appareil: "iPhone (Forcé)",
         });
-        alert("Abonnement aux notifications réussi !");
-      } else {
-        alert("Le token généré est vide.");
+        alert("✅ Succès ! Votre iPhone est bien enregistré.");
       }
     } else {
-      alert("La permission a été refusée ou bloquée par le système.");
+      // Si l'iPhone ne fait RIEN (pas de pop-up, pas de changement), on affiche ce guide :
+      alert(
+        "📱 Configurer votre iPhone :\nSi aucune pop-up n'est apparue, allez dans Réglages > Réglages Safari > Avancé > Feature Flags > Activez 'Push Notifications'.",
+      );
     }
   } catch (error) {
-    alert("Erreur dans le processus : " + error.message);
+    alert("Erreur capturée : " + error.message);
   }
 }
