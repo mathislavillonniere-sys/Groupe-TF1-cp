@@ -44,43 +44,40 @@ window.addEventListener("load", () => {
 
 // 2. Fonction déclenchée par le clic (Action directe exigée par iOS)
 async function DemanderPermissionEtToken() {
-  console.log("Clic détecté : Demande de permission immédiate...");
+  alert("Étape 1 : Clic détecté ! Tentative de demande de permission...");
 
   try {
-    // Cette ligne doit s'exécuter en premier sans aucun 'await' avant elle
     const permission = await Notification.requestPermission();
+    alert("Étape 2 : Réponse d'iOS à la permission : " + permission);
 
     if (permission === "granted") {
-      console.log("Permission accordée par l'utilisateur !");
-
-      // La permission est là, on récupère le Service Worker qui est déjà prêt
+      alert("Étape 3 : Permission accordée, récupération du Service Worker...");
       const registration = await navigator.serviceWorker.ready;
 
-      // Récupération du Token Firebase
+      alert("Étape 4 : Service Worker prêt, génération du Token Firebase...");
       const token = await getToken(messaging, {
-        vapidKey:
-          "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0", // Mettez votre clé générée ici
+        vapidKey: "VOTRE_CLE_VAPID_PUBLIQUE_ICI",
         serviceWorkerRegistration: registration,
       });
 
       if (token) {
-        console.log("Token généré avec succès :", token);
-
-        // Sauvegarde dans Firestore
+        alert("Étape 5 : Token généré ! Enregistrement dans la base...");
         await addDoc(collection(db, "tokens_notifications"), {
           token: token,
           dateAbonnement: new Date(),
-          appareil: navigator.userAgent.includes("iPhone") ? "iPhone" : "Autre",
+          appareil: "iPhone",
         });
-
-        alert("Félicitations ! Vous êtes abonné aux notifications.");
+        alert("Succès total ! Enregistré.");
+      } else {
+        alert("Erreur : Le token retourné est vide.");
       }
     } else {
       alert(
-        "La permission a été refusée. Modifiez les réglages de votre iPhone si nécessaire.",
+        "iOS a refusé la permission ou elle est déjà bloquée dans vos réglages iPhone.",
       );
     }
   } catch (error) {
-    console.error("Erreur lors du processus :", error);
+    alert("Une erreur est survenue : " + error.message);
+    console.error(error);
   }
 }
