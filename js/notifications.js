@@ -1,4 +1,8 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import {
+  initializeApp,
+  getApps,
+  getApp,
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import {
   getMessaging,
   getToken,
@@ -18,96 +22,59 @@ const firebaseConfig = {
   appId: "1:345963750865:web:c2851dc606b6ceb5ebecf0",
 };
 
-const app = initializeApp(firebaseConfig);
+// SÉCURITÉ : On réutilise l'application Firebase si elle existe déjà, pour éviter le crash général
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
 const messaging = getMessaging(app);
 
-// Enregistrement du Service Worker immédiatement
+// Enregistrement du Service Worker
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/firebase-messaging-sw.js")
-    .then((reg) => console.log("SW Enregistré avec succès !"))
-    .catch((err) => console.error("Erreur d'enregistrement du SW :", err));
+    .then(() => console.log("SW Notifications prêt."))
+    .catch((err) => console.error("Erreur SW Notifications:", err));
 }
 
-// Attente du chargement complet du DOM pour lier le bouton
-document.addEventListener("DOMContentLoaded", () => {
+// Attente du chargement de la page pour lier le bouton
+window.addEventListener("load", () => {
   const btnNotif = document.getElementById("btn-notifications");
   if (btnNotif) {
-    console.log("Bouton de notification détecté immédiatement dans la page.");
     btnNotif.addEventListener("click", DemanderPermissionEtToken);
-  } else {
-    // Si le bouton n'est pas encore là, on utilise un intervalle rapide pour le chasser
-    const verifBouton = setInterval(() => {
-      const btnSecours = document.getElementById("btn-notifications");
-      if (btnSecours) {
-        btnSecours.addEventListener("click", DemanderPermissionEtToken);
-        clearInterval(verifBouton);
-      }
-    }, 100);
   }
 });
 
 async function DemanderPermissionEtToken() {
-  alert("Étape 1 : Clic détecté ! Vérification du statut actuel...");
-
-  // 1. Si la permission est déjà accordée, on saute directement à la suite
-  if (window.Notification && Notification.permission === "granted") {
-    alert("Statut : Déjà accordé ! Passage direct à l'étape 3.");
-    continuerProcessus();
-    return;
-  }
-
-  if (window.Notification && Notification.permission === "denied") {
-    alert(
-      "Attention : L'iPhone indique que vous avez bloqué les notifications pour cette app dans vos Réglages iPhone.",
-    );
-    return;
-  }
+  alert("Étape 1 : Clic détecté ! Demande lancée...");
 
   try {
-    alert("Lancement de la demande native Apple...");
+    // Demande de permission standard compatible PC et iOS récent
+    const permission = await Notification.requestPermission();
+    alert("Étape 2 : Réponse de l'appareil = " + permission);
 
-    // Syntaxe pure iOS (Callback classique)
-    Notification.requestPermission(function (permission) {
-      alert("Étape 2 : Réponse reçue de l'iPhone = " + permission);
+    if (permission === "granted") {
+      const registration = await navigator.serviceWorker.ready;
 
-      if (permission === "granted") {
-        continuerProcessus();
-      } else {
-        alert("Permission refusée par l'utilisateur ou le système.");
-      }
-    });
-  } catch (error) {
-    alert("Erreur lors de la demande : " + error.message);
-  }
-}
-
-// Sous-fonction pour la suite (Étapes 3, 4, 5) pour ne pas surcharger iOS
-async function continuerProcessus() {
-  try {
-    alert("Étape 3 : Récupération du Service Worker...");
-    const registration = await navigator.serviceWorker.ready;
-
-    alert("Étape 4 : Génération du Token Firebase...");
-    const token = await getToken(messaging, {
-      vapidKey:
-        "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
-      serviceWorkerRegistration: registration,
-    });
-
-    if (token) {
-      alert("Étape 5 : Token généré ! Sauvegarde Firestore...");
-      await addDoc(collection(db, "tokens_notifications"), {
-        token: token,
-        dateAbonnement: new Date(),
-        appareil: "iPhone",
+      const token = await getToken(messaging, {
+        vapidKey:
+          "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
+        serviceWorkerRegistration: registration,
       });
-      alert("Félicitations ! Abonnement réussi.");
+
+      if (token) {
+        alert("Étape 3 : Token généré ! Enregistrement Firestore...");
+        await addDoc(collection(db, "tokens_notifications"), {
+          token: token,
+          dateAbonnement: new Date(),
+          appareil: navigator.userAgent.includes("iPhone") ? "iPhone" : "Autre",
+        });
+        alert("Abonnement aux notifications réussi !");
+      } else {
+        alert("Le token généré est vide.");
+      }
     } else {
-      alert("Le token retourné est vide.");
+      alert("La permission a été refusée ou bloquée par le système.");
     }
-  } catch (err) {
-    alert("Erreur lors de la génération du token : " + err.message);
+  } catch (error) {
+    alert("Erreur dans le processus : " + error.message);
   }
 }
