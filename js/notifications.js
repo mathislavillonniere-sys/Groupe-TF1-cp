@@ -52,13 +52,30 @@ async function DemanderPermissionEtToken() {
   alert("Étape 1 : Clic détecté ! Demande de permission lancée...");
 
   try {
-    const permission = await Notification.requestPermission();
+    // Fonction de secours pour obtenir la permission de manière compatible iOS
+    let permission;
+
+    try {
+      // On teste d'abord la méthode moderne
+      permission = await Notification.requestPermission();
+    } catch (e) {
+      // Si l'await plante (vieux comportement iOS), on utilise le callback
+      permission = await new Promise((resolve) => {
+        Notification.requestPermission((res) => {
+          resolve(res);
+        });
+      });
+    }
+
     alert("Étape 2 : Réponse de l'iPhone = " + permission);
 
     if (permission === "granted") {
+      alert(
+        "Étape 3 : Permission accordée ! Récupération du Service Worker...",
+      );
       const registration = await navigator.serviceWorker.ready;
 
-      // REMPLACEZ BIEN PAR VOTRE CLÉ CLOUD MESSAGING GENERÉE SUR FIREBASE
+      alert("Étape 4 : Service Worker prêt ! Génération du Token Firebase...");
       const token = await getToken(messaging, {
         vapidKey:
           "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
@@ -66,7 +83,7 @@ async function DemanderPermissionEtToken() {
       });
 
       if (token) {
-        alert("Étape 3 : Token généré ! Enregistrement...");
+        alert("Étape 5 : Token généré ! Enregistrement dans Firestore...");
         await addDoc(collection(db, "tokens_notifications"), {
           token: token,
           dateAbonnement: new Date(),
@@ -74,12 +91,14 @@ async function DemanderPermissionEtToken() {
         });
         alert("Abonnement réussi !");
       } else {
-        alert("Le token généré est vide.");
+        alert("Erreur : Le token généré est vide.");
       }
     } else {
-      alert("La permission a été refusée ou bloquée par l'iPhone.");
+      alert(
+        "La permission a été refusée ou est bloquée globalement dans les réglages de votre iPhone.",
+      );
     }
   } catch (error) {
-    alert("Erreur système : " + error.message);
+    alert("Erreur système pendant le processus : " + error.message);
   }
 }
