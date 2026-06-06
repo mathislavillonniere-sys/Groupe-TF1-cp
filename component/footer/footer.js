@@ -314,6 +314,89 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("tf1cp_notif_refuse", "1");
         banniere.remove();
       });
+
+    // ── Logique notifications directement ici ──
+    // Import dynamique de Firebase (compatible module ES)
+    const btn = document.getElementById("btn-notifications");
+    btn.addEventListener("click", async () => {
+      btn.textContent = "…";
+      btn.disabled = true;
+
+      try {
+        // Charge Firebase dynamiquement
+        const { initializeApp, getApps, getApp } =
+          await import("https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js");
+        const { getMessaging, getToken } =
+          await import("https://www.gstatic.com/firebasejs/10.8.1/firebase-messaging.js");
+        const { getFirestore, collection, addDoc, query, where, getDocs } =
+          await import("https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js");
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyDT-pc5WPQEsqPLQUCSTCfdb8Kqw4k8EDU",
+          authDomain: "groupe-tf1-cp.firebaseapp.com",
+          projectId: "groupe-tf1-cp",
+          storageBucket: "groupe-tf1-cp.firebasestorage.app",
+          messagingSenderId: "345963750865",
+          appId: "1:345963750865:web:c2851dc606b6ceb5ebecf0",
+        };
+
+        const app = !getApps().length
+          ? initializeApp(firebaseConfig)
+          : getApp();
+        const db = getFirestore(app);
+        const messaging = getMessaging(app);
+
+        // Demande permission
+        const permission = await Notification.requestPermission();
+        if (permission !== "granted") {
+          btn.textContent = "Refusé";
+          return;
+        }
+
+        // Enregistre le service worker
+        const registration = await navigator.serviceWorker.register(
+          "/firebase-messaging-sw.js",
+          { scope: "/" },
+        );
+        await navigator.serviceWorker.ready;
+
+        // Récupère le token
+        const token = await getToken(messaging, {
+          vapidKey:
+            "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
+          serviceWorkerRegistration: registration,
+        });
+
+        if (!token) {
+          btn.textContent = "Erreur token";
+          return;
+        }
+
+        // Évite les doublons dans Firestore
+        const q = query(
+          collection(db, "tokens_notifications"),
+          where("token", "==", token),
+        );
+        const existing = await getDocs(q);
+        if (existing.empty) {
+          await addDoc(collection(db, "tokens_notifications"), {
+            token,
+            date: new Date(),
+            appareil: navigator.userAgent,
+            plateforme: "iOS PWA",
+          });
+        }
+
+        // Succès
+        btn.textContent = "✅ Activé !";
+        setTimeout(() => banniere.remove(), 2000);
+      } catch (err) {
+        console.error("Erreur notif:", err);
+        btn.textContent = "Erreur";
+        btn.disabled = false;
+        alert("Erreur : " + err.message);
+      }
+    });
   }
 
   initialiserBanniereNotifications();
