@@ -26,76 +26,81 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
 const messaging = getMessaging(app);
 
+// ── Vérifie qu'on est bien en PWA standalone (obligatoire iOS)
+const estPWA = window.navigator.standalone === true;
+
+// ── Enregistre le SW dès le chargement (pas en attente du clic)
+let swRegistration = null;
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("/firebase-messaging-sw.js")
-    .then(() => console.log("SW Notifications OK"))
+    .register("/firebase-messaging-sw.js", { scope: "/" })
+    .then((reg) => {
+      swRegistration = reg;
+      console.log("SW prêt");
+    })
     .catch((err) => console.error("Erreur SW:", err));
 }
 
-// FIX ANTI-ÉCRASEMENT : On cherche le bouton en boucle toutes les 200ms
-// tant qu'il n'est pas trouvé et bindé. Aucun autre script ne pourra écraser ça.
-const chercherEtAttacherBouton = setInterval(() => {
-  const btnNotif = document.getElementById("btn-notifications");
+// ── Attache le bouton
+const chercherBouton = setInterval(() => {
+  const btn = document.getElementById("btn-notifications");
+  if (btn) {
+    clearInterval(chercherBouton);
 
-  if (btnNotif) {
-    // Sécurité : on supprime un éventuel ancien écouteur fantôme pour éviter les doublons
-    btnNotif.removeEventListener("click", DemanderPermissionEtToken);
+    // Si pas en PWA standalone, on prévient
+    if (!estPWA) {
+      btn.textContent = "Ajouter à l'écran d'accueil d'abord";
+      btn.disabled = true;
+      return;
+    }
 
-    // On attache notre fonction proprement
-    btnNotif.addEventListener("click", DemanderPermissionEtToken);
-
-    console.log(
-      "Bouton notifications sécurisé et protégé contre l'écrasement !",
-    );
-    clearInterval(chercherEtAttacherBouton); // On arrête de chercher puisqu'on l'a
+    btn.addEventListener("click", demanderNotifications);
   }
 }, 200);
 
-async function DemanderPermissionEtToken() {
-  // 1. Alerte de diagnostic immédiat
-  alert(
-    "Vérification du statut initial sur votre iPhone : " +
-      Notification.permission,
-  );
+async function demanderNotifications() {
+  // iOS exige que ce soit dans un vrai geste utilisateur — c'est bon ici (clic)
 
   if (Notification.permission === "denied") {
     alert(
-      "⚠️ Apple bloque l'affichage : Vous avez désactivé les notifications pour cette app. Pour corriger :\n1. Ouvrez les Réglages de l'iPhone\n2. Allez dans Réglages > Notifications > TF1 CP\n3. Activez 'Autoriser les notifications'.",
+      "Notifications bloquées. Va dans Réglages > Notifications > TF1 CP pour les réactiver.",
     );
     return;
   }
 
   try {
-    // 2. Utilisation de la méthode de secours par promesse propre
-    const permission = await window.Notification.requestPermission();
+    const permission = await Notification.requestPermission();
 
-    alert("Résultat de la demande système : " + permission);
-
-    if (permission === "granted") {
-      const registration = await navigator.serviceWorker.ready;
-
-      const token = await getToken(messaging, {
-        vapidKey:
-          "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
-        serviceWorkerRegistration: registration,
-      });
-
-      if (token) {
-        await addDoc(collection(db, "tokens_notifications"), {
-          token: token,
-          dateAbonnement: new Date(),
-          appareil: "iPhone (Forcé)",
-        });
-        alert("✅ Succès ! Votre iPhone est bien enregistré.");
-      }
-    } else {
-      // Si l'iPhone ne fait RIEN (pas de pop-up, pas de changement), on affiche ce guide :
+    if (permission !== "granted") {
       alert(
-        "📱 Configurer votre iPhone :\nSi aucune pop-up n'est apparue, allez dans Réglages > Réglages Safari > Avancé > Feature Flags > Activez 'Push Notifications'.",
+        "Notifications refusées. Tu peux changer ça dans les Réglages iPhone.",
+      );
+      return;
+    }
+
+    // Attend que le SW soit bien prêt
+    const registration = await navigator.serviceWorker.ready;
+
+    const token = await getToken(messaging, {
+      vapidKey:
+        "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
+      serviceWorkerRegistration: registration,
+    });
+
+    if (token) {
+      // Évite les doublons dans Firestore
+      await addDoc(collection(db, "tokens_notifications"), {
+        token,
+        date: new Date(),
+        appareil: navigator.userAgent,
+      });
+      alert("✅ Notifications activées !");
+    } else {
+      alert(
+        "Token vide — vérifie que le domaine Vercel est bien autorisé dans la console Firebase.",
       );
     }
-  } catch (error) {
-    alert("Erreur capturée : " + error.message);
+  } catch (err) {
+    alert("Erreur : " + err.message);
   }
 }
