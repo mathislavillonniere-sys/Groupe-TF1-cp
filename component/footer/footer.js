@@ -340,9 +340,11 @@ document.addEventListener("DOMContentLoaded", function () {
           appId: "1:345963750865:web:c2851dc606b6ceb5ebecf0",
         };
 
-        const app = !getApps().length
-          ? initializeApp(firebaseConfig)
-          : getApp();
+        // On utilise un nom unique pour éviter le conflit avec les autres instances Firebase de la page
+        const appName = "tf1cp-notifications";
+        const app =
+          getApps().find((a) => a.name === appName) ||
+          initializeApp(firebaseConfig, appName);
         const db = getFirestore(app);
         const messaging = getMessaging(app);
 
@@ -398,6 +400,5 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-
   initialiserBanniereNotifications();
 });
