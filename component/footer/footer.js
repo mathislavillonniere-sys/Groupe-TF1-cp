@@ -315,85 +315,33 @@ document.addEventListener("DOMContentLoaded", function () {
         banniere.remove();
       });
 
-    // ── Logique notifications directement ici ──
-    // Import dynamique de Firebase (compatible module ES)
+    // ── Logique OneSignal ──
     const btn = document.getElementById("btn-notifications");
     btn.addEventListener("click", async () => {
       btn.textContent = "…";
       btn.disabled = true;
 
       try {
-        // Charge Firebase dynamiquement
-        const { initializeApp, getApps, getApp } =
-          await import("https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js");
-        const { getMessaging, getToken } =
-          await import("https://www.gstatic.com/firebasejs/10.8.1/firebase-messaging.js");
-        const { getFirestore, collection, addDoc, query, where, getDocs } =
-          await import("https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js");
-
-        const firebaseConfig = {
-          apiKey: "AIzaSyDT-pc5WPQEsqPLQUCSTCfdb8Kqw4k8EDU",
-          authDomain: "groupe-tf1-cp.firebaseapp.com",
-          projectId: "groupe-tf1-cp",
-          storageBucket: "groupe-tf1-cp.firebasestorage.app",
-          messagingSenderId: "345963750865",
-          appId: "1:345963750865:web:c2851dc606b6ceb5ebecf0",
-        };
-
-        // On utilise un nom unique pour éviter le conflit avec les autres instances Firebase de la page
-        const appName = "tf1cp-notifications";
-        const app =
-          getApps().find((a) => a.name === appName) ||
-          initializeApp(firebaseConfig, appName);
-        const db = getFirestore(app);
-        const messaging = getMessaging(app);
-
-        // Demande permission
-        const permission = await Notification.requestPermission();
-        if (permission !== "granted") {
-          btn.textContent = "Refusé";
-          return;
-        }
-
-        // Enregistre le service worker
-        const registration = await navigator.serviceWorker.register(
-          "/firebase-messaging-sw.js",
-          { scope: "/" },
-        );
-        await navigator.serviceWorker.ready;
-
-        // Récupère le token
-        const token = await getToken(messaging, {
-          vapidKey:
-            "BHRzP9sLEktV6K8c7fs0Jz_7LC9uZBzcEd9VFf1dDy34DkxzRt9Rj7YRSGIFQz83lXuUiXQNmyapdsG--L8MXA0",
-          serviceWorkerRegistration: registration,
+        // Attend que OneSignal soit prêt
+        await new Promise((resolve) => {
+          if (window.OneSignal) return resolve();
+          window.OneSignalDeferred = window.OneSignalDeferred || [];
+          window.OneSignalDeferred.push(() => resolve());
+          setTimeout(resolve, 3000); // timeout de sécurité
         });
 
-        if (!token) {
-          btn.textContent = "Erreur token";
-          return;
-        }
+        // Demande la permission via OneSignal
+        await OneSignal.Notifications.requestPermission();
 
-        // Évite les doublons dans Firestore
-        const q = query(
-          collection(db, "tokens_notifications"),
-          where("token", "==", token),
-        );
-        const existing = await getDocs(q);
-        if (existing.empty) {
-          await addDoc(collection(db, "tokens_notifications"), {
-            token,
-            date: new Date(),
-            appareil: navigator.userAgent,
-            plateforme: "iOS PWA",
-          });
+        if (OneSignal.Notifications.permission) {
+          btn.textContent = "✅ Activé !";
+          setTimeout(() => banniere.remove(), 2000);
+        } else {
+          btn.textContent = "Refusé";
+          btn.disabled = false;
         }
-
-        // Succès
-        btn.textContent = "✅ Activé !";
-        setTimeout(() => banniere.remove(), 2000);
       } catch (err) {
-        console.error("Erreur notif:", err);
+        console.error("Erreur OneSignal:", err);
         btn.textContent = "Erreur";
         btn.disabled = false;
         alert("Erreur : " + err.message);

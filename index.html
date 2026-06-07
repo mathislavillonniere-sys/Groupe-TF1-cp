@@ -736,5 +736,22 @@
     <script src="./js/ce-soir.js"></script>
     <script src="./js/header.js"></script>
     <script type="module" src="./js/actualites.js"></script>
+    <!-- OneSignal Push Notifications -->
+    <script
+      src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
+      defer
+    ></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function (OneSignal) {
+        await OneSignal.init({
+          appId: "1b38f646-9cbf-42e5-ac7f-ba73eb74e478",
+          safari_web_id:
+            "web.onesignal.auto.1b38f646-9cbf-42e5-ac7f-ba73eb74e478",
+          notifyButton: { enable: false },
+          promptOptions: { slidedown: { enabled: false } },
+        });
+      });
+    </script>
   </body>
 </html>
