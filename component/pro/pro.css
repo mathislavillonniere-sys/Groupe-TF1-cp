@@ -553,3 +553,27 @@
   font-weight: 800;
   color: #0f172a; /* Bleu/Gris très foncé pour contraster avec le rouge */
 }
+/* ============================================================
+   AFFICHAGE DU TEXTE EN ENTIER AU SURVOL DES PROGRAMMES
+   ============================================================ */
+
+/* 1. On prépare la case du programme pour qu'elle puisse gérer le zoom du texte */
+.programme-item {
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+/* 2. Au survol de la case, on force le titre à annuler le masquage */
+.programme-item:hover {
+  z-index: 99; /* Fait passer la case au-dessus des autres pour ne pas être cachée */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Ajoute une ombre légère pour l'effet de relief */
+  background-color: #c2c5c9; /* Optionnel : accentue légèrement le fond pour la lisibilité */
+}
+
+.programme-item:hover .titre-prog {
+  white-space: normal !important; /* Annule le blocage sur une seule ligne */
+  overflow: visible !important; /* Rend le texte qui dépassait visible */
+  text-overflow: clip !important; /* Supprime les petits points de suspension (...) */
+  display: block !important; /* Si vous utilisiez un line-clamp, cela l'annule */
+  -webkit-line-clamp: unset !important; /* Sécurité pour les navigateurs basés sur Chrome/Safari */
+}
