@@ -3,10 +3,6 @@ const baseDeDonnees = {
     nom: "TF1 Camping Paradis",
     type: "hebdo", // Mode par semaine
     data: {
-      "2026-06-08": {
-        label: "Semaine du 8 au 14 Juin 2026",
-        fichier: "../../csv/tf1_semaine_8juin.csv",
-      },
       "2026-06-15": {
         label: "Semaine du 15 au 21 Juin 2026",
         fichier: "../../csv/tf1_semaine_15juin.csv",
@@ -18,6 +14,10 @@ const baseDeDonnees = {
       "2026-06-29": {
         label: "Semaine du 29 Juin au 5 Juillet 2026",
         fichier: "../../csv/tf1_semaine_29juin.csv",
+      },
+      "2026-07-06": {
+        label: "Semaine du 6 au 12 Juillet 2026",
+        fichier: "../../csv/tf1_semaine_6juillet.csv",
       },
     },
   },
@@ -57,10 +57,10 @@ const baseDeDonnees = {
         label: "Grille Annuelle 2025 - 2026",
         fichier: "../../csv/lci_annuel2025-2026.csv",
       },
-      2027: {
-        label: "Grille Annuelle 2026 - 2027",
-        fichier: "../../csv/lci_annuel2026-2027.csv",
-      },
+      // 2027: {
+      //   label: "Grille Annuelle 2026 - 2027",
+      //   fichier: "../../csv/lci_annuel2026-2027.csv",
+      // },
     },
   },
   tmc: {
