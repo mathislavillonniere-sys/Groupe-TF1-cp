@@ -57,10 +57,14 @@ const baseDeDonnees = {
         label: "Grille Annuelle 2025 - 2026",
         fichier: "../../csv/lci_annuel2025-2026.csv",
       },
-      // 2027: {
-      //   label: "Grille Annuelle 2026 - 2027",
-      //   fichier: "../../csv/lci_annuel2026-2027.csv",
-      // },
+      2027: {
+        label: "Grille été 2026",
+        fichier: "../../csv/lci_ete2026.csv",
+      },
+      2028: {
+        label: "Grille Annuelle 2026 - 2027",
+        fichier: "../../csv/lci_annuel2026-2027.csv",
+      },
     },
   },
   tmc: {
@@ -196,7 +200,16 @@ function chargerGrille() {
   const estChaineReduite = ["tfx", "tmc", "m6", "family"].includes(
     chaineActuelle,
   );
-
+  // 🧠 CHANGER LE TEXTE DU TITRE POUR LCI DIRECTEMENT
+  const titreSoir = document.querySelector(
+    ".categorie-section h3.titre-categorie",
+  );
+  if (titreSoir && titreSoir.textContent.toLowerCase().includes("prime time")) {
+    titreSoir.textContent =
+      chaineActuelle === "lci"
+        ? "Le Prime Time (20h00 - 0h00)"
+        : "Le Prime Time (21h10 - 0h00)";
+  }
   sections.forEach((section) => {
     const titre = section
       .querySelector(".titre-categorie")
@@ -294,10 +307,14 @@ function genererGrillesParTrancheHoraire(csvBrut) {
         }
 
         if (!isNaN(heure)) {
+          // 🧠 DYNAMIQUE : LCI commence son Prime à 20h00, les autres à 21h00
+          const heureDebutPrime = chaineActuelle === "lci" ? 20 : 21;
+
           // TRI DU PRIME TIME ET DES AUTRES TRANCHES
           if (
-            (heure === 21 && minutes >= "00") ||
-            heure === 22 ||
+            (heure === heureDebutPrime && minutes >= "00") ||
+            (heureDebutPrime === 20 ? heure === 21 : heure === 22) || // Ajuste la marche intermédiaire
+            (heure === 22 && heureDebutPrime === 20) ||
             (heure === 23 && minutes < 26)
           ) {
             trancheHoraire = "soir";
