@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (!isNaN(heure)) {
             // PRIME TIME
             if (
-              (heure === 20 && minutes >= 45) ||
+              (heure === 20 && minutes >= "00") ||
               heure === 21 ||
               heure === 22 ||
               (heure === 23 && minutes < 26)
