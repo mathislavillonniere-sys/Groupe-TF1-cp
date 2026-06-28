@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     {
       id: "lci",
       logo: "./photo/logo-LCI.jpg",
-      fichierCSV: "./csv/lci_annuel2025-2026.csv",
+      fichierCSV: "./csv/lci_ete2026.csv",
     },
   ];
 
