@@ -283,6 +283,29 @@
           <picture>
             <source
               media="(max-width: 768px)"
+              srcset="photo/ncis-affichemobile.jpg"
+            />
+            <img src="photo/NCISLOSANgeles" alt="NCIS" />
+          </picture>
+          <div class="carousel-overlay">
+            <div class="carousel-content-wrapper">
+              <div class="text-box">
+                <h2>
+                  <span class="badge-inedit">INÉDIT</span>
+                </h2>
+                <h2>NCIS : Los Angeles</h2>
+                <p>
+                  Nouvelle saison le jeudi 3 septembre à 22h50 sur TF1 Camping
+                  Paradis.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <picture>
+            <source
+              media="(max-width: 768px)"
               srcset="photo/ledomainedesvignes.png"
             />
             <img
@@ -411,6 +434,7 @@
           <span class="dot" onclick="currentSlide(9)"></span>
           <span class="dot" onclick="currentSlide(10)"></span>
           <span class="dot" onclick="currentSlide(11)"></span>
+          <span class="dot" onclick="currentSlide(12)"></span>
         </div>
         <button class="nav-arrow prev" onclick="changeSlide(-1)">
           &#10094;
@@ -745,6 +769,65 @@
           <button class="carousel-btn next-btn-news">
             <i class="fas fa-chevron-right"></i>
           </button>
+        </div>
+      </section>
+      <section class="calendrier-section">
+        <div class="section-content-centered">
+          <h2 class="section-title">Prochains Événements</h2>
+
+          <div class="calendrier-container">
+            <button class="carousel-btn prev-btn-cal">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <div class="calendrier-track" id="calendrier-track">
+              <article class="event-card">
+                <div class="event-date">
+                  <span class="event-day">14</span>
+                  <span class="event-month">Août</span>
+                </div>
+
+                <div class="event-body">
+                  <!-- <span class="event-badge badge-programmes">Prime</span> -->
+                  <h3>Conseil d'Administration</h3>
+
+                  <p class="event-meta">
+                    <i class="fas fa-clock"></i> 10h00
+                    <span class="event-sep">·</span>
+                  </p>
+                </div>
+              </article>
+              <article class="event-card">
+                <div class="event-date">
+                  <span class="event-day">17</span>
+                  <span class="event-month">Août</span>
+                </div>
+
+                <div class="event-body">
+                  <span class="event-badge badge-programmes">rentrée</span>
+                  <h3>Nouvelle Saison de LCI Camping Paradis</h3>
+                </div>
+              </article>
+
+              <article class="event-card">
+                <div class="event-date">
+                  <span class="event-day">31</span>
+                  <span class="event-month">Août</span>
+                </div>
+
+                <div class="event-body">
+                  <span class="event-badge badge-programmes">rentrée</span>
+                  <h3>Lancement de la nouvelle saison</h3>
+
+                  <p class="event-meta">TF1 Camping Paradis</p>
+                </div>
+              </article>
+            </div>
+
+            <button class="carousel-btn next-btn-cal">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
       </section>
     </main>

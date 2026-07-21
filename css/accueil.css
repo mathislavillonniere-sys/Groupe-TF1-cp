@@ -1214,3 +1214,143 @@
     font-size: 0.75rem; /* Source plus discrète sur téléphone */
   }
 }
+/* =========================================
+   8. SECTION CALENDRIER (PROCHAINS ÉVÉNEMENTS)
+   ========================================= */
+.calendrier-section {
+  padding: 80px 20px;
+  background: #ffffff;
+}
+
+.calendrier-container {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.calendrier-track {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 10px 5px 20px;
+}
+.calendrier-track::-webkit-scrollbar {
+  display: none;
+}
+
+.event-card {
+  min-width: 320px;
+  flex: 0 0 320px;
+  display: flex;
+  gap: 18px;
+  background: white;
+  border: 1px solid var(--bordure, #e2e8f0);
+  border-left: 4px solid var(--rouge-tf1);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.event-date {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  background: var(--bleu-corporate);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-day {
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.event-month {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.event-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.event-badge {
+  display: inline-block;
+  color: white;
+  padding: 3px 10px;
+  font-size: 0.7em;
+  font-weight: bold;
+  border-radius: 6px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.event-body h3 {
+  font-size: 1.05rem;
+  color: #0f172a;
+  line-height: 1.3;
+  margin: 0 0 8px;
+}
+
+.event-meta {
+  font-size: 0.85rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.event-meta i {
+  color: var(--rouge-tf1);
+}
+
+.event-sep {
+  color: #cbd5e1;
+}
+
+/* FLÈCHES CALENDRIER (mêmes codes que le carrousel news) */
+.prev-btn-cal {
+  left: -20px;
+}
+.next-btn-cal {
+  right: -20px;
+}
+
+/* --- Adaptation mobile / tablette --- */
+@media (max-width: 1024px) {
+  .prev-btn-cal,
+  .next-btn-cal {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .calendrier-section {
+    padding: 60px 15px;
+  }
+  .event-card {
+    min-width: 85vw;
+    flex: 0 0 85vw;
+  }
+}
