@@ -718,58 +718,85 @@
         <div class="section-content-centered">
           <h2 class="section-title">Prochains Événements</h2>
 
-          <div class="calendrier-container">
-            <button class="carousel-btn prev-btn-cal">
+          <div class="calendrier-nav">
+            <button
+              class="carousel-btn prev-btn-cal"
+              aria-label="Mois précédent"
+            >
               <i class="fas fa-chevron-left"></i>
             </button>
-
-            <div class="calendrier-track" id="calendrier-track">
-              <article class="event-card">
-                <div class="event-date">
-                  <span class="event-day">14</span>
-                  <span class="event-month">Août</span>
-                </div>
-
-                <div class="event-body">
-                  <!-- <span class="event-badge badge-programmes">Prime</span> -->
-                  <h3>Conseil d'Administration</h3>
-
-                  <p class="event-meta">
-                    <i class="fas fa-clock"></i> 10h00
-                    <span class="event-sep">·</span>
-                  </p>
-                </div>
-              </article>
-              <article class="event-card">
-                <div class="event-date">
-                  <span class="event-day">17</span>
-                  <span class="event-month">Août</span>
-                </div>
-
-                <div class="event-body">
-                  <span class="event-badge badge-programmes">rentrée</span>
-                  <h3>Nouvelle Saison de LCI Camping Paradis</h3>
-                </div>
-              </article>
-
-              <article class="event-card">
-                <div class="event-date">
-                  <span class="event-day">31</span>
-                  <span class="event-month">Août</span>
-                </div>
-
-                <div class="event-body">
-                  <span class="event-badge badge-programmes">rentrée</span>
-                  <h3>Lancement de la nouvelle saison</h3>
-
-                  <p class="event-meta">TF1 Camping Paradis</p>
-                </div>
-              </article>
+            <div class="calendrier-month-label" id="calendrier-month-label">
+              Août 2026
             </div>
-
-            <button class="carousel-btn next-btn-cal">
+            <button class="carousel-btn next-btn-cal" aria-label="Mois suivant">
               <i class="fas fa-chevron-right"></i>
             </button>
+          </div>
+
+          <div class="calendrier-months" id="calendrier-months">
+            <div class="month-group active" data-month-label="Août 2026">
+              <div class="event-row">
+                <div class="event-date-num">14</div>
+                <div class="event-dot"></div>
+                <div class="event-info">
+                  <div class="event-text">
+                    <h3>Conseil d'Administration</h3>
+                    <p class="event-meta">10h00</p>
+                  </div>
+                  <span class="event-badge badge-corporate">Stratégie</span>
+                </div>
+              </div>
+
+              <div class="event-row">
+                <div class="event-date-num">17</div>
+                <div class="event-dot"></div>
+                <div class="event-info">
+                  <div class="event-text">
+                    <h3>Nouvelle Saison</h3>
+                    <p class="event-meta">LCI Camping Paradis</p>
+                  </div>
+                  <span class="event-badge badge-rentree">Rentrée</span>
+                </div>
+              </div>
+
+              <div class="event-row">
+                <div class="event-date-num">31</div>
+                <div class="event-dot"></div>
+                <div class="event-info">
+                  <div class="event-text">
+                    <h3>Lancement de la nouvelle saison</h3>
+                    <p class="event-meta">TF1 Camping Paradis</p>
+                  </div>
+                  <span class="event-badge badge-rentree">Rentrée</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="month-group" data-month-label="Septembre 2026">
+              <div class="event-row">
+                <div class="event-date-num">05</div>
+                <div class="event-dot"></div>
+                <div class="event-info">
+                  <div class="event-text">
+                    <h3>Sommet mondiale du groupe</h3>
+                    <p class="event-meta">09h00 · La Garette</p>
+                  </div>
+                  <span class="event-badge badge-corporate">Corporate</span>
+                </div>
+              </div>
+
+              <div class="event-row">
+                <div class="event-date-num">18</div>
+                <div class="event-dot"></div>
+                <div class="event-info">
+                  <div class="event-text">
+                    <h3>Journée développement durable</h3>
+                    <p class="event-meta">Toutes filiales</p>
+                  </div>
+                  <span class="event-badge badge-corporate">RSE</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -780,6 +807,7 @@
     <script src="./component/footer/footer.js"></script>
     <script src="./js/ce-soir.js"></script>
     <script src="./js/header.js"></script>
+    <script src="./js/calendrier.js"></script>
     <script type="module" src="./js/actualites.js"></script>
   </body>
 </html>
