@@ -54,10 +54,6 @@ const baseDeDonnees = {
     type: "Grille Annuelle 2025 - 2026",
     data: {
       2026: {
-        label: "Grille été 2026",
-        fichier: "../../csv/lci_ete2026.csv",
-      },
-      2028: {
         label: "Grille Annuelle 2026 - 2027",
         fichier: "../../csv/lci_annuel2026-2027.csv",
       },

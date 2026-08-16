@@ -21,6 +21,18 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <meta name="theme-color" content="#00152b" />
+    <script>
+      const mdp = prompt(
+        "Veuillez entrer le mot de passe pour accéder à cette page :",
+      );
+
+      if (mdp !== "79230") {
+        alert(
+          "Mot de passe incorrect. Vous allez être redirigé vers l'accueil.",
+        );
+        window.location.href = "/index.html"; // Redirige le visiteur vers l'accueil
+      }
+    </script>
   </head>
 
   <body>
