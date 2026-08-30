@@ -3,21 +3,21 @@ const baseDeDonnees = {
     nom: "TF1 Camping Paradis",
     type: "hebdo", // Mode par semaine
     data: {
-      "2026-08-10": {
-        label: "Semaine du 10 au 16 Août 2026",
-        fichier: "../../csv/tf1_semaine_10aout.csv",
-      },
-      "2026-08-17": {
-        label: "Semaine du 17 au 23 Août 2026",
-        fichier: "../../csv/tf1_semaine_17aout.csv",
-      },
-      "2026-08-24": {
-        label: "Semaine du 24 au 30 Août 2026",
-        fichier: "../../csv/tf1_semaine_24aout.csv",
-      },
       "2026-08-31": {
         label: "Semaine du 31 Août au 6 Septembre 2026",
         fichier: "../../csv/tf1_semaine_31aout.csv",
+      },
+      "2026-09-07": {
+        label: "Semaine du 7 au 13 Septembre 2026",
+        fichier: "../../csv/tf1_semaine_07sept.csv",
+      },
+      "2026-09-14": {
+        label: "Semaine du 14 au 20 Septembre 2026",
+        fichier: "../../csv/tf1_semaine_14sept.csv",
+      },
+      "2026-09-21": {
+        label: "Semaine du 21 au 27 Septembre 2026",
+        fichier: "../../csv/tf1_semaine_21sept.csv",
       },
     },
   },
