@@ -3,21 +3,21 @@ const baseDeDonnees = {
     nom: "TF1 Camping Paradis",
     type: "hebdo", // Mode par semaine
     data: {
-      "2026-08-31": {
-        label: "Semaine du 31 Août au 6 Septembre 2026",
-        fichier: "../../csv/tf1_semaine_31aout.csv",
+      "2026-10-26": {
+        label: "Semaine du 26 octobre au 1er novembre 2026",
+        fichier: "../../csv/tf1_semaine_26octobre.csv",
       },
-      "2026-09-07": {
-        label: "Semaine du 7 au 13 Septembre 2026",
-        fichier: "../../csv/tf1_semaine_07sept.csv",
+      "2026-11-02": {
+        label: "Semaine du 2 au 8 novembre 2026",
+        fichier: "../../csv/tf1_semaine_2novembre.csv",
       },
-      "2026-09-14": {
-        label: "Semaine du 14 au 20 Septembre 2026",
-        fichier: "../../csv/tf1_semaine_14sept.csv",
+      "2026-11-09": {
+        label: "Semaine du 9 au 15 novembre 2026",
+        fichier: "../../csv/tf1_semaine_9novembre.csv",
       },
-      "2026-09-21": {
-        label: "Semaine du 21 au 27 Septembre 2026",
-        fichier: "../../csv/tf1_semaine_21sept.csv",
+      "2026-11-16": {
+        label: "Semaine du 16 au 22 novembre 2026",
+        fichier: "../../csv/tf1_semaine_16novembre.csv",
       },
     },
   },
@@ -26,10 +26,6 @@ const baseDeDonnees = {
     type: "annuel", // Mode par année
     data: {
       2026: {
-        label: "Grille été 2026",
-        fichier: "../../csv/m6_ete2026.csv",
-      },
-      2027: {
         label: "Grille Annuelle 2026 - 2027",
         fichier: "../../csv/m6_annuel2026-2027.csv",
       },
@@ -40,10 +36,6 @@ const baseDeDonnees = {
     type: "Grille Annuelle 2025 - 2026",
     data: {
       2026: {
-        label: "Grille été 2026",
-        fichier: "../../csv/tfx_ete2026.csv",
-      },
-      2027: {
         label: "Grille Annuelle 2026 - 2027",
         fichier: "../../csv/tfx_annuel2026-2027.csv",
       },
@@ -64,10 +56,6 @@ const baseDeDonnees = {
     type: "Grille Annuelle 2025 - 2026",
     data: {
       2026: {
-        label: "Grille été 2026",
-        fichier: "../../csv/tmc_ete2026.csv",
-      },
-      2027: {
         label: "Grille Annuelle 2026 - 2027",
         fichier: "../../csv/tmc_annuel2026-2027.csv",
       },
